@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-12">
+            <h5>Choose School Logo Here:</h5>
+          </div>
+          <div class="col-md-4">
+            <div class="display-picture-box">
+              <img class="display-picture" [src]="settingsData.logo">
+            </div>
+            <div class="display-picture-box">
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <input id="fileInput"
+                       type="file"
+                       accept="image/*"
+                       (change)="uploadProfilePicture($event)"
+                       style="display:none;"/>
+                <button type="button"
+                        class="btn btn-success"
+                        onclick="document.getElementById('fileInput').click();">Upload
+                </button>
+                <button type="button"
+                        class="btn btn-danger"
+                        (click)="clearPicture()">Clear
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <h5>Admission Number Starting:</h5>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <input type="number"
+                     class="form-control"
+                     [(ngModel)]="settingsData.admissionNo"
+                     placeholder="Enter Admission no Starting From">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-block">
+        <button class="btn btn-primary"
+                (click)="saveSetting()">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

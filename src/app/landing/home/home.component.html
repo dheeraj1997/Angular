@@ -1,0 +1,129 @@
+<div class="landing-section">
+  <div class="header-banner">
+    <div class="container">
+      <h1 class="heading">{{headingData.heading}}</h1>
+      <p>{{headingData.text}}</p>
+      <a (click)="submitEvent('navigation', 'click' , 'login')"
+         [routerLink]="['/user/login']"
+         class="btn login-bt">Login</a>
+      <a (click)="submitEvent('navigation', 'click' , 'sign-up')"
+         class="btn login-bt"
+         [routerLink]="['/user/sign-up']">Signup</a>
+    </div>
+  </div>
+
+  <div class="container-fluid features">
+    <div class="headings">
+      <h1>Features</h1>
+    </div>
+    <div class="row text-center">
+      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" *ngFor="let feature of featureData;">
+        <div class="card">
+          <div class="card-body">
+            <div class="icon-size">
+              <i class="icon-style fa" [ngClass]="feature.icon"></i>
+            </div>
+            <h4>{{feature.title}}</h4>
+            <p class="text-justify text-feature">{{feature.text}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container-fluid about">
+    <div class="headings">
+      <h1>About Us</h1>
+    </div>
+
+    <div class="card">
+      <div class="card-block">
+        <p class="text-justify text-feature" style="font-size: 15px">{{aboutData}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid clients">
+    <div class="headings">
+      <h1>Our Clients</h1>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4" *ngFor="let client of clientData;">
+        <div class="card">
+          <div class="card-body">
+            <h4>{{client.name}}</h4>
+            <p>{{client.location}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--<div>-->
+    <!--<div class="headings">-->
+    <!--<h1 style="margin-top:15px">Testimonials</h1>-->
+    <!--</div>-->
+
+
+    <!--<div class="bs-example">-->
+    <!--<div id="myCarousel" class="carousel slide" data-interval="6500" data-ride="carousel">-->
+    <!--&lt;!&ndash; Carousel indicators &ndash;&gt;-->
+    <!--<ol class="carousel-indicators">-->
+    <!--<li data-target="#myCarousel" data-slide-to="0" class="active"></li>-->
+    <!--<li data-target="#myCarousel" data-slide-to="1"></li>-->
+    <!--<li data-target="#myCarousel" data-slide-to="2"></li>-->
+    <!--</ol>-->
+    <!--&lt;!&ndash; Carousel items &ndash;&gt;-->
+    <!--<div class="carousel-inner">-->
+    <!--<div class="active item carousel-fade">-->
+    <!--<div class="text-align">-->
+    <!--<img src="../../assets/images/school logo/sainik.jpg" height="150px" width="150px">-->
+    <!--</div>-->
+    <!--<div class=" carousel-caption">-->
+
+    <!--<p style="color: black">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="item carousel-fade">-->
+    <!--<div class="text-align">-->
+    <!--<img src="../../assets/images/school logo/indian academy logo.png" height="150px" width="150px">-->
+    <!--</div>-->
+    <!--<div class="  carousel-caption">-->
+
+    <!--<p style="color: black">Aliquam sit amet gravida nibh, facilisis gravida odio.</p>-->
+
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="item carousel-fade">-->
+    <!--<div class="text-align">-->
+    <!--<img src="../../assets/images/school logo/mkd om.png" height="150px" width="150px">-->
+    <!--</div>-->
+    <!--<div class=" carousel-caption">-->
+
+    <!--<p style="color: black">Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="item carousel-fade">-->
+    <!--<div class="text-align">-->
+    <!--<img src="../../assets/images/school logo/us college.jpg" height="150px" width="150px">-->
+    <!--</div>-->
+    <!--<div class="carousel-caption">-->
+
+    <!--<p style="color: black">Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--&lt;!&ndash; Carousel nav &ndash;&gt;-->
+    <!--<a class="carousel-control left" href="#myCarousel" data-slide="prev">-->
+    <!--<span class="glyphicon glyphicon-chevron-left"></span>-->
+    <!--</a>-->
+    <!--<a class="carousel-control right" href="#myCarousel" data-slide="next">-->
+    <!--<span class="glyphicon glyphicon-chevron-right"></span>-->
+    <!--</a>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--</div>-->
+  </div>
+
+</div>

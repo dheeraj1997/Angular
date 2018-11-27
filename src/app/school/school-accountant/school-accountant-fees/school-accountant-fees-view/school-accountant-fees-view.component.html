@@ -1,0 +1,106 @@
+<div class="row">
+  <div class="col-md-12">
+    <button class="btn pull-right card pointer"
+            [routerLink]="['/school/accountant/fees/add']">
+      Collect fees
+    </button>
+  </div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        Fees Detail
+      </div>
+      <div class="card-block">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label>
+              <b>Select Session</b>
+            </label>
+            <select class="form-control"
+                    [(ngModel)]="selectedSession"
+                    (change)="onSessionChange()">
+              <option value="{{sess._id}}" *ngFor="let sess of sessionData;">
+                {{sess.name}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label>
+              <b>Select Class</b>
+            </label>
+            <select class="form-control"
+                    [(ngModel)]="selectedClass"
+                    (change)="onClassChange()">
+              <option value="{{cls._id}}" *ngFor="let cls of classData;">
+                {{cls.name}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-block" *ngIf="toShowData.length">
+        <input
+          type="text"
+          class="form-control mb-3"
+          [(ngModel)]="searchString"
+          placeholder="Type to filter the name column..."
+          (ngModelChange)="search($event)">
+        <div class="no-more-tables">
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+            <tr>
+              <th>
+                #
+              </th>
+              <th>
+                Date
+              </th>
+              <th>
+                Student Name
+              </th>
+              <th>
+                Amount
+              </th>
+              <th>
+                Payment Mode
+              </th>
+              <th>
+                Action
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let fees of toShowData; let i=index; ">
+              <td>
+                {{i+1}}
+              </td>
+              <td data-title="Date">
+                {{fees.createdAt | amDateFormat:'LL'}}
+              </td>
+              <td data-title="Student Name">
+                {{fees.studentName}}
+              </td>
+              <td data-title="Amount">
+                ₹{{fees.total}}
+              </td>
+              <td data-title="Payment Mode">
+                {{fees.paymentMode}}
+              </td>
+              <td data-title="Action">
+                <button
+                  type="button"
+                  class="btn btn-success pointer"
+                  (click)="getRecipt(fees.fileName)">
+                  Download Receipt
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

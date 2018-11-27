@@ -1,0 +1,47 @@
+$break-sm: 400px;
+$break-md: 700px;
+$break-lg: 1200px;
+.navbar {
+  background-color: white;
+  //margin-bottom: 0px !important;
+}
+
+.navbar-toggler {
+  height: 40px;
+  margin: 5px;
+  padding: 10px;
+}
+
+.blank a {
+  display: block;
+  margin: 0px 5px 0px 5px;
+  padding: 7px 20px;
+  font-size: 15px;
+  border-radius: 2px;
+}
+
+.blank a:hover {
+  border-radius: 2px;
+  background-color: #3164a1;
+  color: white;
+}
+
+.blank .active {
+  border-radius: 2px;
+  background-color: #3164a1;
+  color: white;
+}
+
+.navbar-nav {
+  //@media screen and (max-width: $break-lg) {
+  float: right !important;
+  //}
+  @media screen and (max-width: $break-sm) {
+    float: inherit !important;
+    text-align: center;
+  }
+  @media screen and (max-width: $break-md) {
+    float: inherit !important;
+    text-align: center
+  }
+}

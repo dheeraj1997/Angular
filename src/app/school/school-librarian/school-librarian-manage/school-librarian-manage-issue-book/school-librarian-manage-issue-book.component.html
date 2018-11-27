@@ -1,0 +1,62 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-header">
+				All Books
+			</div>
+			<div class="card-block">
+				<input
+				type="text"
+				class="form-control mb-3"
+				[(ngModel)]="searchString"
+				placeholder="Type to filter the name column..."
+				(ngModelChange)='search($event)'>
+			</div>		
+		</div>
+		<div class="row">
+			<div class="col-md-4" *ngFor="let book of toShowData">
+				<div class="card">
+					<div class="card-block">					
+						<!-- <div style=" height:150px; width:200px; margin: auto;">
+							<img src="" alt=" book cover not avilable" height="250px" width="200px" >
+						</div> -->
+						<div >
+							<div>
+								<table class="table table-bordered table-striped mb-0" >
+									<tbody>	
+										<tr>
+											<th>Name:</th>
+											<td>{{book.name}}</td>
+										</tr>
+										<tr>
+											<th>Book Code:</th>
+											<td>{{book.code}}</td>
+										</tr>
+										<tr>
+											<th>Author:</th>
+											<td>{{book.author}}</td>
+										</tr>
+										<tr>
+											<th>Books Left:</th>
+											<td>{{book.bookLeft}}</td>
+										</tr>
+									</tbody>	
+								</table>
+							</div>			
+						</div>
+
+						<div style="margin-top: 5px; ">						
+							<button type="button" class="btn btn-secondary pointer "
+							style="width: 100%" 
+							[ngClass]="{' btn-success ': book.bookLeft !== 0 ,' btn-secondary': book.bookLeft == 0}"
+							[disabled]="book.bookLeft === 0"
+							[routerLink]="['/school/librarian/manage/issue', book._id]">
+							Issue
+						</button>
+					</div>
+				</div>	
+			</div>		
+		</div>
+	</div>
+</div>
+</div>

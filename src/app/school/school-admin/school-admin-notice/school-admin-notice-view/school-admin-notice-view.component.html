@@ -1,0 +1,86 @@
+<div class="row">
+  <div class="col-md-12">
+    <button class="btn pull-left card pointer"
+            *ngIf="viewType==='notice'"
+            (click)="getDrafts()">
+      View Drafts
+    </button>
+    <button class="btn pull-left card pointer"
+            *ngIf="viewType==='draft'"
+            (click)="getNotice()">
+      View Notice
+    </button>
+    <button class="btn pull-right card pointer"
+            [routerLink]="['/school/admin/notice/add']">
+      Add Notice
+    </button>
+  </div>
+  <div class="col-md-4" *ngFor="let note of toShowData; let i = index;">
+    <div class="card" [ngClass]="{holiday:note.isHoliday}">
+      <div class="card-header">
+        {{note.title}}
+        <span class="menu-icon"
+              [ngbPopover]="popCat"
+              #popC="ngbPopover"
+              placement="left"
+              (document:click)="popC.close()" (click)="$event.stopPropagation()">
+          <i class="icon-options-vertical"></i>
+        </span>
+        <ng-template #popCat>
+          <div class="btn-pop" (click)="view(note , i, noticeModal)">
+            <i class="icon-basic-settings"></i> &nbsp;&nbsp;&nbsp;Edit
+          </div>
+          <div class="btn-pop" (click)="delete(note , i, deleteModal)">
+            <i class="icon-basic-trashcan-remove"></i> &nbsp;&nbsp;&nbsp;Delete
+          </div>
+        </ng-template>
+      </div>
+      <div class="card-block">
+        <p><b>DATE: {{note.noticeDate.day}}/{{note.noticeDate.month}}/{{note.noticeDate.year}}</b></p>
+        <p class="card-text text-justify">{{note.noticeText}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #deleteModal let-submit="close" let-dismiss="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title text-uppercase">Delete {{nameToDelete}}!</h6>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss('clicking on cross!')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete <b>{{nameToDelete}}</b> notice?</p>
+  </div>
+  <div class="modal-footer" style="display: block;">
+    <button
+      type="button"
+      class="btn btn-outline-danger"
+      (click)="submit('yes')">Yes!
+    </button>
+    <button type="button" class="btn btn-outline-success pull-right" (click)="submit('cancel')">Cancel</button>
+  </div>
+</ng-template>
+
+
+<ng-template #noticeModal let-submit="close" let-dismiss="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title text-uppercase">{{titleToView}}</h6>
+    <button type="button" class="close" aria-label="Close" (click)="submit('cancel')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="text-justify text-capitalize">
+      {{noticeInfo}}
+    </div>
+  </div>
+  <div class="modal-footer" style="display: block;">
+    <button
+      type="button"
+      class="btn btn-outline-info"
+      (click)="submit('Edit')">Edit
+    </button>
+  </div>
+</ng-template>

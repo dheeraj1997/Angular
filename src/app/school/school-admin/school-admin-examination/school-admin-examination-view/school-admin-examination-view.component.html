@@ -1,0 +1,112 @@
+<div class="row">
+  <div class="col-md-12">
+    <button class="btn pull-right card pointer"
+            [routerLink]="['/school/admin/examination/add']">
+      Add Exam
+    </button>
+  </div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-block">
+        <div class="form-group">
+          <label>
+            Select Session
+            <span style="color: red">*</span>
+          </label>
+          <select [(ngModel)]="selectedSession"
+                  (ngModelChange)="getExam()" class="form-control">
+            <option *ngFor='let sess of sessionData;' value="{{sess._id}}">
+              {{sess.name}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        All Examinations
+      </div>
+      <div class="card-block" *ngIf="toShowData.length">
+        <input
+          type="text"
+          class="form-control mb-3"
+          [(ngModel)]="searchString"
+          placeholder="Type to filter the name column..."
+          (ngModelChange)='search($event)'>
+        <div class="no-more-tables">
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+            <tr>
+              <th>
+                #
+              </th>
+              <th>
+                Examination Name
+              </th>
+              <th>
+                Class
+              </th>
+              <th>
+                Action
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let exam of toShowData; let i=index ">
+              <td>
+                {{i+1}}
+              </td>
+              <td data-title=" Examination Name">
+                {{exam.name}}
+              </td>
+              <td data-title="Class">
+                {{exam.className}}
+              </td>
+              <td data-title="Action">
+                <button
+                  type="button"
+                  class="btn btn-success pointer"
+                  [routerLink]="['/school/admin/examination/edit',exam._id]"
+                  placement="top"
+                  ngbTooltip="Edit Examination">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger pointer"
+                  placement="top"
+                  (click)="delete(exam , i, deleteModal)"
+                  ngbTooltip="Delete Examination">
+                  <i class="fa fa-remove"></i>
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #deleteModal let-submit="close" let-dismiss="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title text-uppercase">Delete {{nameToDelete}}!</h6>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss('clicking on cross!')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete <b>{{nameToDelete}}</b> examination?</p>
+  </div>
+  <div class="modal-footer" style="display: block;">
+    <button
+      type="button"
+      class="btn btn-outline-danger"
+      (click)="submit('yes')">Yes!
+    </button>
+    <button type="button" class="btn btn-outline-success pull-right" (click)="submit('cancel')">Cancel</button>
+  </div>
+</ng-template>
+

@@ -1,0 +1,233 @@
+<div class="row">
+  <div class="col-md-12" style="margin-bottom: 5px;">
+    <h2>Welcome to {{schoolData.name}}!</h2>
+  </div>
+  <div class="col-sm-12 col-md-6">
+    <div class="card card-block card-widget">
+      <div class="widget-icon rounded-circle bg-green text-white icon icon-people">
+      </div>
+      <div class="block ml-3 mr-3">
+        <h5 class="mb-0 fw-400">
+          {{totalStudent}}
+        </h5>
+        <small class="text-muted text-uppercase ">
+          <strong>Total Students</strong>
+        </small>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-6">
+    <div class="card card-block card-widget">
+      <div class="widget-icon rounded-circle bg-blue text-white icon icon-people">
+      </div>
+      <div class="block ml-3 mr-3">
+        <h5 class="mb-0 fw-400">
+          {{totalTeacher}}
+        </h5>
+        <small class="text-muted text-uppercase ">
+          <strong>Total Teachers</strong>
+        </small>
+      </div>
+    </div>
+  </div>
+ <!--  <div class="col-sm-6 col-md-3">
+    <div class="card card-block card-widget">
+      <div class="widget-icon rounded-circle bg-teal text-white icon icon-basic-message-multiple">
+      </div>
+      <div class="block ml-3 mr-3">
+        <h5 class="mb-0 fw-400">
+          {{schoolData.smsCount.total - schoolData.smsCount.used}}
+        </h5>
+        <small class="text-muted text-uppercase ">
+          <strong>Remaining SMS</strong>
+        </small>
+      </div>
+    </div>
+  </div> -->
+  <!-- <div class="col-sm-6 col-md-3">
+    <div class="card card-block card-widget">
+      <div class="widget-icon rounded-circle bg-red text-white icon icon-paper-plane">
+      </div>
+      <div class="block ml-3 mr-3">
+        <h5 class="mb-0 fw-400">
+          <a [routerLink]="['/school/admin/message/history']">Messaging</a>
+        </h5>
+        <small class="text-muted text-uppercase ">
+          <strong></strong>
+        </small>
+      </div>
+    </div>
+  </div> -->
+
+</div>
+<!-- <div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header no-shadow">
+        <div class="card-header-text w-100">
+          <div class="card-title">
+            Attendance Ratio
+          </div>
+          <div class="card-subtitle text-capitalize ff-sans">
+            ToDay
+          </div>
+        </div>
+      </div>
+      <div class="card-block">
+        <div class="row text-center">
+          <div class="col-xs-6 col-sm-3 text-success">
+            <h5 class="mb-0">
+              <strong>
+                1000
+              </strong>
+            </h5>
+            <small>
+              Total Student's Present
+            </small>
+          </div>
+          <div class="col-xs-6 col-sm-3">
+            <h5 class="mb-0">
+              <strong>
+                150
+              </strong>
+            </h5>
+            <small>
+              Total Student's Absent
+            </small>
+          </div>
+          <div class="col-xs-6 col-sm-3 text-danger">
+            <h5 class="mb-0">
+              <strong>
+                1150
+              </strong>
+            </h5>
+            <small>
+              Total Student's in School
+            </small>
+          </div>
+          <div class="col-xs-6 col-sm-3">
+            <h5 class="mb-0">
+              <strong>
+                85%
+              </strong>
+            </h5>
+            <small>
+              Attendance Percentage
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="mb-1">
+        <ngx-charts-bar-vertical
+            class="chart-container"
+            [scheme]="colorScheme"
+            [schemeType]="schemeType"
+            [results]="single"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [tooltipDisabled]="tooltipDisabled"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            [showGridLines]="showGridLines"
+            [barPadding]="barPadding"
+            [roundDomains]="roundDomains"
+            (select)="select($event)"
+            (legendLabelClick)="onLegendLabelClick($event)">
+          </ngx-charts-bar-vertical>
+      </div>
+    </div>
+  </div>
+-->
+
+<!-- <div class="col-lg-6">
+  <div class="card">
+    <div class="card-header no-shadow">
+      <div class="card-header-text w-100">
+        <div class="card-title">
+          Country spending
+        </div>
+        <div class="card-subtitle text-capitalize ff-sans">
+          Last updated: 1 hour ago
+        </div>
+      </div>
+    </div>
+    <div class="card-block">
+      <div class="row text-center">
+        <div class="col-sm-6 col-md-3 text-purple">
+          <h5 class="mb-0">
+            <strong>
+              34.45B
+            </strong>
+          </h5>
+          <small>
+            Health
+          </small>
+        </div>
+        <div class="col-sm-6 col-md-3">
+          <h5 class="mb-0">
+            <strong>
+              21.78B
+            </strong>
+          </h5>
+          <small>
+            Education
+          </small>
+        </div>
+        <div class="col-sm-6 col-md-3 text-indigo">
+          <h5 class="mb-0">
+            <strong>
+              2.89M
+            </strong>
+          </h5>
+          <small>
+            Research
+          </small>
+        </div>
+        <div class="col-sm-6 col-md-3">
+          <h5 class="mb-0">
+            <strong>
+              34.76B
+            </strong>
+          </h5>
+          <small>
+            Food
+          </small>
+        </div>
+      </div>
+    </div>
+     <div class="mb-1">
+      <ngx-charts-gauge (legendlabelclick)="onLegendLabelClick($event)" (select)="select($event)" [angleSpan]="gaugeAngleSpan" [bigSegments]="gaugeLargeSegments" [legend]="showLegend" [margin]="margin ? [marginTop, marginRight, marginBottom, marginLeft] : null" [max]="gaugeMax" [min]="gaugeMin" [results]="single" [scheme]="colorScheme" [showAxis]="gaugeShowAxis" [smallSegments]="gaugeSmallSegments" [startAngle]="gaugeStartAngle" [textValue]="gaugeTextValue" [tooltipDisabled]="tooltipDisabled" [units]="gaugeUnits" class="gauge-container">
+      </ngx-charts-gauge>
+    </div>
+  </div>
+</div>
+</div>
+<div> -->
+<div class="row">
+  <div class="col-md-6 col-xl-4">
+    <div class="card bg-indigo card-inverse">
+      <div class="card-header no-shadow">
+        Notice Board
+      </div>
+      <div class="list-group" *ngFor="let notice of noticeData;let i=index; ">
+        <div class="list-group-item list-group-item-action flex-column align-items-start no-bg text-white">
+          <p class="mb-1 w-100">
+            {{notice.title}}
+          </p>
+          <div class="d-flex w-100 justify-content-between">
+            <small>
+              {{notice.noticeText.substring(0,100)}}
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer " style="display: block;">
+        <a style="color: white" class="pull-right" [routerLink]="['/school/registrar/notice']">VIEW MORE</a>
+      </div>
+    </div>
+  </div>
+</div>

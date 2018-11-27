@@ -1,0 +1,86 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-12">
+            <h6>Select Attendance SMS Language</h6>
+          </div>
+          <div class="col-md-12 form-group">
+            <select class="form-control" [(ngModel)]="settingsData.smsLanguage">
+              <option [value]="'eng'">English</option>
+              <option [value]="'hin'">हिंदी</option>
+            </select>
+          </div>
+          <div class="col-md-12">
+            <h6>Select Attendance SMS Signature</h6>
+          </div>
+          <div class="col-md-12 form-group">
+            <input type="text"
+                   class="form-control"
+                   [(ngModel)]="settingsData.attendanceSignature">
+          </div>
+          <div class="col-md-12">
+            <h6>Select Attendance Type</h6>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input"
+                     [(ngModel)]="settingsData.attendanceType"
+                     [value]="'timetable'">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Take Attendance by Time-Table</span>
+            </label>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input"
+                     [(ngModel)]="settingsData.attendanceType"
+                     [value]="'daily'">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Take Attendance by Class</span>
+            </label>
+          </div>
+          <div class="col-md-12" *ngIf="settingsData.attendanceType === 'timetable'">
+            <p>You will be redirected to timetable page to setup timetable.</p>
+          </div>
+          <div class="col-md-12" *ngIf="settingsData.attendanceType === 'daily'">
+            <h6>Please choose days on which attendance is taken:</h6>
+            <div class="col-md-12">
+              <label class="custom-control custom-checkbox" *ngFor="let day of classAttendanceSettingsData.days;">
+                <input type="checkbox" class="custom-control-input"
+                       [(ngModel)]="day.selected"
+                       [value]="true">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">{{day.name.substring(0 , 3).toUpperCase() }}</span>
+              </label>
+              <br><br>
+            </div>
+            <h6>Please setup number of attendance to be taken here:</h6>
+            <table class="table table-bordered">
+              <thead>
+              <tr>
+                <td>#</td>
+                <td>Class</td>
+                <td>Attendance Frequency</td>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let clss of classAttendanceSettingsData.classData; let i = index;">
+                <td>{{i+1}}</td>
+                <td>{{clss.name}}</td>
+                <td>
+                  <input type="number" class="form-control" [(ngModel)]="clss.frequency">
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="form-group col-md-12">
+            <button class="btn btn-primary" (click)="saveSettings()"> Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

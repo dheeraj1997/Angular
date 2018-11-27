@@ -1,0 +1,135 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        Issued Books
+      </div>
+      <div class="card-block">
+        <input
+          type="text"
+          class="form-control mb-3"
+          [(ngModel)]="searchString"
+          placeholder="Type to search the Student..."
+          (ngModelChange)='search($event)'>
+        <div class="no-more-tables">
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+            <tr>
+              <th>
+                Book Name
+              </th>
+              <th>
+                Student Name
+              </th>
+              <th>
+                Class
+              </th>
+              <th>
+                Issued date
+              </th>
+              <th>
+                Expected Return Date
+              </th>
+
+              <th>
+                Action
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let issueBook of toShowData">
+              <td data-title="Book Name">
+                {{issueBook.bookName}}
+              </td>
+              <td data-title="Student Name">
+                {{issueBook.studentName}}
+              </td>
+              <td data-title="Class">
+                {{issueBook.className}}
+              </td>
+              <td data-title="issued date">
+                {{issueBook.issueDate.day}}-
+                {{issueBook.issueDate.month}}-
+                {{issueBook.issueDate.year}}
+              </td>
+              <td data-title="Expected Return date">
+                {{issueBook.expectedReturnDate.day}}-
+                {{issueBook.expectedReturnDate.month}}-
+                {{issueBook.expectedReturnDate.year}}
+              </td>
+              <td data-title="Action">
+                <button
+                  type="button"
+                  class="btn btn-danger pointer"
+                  (click)="openReturnModel(issueBook , i, returnModal)"
+                  placement="top"
+                  ngbTooltip="Return Book">
+                  <i class="fa fa-refresh"></i>
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #returnModal let-submit="close" let-dismiss="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title text-uppercase">{{nameWhoReturn}} returned {{returnBookName}}!</h6>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss('clicking on cross!')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="card">
+      <div class="card-block">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label>
+              Return Date
+              <span style="color: red">*</span>
+            </label>
+            <div class="input-group">
+              <input
+                class="form-control"
+                placeholder="yyyy-mm-dd"
+                name="d1"
+                [(ngModel)]="issueData.returnDate"
+                (click)="d1.toggle()"
+                ngbDatepicker #d1="ngbDatepicker" required>
+              <button class="input-group-addon" (click)="d1.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+            </div>
+            <small class="form-text text-muted">
+              Return date of book.
+            </small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>
+            Return Comment
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="issueData.returnComment"
+            placeholder="Enter Return Comment">
+          <small class="form-text text-muted">
+            Remarks regarding book.
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer" style="display: block;">
+    <button
+      type="button"
+      class="btn btn-outline-success"
+      (click)="submit('yes')">Yes!
+    </button>
+    <button type="button" class="btn btn-outline-danger pull-right" (click)="submit('cancel')">No</button>
+  </div>
+</ng-template>

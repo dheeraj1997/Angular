@@ -1,0 +1,253 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+      <div class="card-header">
+        Basic Info
+      </div>
+      <div class="card-block">
+        <div class="form-group">
+          <label>
+            Organization Name
+            <span style="color: red">*</span>
+          </label>
+          <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="organizationData.name"s
+          placeholder="Enter organization Name" required>
+          <small class="form-text text-muted">
+            Complete Name of the organization.
+          </small>
+        </div>
+        <div class="form-group">
+          <label>
+            Organization Established Year
+          </label>
+          <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="organizationData.establishedYear"
+          placeholder="Enter organization Established Year">
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        Affiliation Info
+      </div>
+      <div class="card-block">
+        <div class="form-group"
+      *ngFor="let board of organizationData.affiliation.board; let i= index; trackBy:customTrackBy;">
+      <label>
+        Boards
+        <span *ngIf="i > 0">{{i+1}}</span>
+        <span style="color: red" *ngIf="i === 0">*</span>
+      </label>
+      <input
+      type="text"
+      class="form-control"
+      placeholder="Enter school boards"
+      [(ngModel)]="organizationData.affiliation.board[i]"
+      >
+    </div>
+    <div class="form-group">
+      <button
+      class="btn btn-secondary pointer"
+      (click)="addBoard()">
+      Add More Board(s)
+    </button>
+  </div>
+      </div>
+    </div>
+  <div class="card">
+    <div class="card-header">
+      Address Info
+    </div>
+    <div class="card-block">
+      <div class="form-group">
+        <label>
+          Pin Code
+          <span style="color: red">*</span>
+        </label>
+        <input
+        type="text"
+        class="form-control"
+        placeholder="Enter Pin Code"
+        [(ngModel)]="organizationData.address.pin"
+        maxlength="6"
+        (ngModelChange)="getDetailsFromPin($event)"
+        required>
+      </div>
+      <div class="form-group">
+        <label>
+          Village/Locality
+        </label>
+        <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="organizationData.address.village"
+        placeholder="Enter Village/Locality" required>
+      </div>
+      <div class="form-group">
+        <label>
+          Block
+        </label>
+        <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="organizationData.address.block"
+        placeholder="Enter Block">
+      </div>
+      <div class="form-group">
+        <label>
+          District
+          <span style="color: red">*</span>
+        </label>
+        <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="organizationData.address.district"
+        placeholder="Enter District">
+      </div>
+      <div class="form-group">
+        <label>
+          State
+          <span style="color: red">*</span>
+        </label>
+        <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="organizationData.address.state"
+        placeholder="Enter State">
+      </div>
+      <div class="form-group">
+        <label>
+          Complete Address
+          <span style="color: red">*</span>
+        </label>
+        <textarea
+        class="form-control"
+        [(ngModel)]="organizationData.address.completeAddress"
+        rows="3">Complete Address</textarea>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      Contact Info
+    </div>
+    <div class="card-block">
+      <div class="form-group"
+      *ngFor="let phone of organizationData.contact.phone; let i= index; trackBy:customTrackBy;">
+      <label>
+        Phone Number
+        <span *ngIf="i > 0">{{i+1}}</span>
+        <span style="color: red" *ngIf="i === 0">*</span>
+      </label>
+      <input
+      type="text"
+      class="form-control"
+      placeholder="Enter Phone Number"
+      [(ngModel)]="organizationData.contact.phone[i]"
+      >
+    </div>
+    <div class="form-group">
+      <button
+      class="btn btn-secondary pointer"
+      (click)="addPhone()">
+      Add More Phone(s)
+    </button>
+  </div>
+  <div class="form-group" *ngFor="let email of organizationData.contact.email; let i= index; trackBy:customTrackBy;">
+    <label>
+      Email Address
+      <span *ngIf="i > 0">{{i+1}}</span>
+      <span style="color: red" *ngIf="i === 0">*</span>
+    </label>
+    <input
+    type="email"
+    class="form-control"
+    placeholder="Enter Email Address"
+    [(ngModel)]="organizationData.contact.email[i]">
+  </div>
+  <div class="form-group">
+    <button
+    class="btn btn-secondary pointer"
+    (click)="addEmail()">
+    Add More Email Address(es)
+  </button>
+</div>
+<div class="form-group">
+  <label>
+    Website
+  </label>
+  <input
+  type="text"
+  class="form-control"
+  [(ngModel)]="organizationData.contact.website"
+  placeholder="Enter organization Website URL">
+</div>
+<div class="form-group">
+  <label>
+    Fax
+  </label>
+  <input
+  type="text"
+  class="form-control"
+  [(ngModel)]="organizationData.contact.fax"
+  placeholder="Enter organization Fax">
+</div>
+</div>
+</div>
+<div class="card">
+  <div class="card-block">
+    <div class="form-group">
+      <label>
+        Username
+        <span style="color: red">*</span>
+      </label>
+      <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="organizationData.username"
+      placeholder="Enter organization Username">
+    </div>
+    <div class="form-group">
+      <label>
+        Password
+        <span style="color: red">*</span>
+      </label>
+      <input
+      type="password"
+      class="form-control"
+      [(ngModel)]="organizationData.password"
+      placeholder="Enter organization Password">
+    </div>
+    <div class="form-group">
+      <label>
+        Confirm Password
+        <span style="color: red">*</span>
+      </label>
+      <input
+      type="password"
+      class="form-control"
+      [(ngModel)]="confirmPass"
+      placeholder="Enter organization Password">
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <span style="color: red"> * </span> &nbsp;&nbsp;
+    Required Fields
+  </div>
+  <div class="card-block">
+    <button
+    type="submit"
+    class="btn btn-primary"
+    (click)="submitOrganization()">Submit
+  </button>
+</div>
+</div>
+</div>
+</div>

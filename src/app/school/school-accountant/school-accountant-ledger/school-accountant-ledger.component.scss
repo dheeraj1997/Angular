@@ -1,0 +1,9 @@
+@media only screen and (max-width: 800px) {
+  .no-more-tables td:before {
+    content: attr(headers);
+  }
+}
+
+.custom-overflow {
+  overflow-x: auto;
+}

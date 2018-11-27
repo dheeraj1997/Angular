@@ -1,0 +1,304 @@
+<div class="row">
+  <div class="col-md-12">
+    <button class="btn pull-right card pointer"
+            [routerLink]="['/school/admin/message/history']">
+      Messaging History
+    </button>
+  </div>
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-block">
+        <div class="form-group">
+          <label class="custom-control custom-checkbox">
+            <input
+              type="checkbox"
+              [(ngModel)]="teacherSelect"
+              class="custom-control-input"
+              (ngModelChange)="addTeachers($event)">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description"><b>Teachers</b></span>
+          </label>
+          <label
+            class="custom-control custom-checkbox">
+            <input
+              type="checkbox"
+              [(ngModel)]="staffSelect"
+              class="custom-control-input"
+              (ngModelChange)="addStaff($event)">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description"><b>Staff</b></span>
+          </label>
+          <label
+            class="custom-control custom-checkbox"
+            *ngFor="let cls of classData">
+            <input
+              type="checkbox"
+              [(ngModel)]="cls.selected"
+              class="custom-control-input"
+              (ngModelChange)="addClassStudents(cls._id , $event)">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">{{cls.name}}</span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <select class="form-control" [(ngModel)]="lang">
+                <option value="eng">English</option>
+                <option value="hin">हिंदी</option>
+              </select>
+              <div class="form-group">
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-md-12">
+            <label for="text">
+              Total Characters: <b>{{totalChar}}</b>
+            </label>
+            <textarea
+              class="form-control"
+              id="text"
+              [(ngModel)]="text"
+              (ngModelChange)="countUpdate()"
+              rows="3">
+          </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" *ngIf="teacherData.length">
+      <div class="card-header" style="width: 100%;">
+        <span>All Teachers &nbsp;&nbsp;</span>
+        <button
+          *ngIf="!selectAllTeachers"
+          (click)="selectAllTeacher(true)"
+          class="btn btn-success pull-right">
+          Select All
+        </button>
+        <button
+          *ngIf="selectAllTeachers"
+          (click)="selectAllTeacher(false)"
+          class="btn btn-danger pull-right">
+          Remove All
+        </button>
+      </div>
+      <div class="card-block">
+        <div class="no-more-tables">
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+            <tr>
+              <th>
+                #
+              </th>
+              <th>
+                <label class="custom-control custom-checkbox">
+                  <input
+                    type="checkbox"
+                    [(ngModel)]="selectAllTeachers"
+                    (change)="selectAllTeacher(selectAllTeachers)"
+                    class="custom-control-input">
+                  <span class="custom-control-indicator"></span>
+                </label>
+              </th>
+              <th>
+                Name
+              </th>
+              <th>
+                Contact No
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let teacher of teacherData;let t=index;">
+              <td data-title="#">
+                {{t+1}}
+              </td>
+              <td data-title="">
+                <label class="custom-control custom-checkbox">
+                  <input
+                    type="checkbox"
+                    [(ngModel)]="teacher.selected"
+                    class="custom-control-input">
+                  <span class="custom-control-indicator"></span>
+                </label>
+              </td>
+              <td data-title="Name">
+                {{teacher.name}}
+              </td>
+              <td data-title="Contact No">
+                {{teacher.emergencyContactNo}}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card" *ngIf="staffData.length">
+      <div class="card-header" style="width: 100%;">
+        <span>All Staff &nbsp;&nbsp;</span>
+        <button
+          *ngIf="!selectAllStaff"
+          (click)="selectAllStaffs(true)"
+          class="btn btn-success pull-right">
+          Select All
+        </button>
+        <button
+          *ngIf="selectAllStaff"
+          (click)="selectAllStaffs(false)"
+          class="btn btn-danger pull-right">
+          Remove All
+        </button>
+      </div>
+      <div class="card-block">
+        <div class="no-more-tables">
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+            <tr>
+              <th>
+                #
+              </th>
+              <th>
+                <label class="custom-control custom-checkbox">
+                  <input
+                    type="checkbox"
+                    [(ngModel)]="selectAllStaff"
+                    (change)="selectAllStaffs(selectAllStaff)"
+                    class="custom-control-input">
+                  <span class="custom-control-indicator"></span>
+                </label>
+              </th>
+              <th>
+                Name
+              </th>
+              <th>
+                Type
+              </th>
+              <th>
+                Contact No
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let staff of staffData;let s=index;">
+              <td data-title="#">{{s+1}}</td>
+              <td data-title="">
+                <label class="custom-control custom-checkbox">
+                  <input
+                    type="checkbox"
+                    [(ngModel)]="staff.selected"
+                    class="custom-control-input">
+                  <span class="custom-control-indicator"></span>
+                </label>
+              </td>
+              <td data-title="Name">
+                {{staff.name}}
+              </td>
+              <td data-title="Type">
+                {{staff.type}}
+              </td>
+              <td data-title="Contact No">
+                {{staff.emergencyContactNo}}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card" *ngIf="studentData.length">
+      <div class="card-header" style="width: 100%;">
+        <span>All Students &nbsp;&nbsp;</span>
+        <button
+          *ngIf="!selectAllStudents"
+          (click)="selectAllStudent(true)"
+          class="btn btn-success pull-right">
+          Select All
+        </button>
+        <button
+          *ngIf="selectAllStudents"
+          (click)="selectAllStudent(false)"
+          class="btn btn-danger pull-right">
+          Remove All
+        </button>
+
+      </div>
+      <div class="card-block">
+        <div class="no-more-tables">
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+            <tr>
+              <th>
+                #
+              </th>
+              <th>
+                <label class="custom-control custom-checkbox">
+                  <input
+                    type="checkbox"
+                    [(ngModel)]="selectAllStudents"
+                    (change)="selectAllStudent(selectAllStudents)"
+                    class="custom-control-input">
+                  <span class="custom-control-indicator"></span>
+                </label>
+              </th>
+              <th>
+                Roll No
+              </th>
+              <th>
+                Name
+              </th>
+              <th>
+                Class
+              </th>
+              <th>
+                Contact No
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let stu of studentData;let st=index;">
+              <td data-title="#">{{st+1}}</td>
+              <td data-title="">
+                <label class="custom-control custom-checkbox">
+                  <input
+                    type="checkbox"
+                    [(ngModel)]="stu.selected"
+                    class="custom-control-input">
+                  <span class="custom-control-indicator"></span>
+                </label>
+              </td>
+              <td data-title="Roll No">
+                {{stu.rollNo}}
+              </td>
+              <td data-title="Name">
+                {{stu.name}}
+              </td>
+              <td data-title="Class">
+                {{stu.className}}
+              </td>
+              <td data-title="Contact No">
+                {{stu.emergencyContactNo}}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-block">
+        <button
+          type="submit"
+          (click)="submitSms()"
+          class="btn btn-success">Send Sms
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

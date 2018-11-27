@@ -1,0 +1,177 @@
+<div class="row">
+  <div class="col-md-12">
+    <button class="btn pull-left card pointer"
+            [routerLink]="['/school/registrar/student/csv']">
+      Add CSV
+    </button>
+    <button class="btn pull-right card pointer"
+            [routerLink]="['/school/registrar/student/add']">
+      Add New Student
+    </button>
+  </div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label>
+              <b>Select Session</b>
+            </label>
+            <select
+              class="form-control"
+              [(ngModel)]="selectedSession"
+              (ngModelChange)="getStudents()">
+              <option
+                value="{{sess._id}}"
+                *ngFor="let sess of sessionData;">
+                {{sess.name}}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-6 form-group">
+            <label>
+              <b>Select Class</b>
+            </label>
+            <select
+              class="form-control"
+              [(ngModel)]="selectedClass"
+              (ngModelChange)="getStudents()">
+              <option
+                value="{{cls._id}}"
+                *ngFor="let cls of classData;">
+                {{cls.name}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" *ngIf="toShowData.length">
+      <div class="card-header">
+        All Students
+      </div>
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-12">
+            <input
+              type="text"
+              class="form-control mb-3"
+              [(ngModel)]="searchString"
+              placeholder="Type to filter the name column..."
+              (ngModelChange)='search($event)'>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label>Select Roll Assignment Type</label>
+            <select class="form-control" [(ngModel)]="rollNumberType">
+              <option *ngFor="let ro of rollNumberOptions;" value="{{ro.value}}">{{ro.name}}</option>
+            </select>
+          </div>
+          <div class="col-md-6 form-group">
+            <label>Click To Select</label>
+            <div>
+              <button class="btn btn-success pull" (click)="assignRollNumbers()">Assign Roll Numbers</button>
+            </div>
+          </div>
+        </div>
+        <div class="no-more-tables">
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+            <tr>
+              <th>
+                Roll No
+              </th>
+              <th>
+                SRN No
+              </th>
+              <th>
+                Admission No
+              </th>
+              <th>
+                Name
+              </th>
+              <th>
+                Class
+              </th>
+              <th>
+                Admission Type
+              </th>
+              <th>
+                Contact
+              </th>
+              <th>
+                Action
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let student of toShowData; let i=index; ">
+              <td data-title=" Roll No">
+                {{student.schoolDetail.rollNo}}
+              </td>
+              <td data-title=" SRN No">
+                {{student.schoolDetail.srnNo}}
+              </td>
+              <td data-title="Admission No">
+                {{student.schoolDetail.admissionNumber}}
+              </td>
+              <td data-title="Name">
+                {{student.name}}
+              </td>
+              <td data-title="Class">
+                {{student.className}}
+              </td>
+              <td data-title="Admission Type">
+                {{student.schoolDetail.admissionType}}
+              </td>
+              <td data-title="Contact">
+                {{student.emergencyContactNo}}
+              </td>
+              <td data-title="Action">
+                <button
+                  type="button"
+                  class="btn btn-success pointer"
+
+                  [routerLink]="['/school/registrar/student/edit' , student._id , selectedSession]"
+                  placement="top"
+                  ngbTooltip="Edit Student">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <!-- <button
+                  type="button"
+                  class="btn btn-danger pointer"
+                  placement="top"
+                  (click)="delete(student , i, deleteModal)"
+                  ngbTooltip="Delete Student">
+                  <i class="fa fa-remove"></i>
+                </button> -->
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <ng-template #deleteModal let-submit="close" let-dismiss="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title text-uppercase">Delete {{nameToDelete}}!</h6>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss('clicking on cross!')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete <b>{{nameToDelete}}</b> session?</p>
+  </div>
+  <div class="modal-footer" style="display: block;">
+    <button
+      type="button"
+      class="btn btn-outline-danger"
+      (click)="submit('yes')">Yes!
+    </button>
+    <button type="button" class="btn btn-outline-success pull-right" (click)="submit('cancel')">Cancel</button>
+  </div>
+</ng-template> -->
+

@@ -1,0 +1,147 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-12">
+            <strong>Publish Result By:</strong>
+            <label class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input"
+                     [(ngModel)]="examSetting.resultType"
+                     [value]="'grade'">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Grade</span>
+            </label>
+            <label class="custom-control custom-radio">
+              <input type="radio" class="custom-control-input"
+                     [(ngModel)]="examSetting.resultType"
+                     [value]="'division'">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Division</span>
+            </label>
+          </div>
+          <div class="col-md-12" *ngIf="examSetting.resultType === 'grade'">
+            <h6>Grade Settings</h6>
+            <div class="row" *ngFor="let grade of examSetting.gradeSettings; let i=index;">
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label>
+                    Grade
+                  </label>
+                  <input type="text"
+                         class="form-control"
+                         [(ngModel)]="grade.grade"
+                         placeholder="Grade">
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label>
+                    Minimum %
+                  </label>
+                  <input type="number"
+                         class="form-control"
+                         [(ngModel)]="grade.minPercentage"
+                         placeholder="Enter Minimum % to obtain this grade.">
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label>
+                    Grade Point
+                  </label>
+                  <input type="text"
+                         class="form-control"
+                         [(ngModel)]="grade.gradePoint"
+                         placeholder="Enter Grade Points.">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>
+                    Remark
+                  </label>
+                  <div class="input-group">
+                    <input type="text"
+                           class="form-control"
+                           [(ngModel)]="grade.remark"
+                           placeholder="Enter Remark">
+                    <i class="fa fa-remove remove-icon" (click)="deleteGradeRow(i)"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <button class="btn btn-success pull-left"
+                        (click)="addGradeRow()">
+                  Add New Row
+                </button>
+                <button class="btn btn-primary pull-right"
+                        (click)="saveExamSettings()">
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12" *ngIf="examSetting.resultType === 'division'">
+          <!--<div class="col-md-12">-->
+            <h6>Division Settings</h6>
+            <div class="row" *ngFor="let division of examSetting.divisionSettings; let j=index;">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>
+                    Division
+                  </label>
+                  <input type="text"
+                         class="form-control"
+                         [(ngModel)]="division.division"
+                         placeholder="Grade">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>
+                    Minimum %
+                  </label>
+                  <input type="number"
+                         class="form-control"
+                         [(ngModel)]="division.minPercentage"
+                         placeholder="Enter Minimum % to obtain this grade.">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>
+                    Remark
+                  </label>
+                  <div class="input-group">
+                    <input type="text"
+                           class="form-control"
+                           [(ngModel)]="division.remark"
+                           placeholder="Enter Remark">
+                    <i class="fa fa-remove remove-icon"
+                       *ngIf="j"
+                       (click)="deleteDivisionRow(j)"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <button class="btn btn-success pull-left"
+                        (click)="addDivisionRow()">
+                  Add New Row
+                </button>
+                <button class="btn btn-primary pull-right"
+                        (click)="saveExamSettings()">
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

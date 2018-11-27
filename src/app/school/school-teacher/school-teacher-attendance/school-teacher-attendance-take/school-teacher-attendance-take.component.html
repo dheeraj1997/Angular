@@ -1,0 +1,199 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h5>Take Attendance
+      <button class="btn card pull-right" (click)="toggleTake()">
+        <b *ngIf="isIcon">Name</b>
+        <b *ngIf="!isIcon">Roll No</b>
+      </button>
+    </h5>
+  </div>
+</div>
+<div *ngIf="attendanceType === 'timetable'" class="row">
+  <div class="col-lg-12" *ngIf="isIcon">
+    <div class="card">
+      <div class="card-header">
+        Class:<i>{{teacherTimeTableData.class}}</i> &nbsp;&nbsp;&nbsp;
+        Subject:<i>{{teacherTimeTableData.subject}}</i>
+      </div>
+      <div class="card-block">
+        <div class="row">
+          <div *ngFor="let stu of studentData;" (click)="togglePresent(stu)"
+               class="col-3 col-xs-3 col-sm-2 col-md-1 col-lg-1">
+            <div style="text-align: center;">
+              <i class="icon icon-user"
+                 placement="bottom"
+                 ngbTooltip="{{stu.name}}"
+                 [ngClass]="
+        {'icon-stu-present':stu.isPresent ,
+        'icon-stu-absent':!stu.isPresent}"
+                 style="font-size: 40px;">
+              </i>
+            </div>
+            <div style="text-align: center;">
+              <span *ngIf="stu.schoolDetail.rollNo">{{stu.schoolDetail.rollNo}}</span>
+              <span *ngIf="!stu.schoolDetail.rollNo">{{stu.schoolDetail.admissionNumber}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-block">
+        <button
+          (click)="submitAttendanceTimeTable()"
+          class="btn btn-primary">
+          Submit
+        </button>
+        <button
+          (click)="submitAttendanceTimeTable(true)"
+          class="btn btn-success pull-right">
+          Submit With SMS
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12" *ngIf="!isIcon">
+    <div class="card">
+      <div class="card-header">
+        Class:<i>{{teacherTimeTableData.class}}</i> &nbsp;&nbsp;&nbsp;
+        Subject:<i>{{teacherTimeTableData.subject}}</i>
+      </div>
+      <div class="card-block">
+        <div class="row">
+          <div class="col-lg-4"
+               *ngFor="let stu of studentData;">
+            <div
+              class="card"
+              [ngClass]="
+                   {'present':stu.isPresent ,
+                     'absent':!stu.isPresent}">
+              <div class="card-block" style="padding: 5px; color: white;">
+                <div class="row">
+                  <div
+                    class="col-2 text-center"
+                    (click)="togglePresent(stu)"
+                    style="border-right: solid 2px #cbcbcb; cursor: pointer;">
+                    <i
+                      class="fa fa-plus-circle"
+                      *ngIf="!stu.isPresent"
+                      style="font-size: 30px; margin-top: 5px;"></i>
+                    <i class="fa fa-minus-circle"
+                       *ngIf="stu.isPresent"
+                       style="font-size: 30px; margin-top: 5px;"></i>
+                  </div>
+                  <div class="col-8">
+                    <b>Name:</b> {{stu.name}}<br>
+                    <b *ngIf="stu.schoolDetail.rollNo">Roll No: {{stu.schoolDetail.rollNo}}</b>
+                    <b *ngIf="!stu.schoolDetail.rollNo">Admission No:
+                      {{stu.schoolDetail.admissionNumber}}</b>
+                  </div>
+                  <div class="col-2"></div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-block">
+        <button
+          (click)="submitAttendance()"
+          class="btn btn-primary">
+          Submit
+        </button>
+        <button
+          (click)="submitAttendance(true)"
+          class="btn btn-success pull-right">
+          Submit With SMS
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div *ngIf="attendanceType === 'daily'" class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row" style="width: 100%;">
+          <div class="col-lg-2">
+            <b>Date:</b> {{attendanceData.date}}
+          </div>
+          <div class="col-lg-2">
+            <b>Class: </b> {{attendanceData.className}}
+          </div>
+          <div class="col-lg-3">
+            <b>Total Students: </b> {{attendanceData.studentList.length}}
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!isIcon" class="card-block">
+        <div class="row">
+          <div class="col-lg-4" *ngFor="let stu of attendanceData.studentList;">
+            <div
+              class="card"
+              [ngClass]="{'present':stu.isPresent ,'absent':!stu.isPresent}">
+              <div class="card-block" style="padding: 5px; color: white;">
+                <div class="row">
+                  <div
+                    class="col-2 text-center"
+                    (click)="togglePresent(stu)"
+                    style="border-right: solid 2px #cbcbcb; cursor: pointer;">
+                    <i
+                      class="fa fa-plus-circle"
+                      *ngIf="!stu.isPresent"
+                      style="font-size: 30px; margin-top: 5px;"></i>
+                    <i class="fa fa-minus-circle"
+                       *ngIf="stu.isPresent"
+                       style="font-size: 30px; margin-top: 5px;"></i>
+                  </div>
+                  <div class="col-8">
+                    <b>Name:</b> {{stu.name}}<br>
+                    <b *ngIf="stu.schoolDetail.rollNo">Roll No: {{stu.schoolDetail.rollNo}}</b>
+                    <b *ngIf="!stu.schoolDetail.rollNo">Admission No:{{stu.schoolDetail.admissionNumber}}</b>
+                  </div>
+                  <div class="col-2"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="isIcon" class="card-block">
+        <div class="row">
+          <div *ngFor="let stu of attendanceData.studentList;" (click)="togglePresent(stu)"
+               class="col-3 col-xs-3 col-sm-2 col-md-1 col-lg-1">
+            <div style="text-align: center;">
+              <i class="icon icon-user"
+                 placement="bottom"
+                 ngbTooltip="{{stu.name}}"
+                 [ngClass]="{'icon-stu-present':stu.isPresent ,'icon-stu-absent':!stu.isPresent}"
+                 style="font-size: 40px;">
+              </i>
+            </div>
+            <div style="text-align: center;">
+              <span *ngIf="stu.schoolDetail.rollNo">{{stu.schoolDetail.rollNo}}</span>
+              <span *ngIf="!stu.schoolDetail.rollNo">{{stu.schoolDetail.admissionNumber}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <button
+      (click)="submitAttendanceList()"
+      class="btn btn-primary">
+      Submit
+    </button>
+    <button
+      (click)="submitAttendanceList(true)"
+      class="btn btn-success pull-right">
+      Submit With SMS
+    </button>
+  </div>
+</div>
+
+

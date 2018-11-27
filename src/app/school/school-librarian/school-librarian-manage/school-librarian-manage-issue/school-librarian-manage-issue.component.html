@@ -1,0 +1,193 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        Issue Book
+      </div>
+      <div class="card-block" *ngIf="bookData">
+        <div class="form-group mt-2">
+          <label>
+            Book Name
+          </label>
+
+          <div class="form-control">
+            {{bookData.name}}
+          </div>
+        </div>
+        <div class="form-group">
+          <label>
+            Book Code
+          </label>
+          <div class="form-control">
+            {{bookData.code}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        student detail
+      </div>
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>
+                <b>Select Class</b>
+              </label>
+              <select
+                class="form-control"
+                [(ngModel)]="selectedClass"
+                (ngModelChange)="getStudents()">
+                <option
+                  value="{{cls._id}}"
+                  *ngFor="let cls of classData;">
+                  {{cls.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+        <input
+          type="text"
+          class="form-control mb-3"
+          [(ngModel)]="searchString"
+          placeholder="Type to filter the book name column...">
+        <div class="no-more-tables">
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+            <tr>
+              <th>
+                Roll No
+              </th>
+              <th>
+                Name
+              </th>
+              <th>
+                Class
+              </th>
+              <th>
+                Contact
+              </th>
+              <th>
+                Action
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let student of studentData	; let i=index;">
+              <td data-title="Roll No">
+                {{student.schoolDetail.rollNo}}
+              </td>
+              <td data-title="Name">
+                {{student.name}}
+              </td>
+              <td data-title="Class">
+                {{student.className}}
+              </td>
+              <td data-title="Contact">
+                {{student.emergencyContactNo}}
+              </td>
+              <td data-title="Action">
+                <button
+                  type="button"
+                  class="btn btn-success pointer"
+                  placement="top"
+                  (click)="openIssueModel(student , i, issueModal)">
+                  Issue
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<ng-template #issueModal let-submit="close" let-dismiss="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title text-uppercase">Issue {{this.bookData.name}} to {{nameToIssue}}!</h6>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss('clicking on cross!')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="card">
+      <div class="card-block">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label>
+              Issue Date
+              <span style="color: red">*</span>
+            </label>
+            <div class="input-group">
+              <input
+                class="form-control"
+                placeholder="yyyy-mm-dd"
+                name="d1"
+                [(ngModel)]="issueData.issueDate"
+                (click)="d1.toggle()"
+                ngbDatepicker #d1="ngbDatepicker" required>
+              <button class="input-group-addon" (click)="d1.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+            </div>
+            <small class="form-text text-muted">
+              issue Date of book.
+            </small>
+          </div>
+          <div class="form-group col-md-6">
+            <label>
+              Expected Return Date
+              <span style="color: red">*</span>
+            </label>
+            <div class="input-group">
+              <input
+                class="form-control"
+                placeholder="yyyy-mm-dd"
+                name="d2"
+                [(ngModel)]="issueData.expectedReturnDate"
+                (click)="d2.toggle()"
+                ngbDatepicker #d2="ngbDatepicker" required>
+              <button class="input-group-addon" (click)="d2.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+            </div>
+            <small class="form-text text-muted">
+              Expected return date of book.
+            </small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>
+            Issue Comment
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="issueData.issueComment"
+            placeholder="Enter Issue Comment">
+          <small class="form-text text-muted">
+            reason for Issue.
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer" style="display: block;">
+    <button
+      type="button"
+      class="btn btn-outline-success"
+      (click)="submit('yes')"
+      [disabled]="isDisable===true">Yes!
+    </button>
+    <button type="button" class="btn btn-outline-danger pull-right" (click)="submit('cancel')">No</button>
+  </div>
+</ng-template>
+
+
+

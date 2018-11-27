@@ -1,0 +1,166 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-6">
+            <label>
+              Session
+            </label>
+            <select
+              class="form-control"
+              [(ngModel)]="selectedSession"
+              (change)="onSessionChange()">
+              <option
+                value="{{sess._id}}"
+                *ngFor="let sess of sessionData;">
+                {{sess.name}}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label>
+              Class
+            </label>
+            <select
+              class="form-control"
+              [(ngModel)]="selectedClass"
+              (change)="onClassChange()">
+              <option
+                value="{{cls._id}}"
+                *ngFor="let cls of classData;">
+                {{cls.name}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" *ngIf="toShowData.length">
+      <div class="card-block">
+        <input
+          type="text"
+          [(ngModel)]="searchString"
+          class="form-control mb-3"
+          placeholder="Type to filter the name column..."
+          (ngModelChange)='search($event)'>
+        <div class="no-more-tables">
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+            <tr>
+              <th>
+                #
+              </th>
+              <th>
+                Roll No
+              </th>
+              <th>
+                Student Name
+              </th>
+              <th>
+                Guardian Name
+              </th>
+              <th>
+                Contact No.
+              </th>
+              <th>
+                Action
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let student of toShowData;let i = index; ">
+              <td data-title="#">{{i+1}}</td>
+              <td data-title="Roll No">
+                {{student.schoolDetail.rollNo}}
+              </td>
+              <td data-title="Student Name">
+                {{student.name}}
+              </td>
+              <td data-title="Guardian Name">
+                {{student.guardianInfo.name}}
+              </td>
+              <td data-title="Relation">
+                {{student.emergencyContactNo}}
+              </td>
+              <td data-title="Action">
+                <button
+                  type="button"
+                  class="btn btn-success pointer"
+                  (click)="transportFee(student , i, transportFeeModal)">
+                  Add Transport
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #transportFeeModal let-submit="close" let-dismiss="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title text-uppercase">Add Transport to {{nameOfStudent}}!</h6>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss('clicking on cross!')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body row">
+    <div class="form-group col-md-6">
+      <label>
+        Date of Joining
+        <span style="color: red">*</span>
+      </label>
+      <div class="input-group">
+        <input
+          class="form-control"
+          placeholder="yyyy-mm-dd"
+          name="doj"
+          [(ngModel)]="transportData.doj"
+          (click)="doj.toggle()"
+          ngbDatepicker #doj="ngbDatepicker" required>
+        <button class="input-group-addon" (click)="doj.toggle()" type="button">
+          <i class="fa fa-calendar"></i>
+        </button>
+      </div>
+
+    </div>
+    <div class="form-group col-md-6">
+      <label>
+        Amount
+        <span style="color: red">*</span>
+      </label>
+      <input
+        class="form-control"
+        type="text"
+        [(ngModel)]="transportData.amount">
+    </div>
+    <div class="form-group col-md-6">
+      <label>
+        Route
+      </label>
+      <input
+        class="form-control"
+        type="text"
+        [(ngModel)]="transportData.route">
+    </div>
+    <div class="form-group col-md-6">
+      <label>
+        Vehicle No
+      </label>
+      <input
+        class="form-control"
+        type="text"
+        [(ngModel)]="transportData.vehicleNo">
+    </div>
+  </div>
+  <div class="modal-footer" style="display: block;">
+    <button
+      type="button"
+      class="btn btn-outline-success"
+      (click)="submit('yes')">Yes!
+    </button>
+    <button type="button" class="btn btn-outline-danger pull-right" (click)="submit('cancel')">Cancel</button>
+  </div>
+</ng-template>

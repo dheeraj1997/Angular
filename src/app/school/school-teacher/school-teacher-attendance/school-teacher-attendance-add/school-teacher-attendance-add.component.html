@@ -1,0 +1,59 @@
+<h6 class="text-uppercase">
+  All Attendance to Take
+</h6>
+<div class="row" *ngIf="attendanceType === 'timetable'">
+  <div class="col-lg-4" *ngFor="let timeData of timeTableData;">
+    <div class="card" [ngClass]="{'card-success':timeData.toTake, 'card-warning':!timeData.toTake}">
+      <div class="card-header">
+        <div class="col-lg-6">Time</div>
+        <div class="col-lg-6 text-right">
+          <b *ngIf="timeData.startTime">
+            {{timeData.startTime.hour}}: {{timeData.startTime.minute}} -
+            {{timeData.endTime.hour}}: {{timeData.endTime.minute}}
+          </b>
+        </div>
+      </div>
+      <div class="card-block">
+        <h6>Class: {{timeData.class}}</h6>
+        <h6>Subject: {{timeData.subject}}</h6>
+        <h6>Total Student: {{timeData.totalStudent}}</h6>
+        <button
+          class="btn btn-primary"
+          *ngIf="timeData.toTake"
+          (click)="takeAttendanceTimeTable(timeData)">
+          Take Attendance
+        </button>
+        <button
+          *ngIf="!timeData.toTake"
+          class="btn btn-success"
+          (click)="viewAttendanceTimeTable(timeData)">
+          View Attendance
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="attendanceType === 'daily'">
+  <div class="col-lg-4" *ngFor="let list of attendanceList; let i = index;">
+    <div class="card" [ngClass]="{'card-success':list.toTake, 'card-warning':!list.toTake}">
+      <div class="card-block">
+        <h6>Class: {{list.className}}</h6>
+        <h6>Total Student: {{list.totalStudents}}</h6>
+        <button
+          class="btn btn-primary"
+          *ngIf="list.toTake"
+          (click)="takeAttendanceDaily(list)">
+          Take Attendance
+        </button>
+
+        <button
+          *ngIf="!list.toTake"
+          class="btn btn-success"
+          (click)="viewAttendanceDaily(list)">
+          View({{list.takenByName}})
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

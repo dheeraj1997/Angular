@@ -1,0 +1,78 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-header">
+				Event Calendar
+			</div>
+			<div class="card-block">
+				<div class="form-group">
+					<label>Title
+						<span style="color: red">*</span>
+					</label>
+					<input type="text"
+					class="form-control"
+
+					placeholder="Title of Event ">
+				</div>
+				<div class="form-group">
+					<label>Description
+					</label>
+					<input type="text"
+					class="form-control"
+
+					placeholder="Event description">
+				</div>
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label>
+							Event Starting Date
+							<span style="color: red">*</span>
+						</label>
+						<div class="input-group">
+							<input
+							class="form-control"
+							placeholder="yyyy-mm-dd"
+							name="d1"
+							
+							(click)="d1.toggle()"
+							ngbDatepicker #d1="ngbDatepicker" required>
+							<button class="input-group-addon" (click)="d1.toggle()" type="button">
+								<i class="fa fa-calendar"></i>
+							</button>
+						</div>
+						<small class="form-text text-muted">
+							Start Date of Event.
+						</small>
+					</div>
+					<div class="form-group col-md-5">
+						<label>
+							End Date
+						</label>
+						<div class="input-group">	
+							<input
+							class="form-control"
+							placeholder="yyyy-mm-dd"
+							name="d2"
+							
+							(click)="d2.toggle()"
+							ngbDatepicker #d2="ngbDatepicker" required>
+							<button class="input-group-addon" (click)="d2.toggle()" type="button">
+								<i class="fa fa-calendar"></i>
+							</button>
+						</div>
+						<small class="form-text text-muted">
+							End Date of Event.
+						</small>
+					</div>
+				</div>
+			</div>
+			<div class="card-footer">
+				<div class="col-md-12">
+					<button class="btn btn-success" >
+						Add Event
+					</button>
+				</div>
+			</div>
+		</div>					
+	</div>
+</div>

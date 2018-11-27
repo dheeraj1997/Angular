@@ -1,0 +1,128 @@
+<div style="background-color: #f5f5f5">
+  <div class="row">
+    <div class="col-md-12">
+      <button class="btn pull-right card pointer"
+              [routerLink]="['/school/admin/master/session/add']">
+        Add New Session
+      </button>
+    </div>
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          Select Current Session
+        </div>
+        <div class="card-block">
+          <select
+            class="form-control"
+            [(ngModel)]="currentSession"
+            (change)="onChangeCurrentSession()">
+            <option
+              value="{{sess._id}}"
+              *ngFor="let sess of toShowData;">
+              {{sess.name}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          All Sessions
+        </div>
+
+        <div class="card-block" *ngIf="toShowData.length">
+          <input
+            type="text"
+            class="form-control mb-3"
+            [(ngModel)]="searchString"
+            placeholder="Type to filter the name column..."
+            required
+            (ngModelChange)='search($event)'>
+          <div class="no-more-tables">
+            <table class="table table-bordered table-striped mb-0">
+              <thead>
+              <tr>
+                <th>
+                  #
+                </th>
+                <th>
+                  Name
+                </th>
+                <!--<th>-->
+                  <!--Comment-->
+                <!--</th>-->
+                <th>
+                  Start Date
+                </th>
+                <th>
+                  End Date
+                </th>
+                <th>
+                  Action
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let session of toShowData; let i=index;">
+                <td data-title="#">
+                  {{i+1}}
+                </td>
+                <td data-title="Name">
+                  {{session.name}}
+                </td>
+                <!--<td data-title="Comment">-->
+                  <!--{{session.comment}}-->
+                <!--</td>-->
+                <td data-title="Start Year">
+                  {{session.startDate | amDateFormat:'DD-MMMM-YYYY'}}
+                </td>
+                <td data-title="End Year">
+                  {{session.endDate | amDateFormat:'DD-MMMM-YYYY'}}
+                </td>
+                <td data-title="Action">
+                  <button
+                    type="button"
+                    class="btn btn-success pointer"
+                    placement="top"
+                    [routerLink]="['/school/admin/master/session/edit' , session._id]"
+                    ngbTooltip="Edit Session">
+                    <i class="fa fa-edit"></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-danger pointer"
+                    placement="top"
+                    (click)="delete(session , i, deleteModal)"
+                    ngbTooltip="Delete Session">
+                    <i class="fa fa-remove"></i>
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #deleteModal let-submit="close" let-dismiss="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title text-uppercase">Delete {{nameToDelete}}!</h6>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss('clicking on cross!')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete <b>{{nameToDelete}}</b> session?</p>
+  </div>
+  <div class="modal-footer" style="display: block;">
+    <button
+      type="button"
+      class="btn btn-outline-danger"
+      (click)="submit('yes')">Yes!
+    </button>
+    <button type="button" class="btn btn-outline-success pull-right" (click)="submit('cancel')">Cancel</button>
+  </div>
+</ng-template>
+
+

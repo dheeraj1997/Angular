@@ -1,0 +1,129 @@
+<div class="row">
+	<div class="col-md-12">
+		<button class="btn pull-left card pointer"
+		[routerLink]="['/school/accountant/expenses/category']">
+		Manage Category
+	</button>
+	<button class="btn pull-right card pointer"
+	[routerLink]="['/school/accountant/expenses/add']">
+	Add Expenses
+</button>
+</div>
+<div class="col-md-12">
+
+	<div class="card">
+		<div class="card-header">
+			Expenses Detail
+		</div>
+		<div class="card-block">
+			<input
+			type="text"
+			class="form-control mb-3"
+			[(ngModel)]="searchString"
+			placeholder="Type to filter the name column..."
+			(ngModelChange)='search($event)'>
+		</div>
+	</div>
+
+
+
+
+	<div class="card">
+		<div class="card-block">
+			<div class="no-more-tables">
+				<table class="table table-bordered table-striped mb-0">
+					<thead>
+						<tr>
+							<th>
+								#
+							</th>
+
+							<th>
+								Date
+							</th>
+							<th>
+								Particulars
+							</th>
+							<th>
+								Category
+							</th>
+							<th>
+								Amount
+							</th>
+							<th>
+								Comment
+							</th>
+							<th>
+								Action
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let expense of toShowData; let i = index; ">
+							<td>
+								{{i+1}}
+							</td>
+							<td data-title="Date">
+								{{expense.expensesDate.day}}-
+								{{expense.expensesDate.month}}-
+								{{expense.expensesDate.year}}
+
+							</td>
+							<td data-title="Particular">
+								{{expense.particular}}
+							</td>
+							<td data-title="Category">
+								{{expense.category}}
+							</td>
+							<td data-title="Amount">
+								{{expense.amount}}
+							</td>
+							<td data-title="Comment">
+								{{expense.comment}}
+							</td>
+							<td data-title="Action">
+								<button
+								type="button"
+								class="btn btn-success pointer"
+								[routerLink]="['/school/accountant/expenses/edit',expense._id]"
+								placement="top"
+								ngbTooltip="Edit Expense">
+								<i class="fa fa-edit"></i>
+							</button>
+							<button
+							type="button"
+							class="btn btn-danger pointer"
+							placement="top"
+							(click)="delete(expense , i, deleteModal)"
+							ngbTooltip="Delete Expense">
+							<i class="fa fa-remove"></i>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</div>
+</div>
+</div>
+
+<ng-template #deleteModal let-submit="close" let-dismiss="dismiss">
+	<div class="modal-header">
+		<h6 class="modal-title text-uppercase">Delete {{nameToDelete}}!</h6>
+		<button type="button" class="close" aria-label="Close"(click)="dismiss('clicking on cross!')">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<p>Are you sure you want to delete <b>{{nameToDelete}}</b>?</p>
+	</div>
+	<div class="modal-footer" style="display: block;">
+		<button
+		type="button"
+		class="btn btn-outline-danger"
+		(click)="submit('yes')">Yes!
+	</button>
+	<button type="button" class="btn btn-outline-success pull-right" (click)="submit('cancel')">Cancel</button>
+</div>
+</ng-template>

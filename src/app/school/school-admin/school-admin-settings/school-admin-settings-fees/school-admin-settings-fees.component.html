@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>
+                <h6>Fee Receipt Starting String:</h6>
+              </label>
+              <input type="text"
+                     class="form-control"
+                     [(ngModel)]="settingsData.feesSettings.feeReceiptString"
+                     placeholder="Enter Fee Receipt Starting String">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>
+                <h6>Fee Receipt Starting No:</h6>
+              </label>
+              <input type="number"
+                     class="form-control"
+                     [(ngModel)]="settingsData.feesSettings.feeReceiptNo"
+                     placeholder="Enter Fee Receipt no Starting From">
+            </div>
+          </div>
+          <div class="col-md-12" style="margin-top: 15px;">
+            <h6>Select Months to Collect Transport Fees:</h6>
+            <small>NOTE: This change will be reflected from transport fees setup after saving.</small>
+            <br/>
+            <div>
+              <button
+                type="button"
+                class="btn"
+                *ngFor="let month of settingsData.feesSettings.transportSettings.months;"
+                [ngClass]="{'btn-success':month.selected, 'btn-outline-success':!month.selected}"
+                (click)="month.selected = !month.selected"
+                style="margin-right: 10px; margin-bottom: 10px;">
+                {{month.name | uppercase}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-block">
+        <button class="btn btn-primary"
+                (click)="saveSetting()">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

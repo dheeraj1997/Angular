@@ -1,0 +1,27 @@
+<nav class="navbar navbar-toggleable-md navbar-light fixed-top">
+  <button class="navbar-toggler navbar-toggler-right" (click)="toggleState()">
+    <span class="icon icon-menu"></span>
+  </button>
+  <a class="" routerLink="/">
+    <img src="../assets/images/logo.png" height="50px" style="padding: 5px 5px">
+  </a>
+
+  <div class="collapse navbar-collapse in" [ngClass]="{ 'in': isIn }">
+    <ul class="navbar-nav navbar-nav-header mr-auto blank">
+      <li class="nav-item" *ngFor="let item of headerMenuItems;">
+        <a class="nav-item nav-link"
+           (click)="isIn=false;submitEvent('navigation', 'click' , item.name);"
+           [routerLink]="[item.state]"
+           [routerLinkActive]="['active']">{{item.name}}</a>
+
+      </li>
+      <a class="nav-item nav-link" style="background-color: #28c498 ;color:white;"
+         (click)="isIn=false;submitEvent('navigation', 'click' , 'Demo');"
+         [routerLink]="['/demo']">
+        Demo
+      </a>
+      <li class="nav-item">
+      </li>
+    </ul>
+  </div>
+</nav>

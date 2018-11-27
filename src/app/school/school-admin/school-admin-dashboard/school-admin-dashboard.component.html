@@ -1,0 +1,454 @@
+<div class="row">
+  <div class="col-md-12" style="margin-bottom: 5px;">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <!--<div class="card-header">School Information</div>-->
+          <div class="card-block">
+            <div class="row">
+              <div class="col-md-3 text-center" *ngIf="settingData">
+                <img [src]="settingData.logo" style="height: 140px; max-width: 140px;">
+              </div>
+              <div class="col-md-9" style="padding-top: 20px;">
+                <h5>Welcome {{userData.username}}</h5>
+                <h6 class="text-capitalize">{{schoolData.name}}</h6>
+                <b style="font-size: small;">{{schoolData.address.completeAddress}},
+                {{schoolData.address.district}}-{{schoolData.address.pin}}</b>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--<div class="col-md-6">-->
+        <!--<div class="card">-->
+          <!--<div class="card-header">Quick Links</div>-->
+          <!--<div class="card-block" style="padding: 0px 5px;">-->
+            <!--<div class="row">-->
+              <!--<div class="col-12">-->
+                <!--<table class="table table-hover borderless">-->
+                  <!--<tbody>-->
+                    <!--<tr>-->
+                      <!--<td><strong>Attendance</strong></td>-->
+                      <!--<td><a [routerLink]="['/school/admin/attendance/list']">Take</a></td>-->
+                      <!--<td><a [routerLink]="['/school/admin/attendance/display']">View</a></td>-->
+                      <!--</tr>-->
+                      <!--<tr>-->
+                        <!--<td><strong>Messaging</strong></td>-->
+                        <!--<td><a [routerLink]="['/school/admin/message/history']">History</a></td>-->
+                        <!--<td><a [routerLink]="['/school/admin/message/history']">Send</a></td>-->
+                        <!--</tr>-->
+                        <!--<tr>-->
+                          <!--<td><strong>Students</strong></td>-->
+                          <!--<td><a [routerLink]="['/school/admin/student/add']">Add</a></td>-->
+                          <!--<td><a [routerLink]="['/school/admin/student/view']">View</a></td>-->
+                          <!--</tr>-->
+                          <!--<tr>-->
+                            <!--<td><strong>Teachers</strong></td>-->
+                            <!--<td><a [routerLink]="['/school/admin/teacher/add']">Add</a></td>-->
+                            <!--<td><a [routerLink]="['/school/admin/teacher/view']">View</a></td>-->
+                            <!--</tr>-->
+                            <!--<tr>-->
+                              <!--<td><strong>Staff</strong></td>-->
+                              <!--<td><a [routerLink]="['/school/admin/staff/add']">Add</a></td>-->
+                              <!--<td><a [routerLink]="['/school/admin/staff/view']">View</a></td>-->
+                              <!--</tr>-->
+                              <!--</tbody>-->
+                              <!--</table>-->
+                              <!--</div>-->
+                              <!--</div>-->
+                              <!--</div>-->
+                              <!--</div>-->
+                              <!--</div>-->
+                            </div>
+                          </div>
+                          <div class="col-sm-6 col-md-3">
+                            <div class="card card-block card-widget">
+                              <div class="widget-icon rounded-circle bg-red text-white icon icon-user-following"></div>
+                              <div class="block ml-3 mr-3">
+                                <h5 class="mb-0 fw-400">
+                                  <a [routerLink]="['/school/admin/attendance/list']">Attendance</a>
+                                </h5>
+                                <small class="text-muted text-uppercase ">
+                                  <strong></strong>
+                                </small>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-6 col-md-3">
+                            <div class="card card-block card-widget">
+                              <div class="widget-icon rounded-circle bg-green text-white icon icon-speech">
+                              </div>
+                              <div class="block ml-3 mr-3">
+                                <h5 class="mb-0 fw-400">
+                                  <a [routerLink]="['/school/admin/message/history']">Messaging</a>
+                                </h5>
+                                <small class="text-muted text-uppercase ">
+                                  <strong></strong>
+                                </small>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-6 col-md-3">
+                            <div class="card card-block card-widget">
+                              <div class="widget-icon rounded-circle bg-blue text-white icon icon-people">
+                              </div>
+                              <div class="block ml-3 mr-3">
+                                <h5 class="mb-0 fw-400">
+                                  <a [routerLink]="['/school/admin/student/view']">Students</a>
+                                </h5>
+                                <small class="text-muted text-uppercase ">
+                                  <strong></strong>
+                                </small>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-6 col-md-3">
+                            <div class="card card-block card-widget">
+                              <div class="widget-icon rounded-circle bg-yellow text-white icon icon-user">
+                              </div>
+                              <div class="block ml-3 mr-3">
+                                <h5 class="mb-0 fw-400">
+                                  <a [routerLink]="['/school/admin/teacher/view']">Teachers</a>
+                                </h5>
+                                <small class="text-muted text-uppercase ">
+                                  <strong></strong>
+                                </small>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-6 col-md-3">
+                            <div class="card card-block card-widget">
+                              <div class="widget-icon rounded-circle bg-green text-white icon icon-people">
+                              </div>
+                              <div class="block ml-3 mr-3">
+                                <h5 class="mb-0 fw-400">
+                                  {{totalStudent}}
+                                </h5>
+                                <small class="text-muted text-uppercase ">
+                                  <strong>Total Students</strong>
+                                </small>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-6 col-md-3">
+                            <div class="card card-block card-widget">
+                              <div class="widget-icon rounded-circle bg-blue text-white icon icon-people">
+                              </div>
+                              <div class="block ml-3 mr-3">
+                                <h5 class="mb-0 fw-400">
+                                  {{totalTeacher}}
+                                </h5>
+                                <small class="text-muted text-uppercase ">
+                                  <strong>Total Teachers</strong>
+                                </small>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-6 col-md-3">
+                            <div class="card card-block card-widget">
+                              <div class="widget-icon rounded-circle bg-yellow text-white icon  icon-people">
+                              </div>
+                              <div class="block ml-3 mr-3">
+                                <h5 class="mb-0 fw-400">
+                                  {{totalStaff}}
+                                </h5>
+                                <small class="text-muted text-uppercase ">
+                                  <strong>Total Staff</strong>
+                                </small>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-6 col-md-3">
+                            <div class="card card-block card-widget">
+                              <div class="widget-icon rounded-circle bg-red text-white icon icon-basic-message-multiple">
+                              </div>
+                              <div class="block ml-3 mr-3">
+                                <h5 class="mb-0 fw-400">
+                                  {{schoolData.smsCount.total - schoolData.smsCount.used}}
+                                </h5>
+                                <small class="text-muted text-uppercase ">
+                                  <strong>Remaining SMS</strong>
+                                </small>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-6 col-md-3">
+                            <div class="card card-block card-widget">
+                              <div class="widget-icon rounded-circle bg-blue text-white icon  icon-basic-notebook">
+                              </div>
+                              <div class="block ml-3 mr-3">
+                                <h5 class="mb-0 fw-400">
+                                  {{totalClass}}
+                                </h5>
+                                <small class="text-muted text-uppercase ">
+                                  <strong>Total Classes</strong>
+                                </small>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-6 col-md-3">
+                            <div class="card card-block card-widget">
+                              <div class="widget-icon rounded-circle bg-yellow text-white icon  icon-note">
+                              </div>
+                              <div class="block ml-3 mr-3">
+                                <h5 class="mb-0 fw-400">
+                                  {{totalSubject}}
+                                </h5>
+                                <small class="text-muted text-uppercase ">
+                                  <strong>Total Subject</strong>
+                                </small>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-6 col-md-3">
+                            <div class="card card-block card-widget">
+                              <div class="widget-icon rounded-circle bg-green text-white icon icon-login">
+                              </div>
+                              <div class="block ml-3 mr-3">
+                                <h5 class="mb-0 fw-400">
+                                  &#8377; {{totalCollectedFees}}
+                                </h5>
+                                <small class="text-muted text-uppercase ">
+                                  <strong>Fees Collected</strong>
+                                </small>
+                              </div>
+                            </div>
+                          </div>                 
+<!--                           <div class="col-sm-6 col-md-3">
+                            <div class="card card-block card-widget">
+                              <div class="widget-icon rounded-circle bg-red text-white icon  icon-book-open">
+                              </div>
+                              <div class="block ml-3 mr-3">
+                                <h5 class="mb-0 fw-400">
+                                  {{noOfBooks}}
+                                </h5>
+                                <small class="text-muted text-uppercase ">
+                                  <strong>Total Books</strong>
+                                </small>
+                              </div>
+                            </div>
+                          </div> -->
+                          <div class="col-sm-6 col-md-3">
+                            <div class="card card-block card-widget">
+                              <div class="widget-icon rounded-circle bg-red text-white icon  icon-minus">
+                              </div>
+                              <div class="block ml-3 mr-3">
+                                <h5 class="mb-0 fw-400">
+                                  {{totalExpense}}
+                                </h5>
+                                <small class="text-muted text-uppercase ">
+                                  <strong>Total Expenses</strong>
+                                </small>
+                              </div>
+                            </div>
+                          </div>
+                        </div> 
+
+<!-- <div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header no-shadow">
+        <div class="card-header-text w-100">
+          <div class="card-title">
+            Attendance Ratio
+          </div>
+          <div class="card-subtitle text-capitalize ff-sans">
+            ToDay
+          </div>
+        </div>
+      </div>
+      <div class="card-block">
+        <div class="row text-center">
+          <div class="col-xs-6 col-sm-3 text-success">
+            <h5 class="mb-0">
+              <strong>
+                1000
+              </strong>
+            </h5>
+            <small>
+              Total Student's Present
+            </small>
+          </div>
+          <div class="col-xs-6 col-sm-3">
+            <h5 class="mb-0">
+              <strong>
+                150
+              </strong>
+            </h5>
+            <small>
+              Total Student's Absent
+            </small>
+          </div>
+          <div class="col-xs-6 col-sm-3 text-danger">
+            <h5 class="mb-0">
+              <strong>
+                1150
+              </strong>
+            </h5>
+            <small>
+              Total Student's in School
+            </small>
+          </div>
+          <div class="col-xs-6 col-sm-3">
+            <h5 class="mb-0">
+              <strong>
+                85%
+              </strong>
+            </h5>
+            <small>
+              Attendance Percentage
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="mb-1">
+        <ngx-charts-bar-vertical
+            class="chart-container"
+            [scheme]="colorScheme"
+            [schemeType]="schemeType"
+            [results]="single"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [tooltipDisabled]="tooltipDisabled"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            [showGridLines]="showGridLines"
+            [barPadding]="barPadding"
+            [roundDomains]="roundDomains"
+            (select)="select($event)"
+            (legendLabelClick)="onLegendLabelClick($event)">
+          </ngx-charts-bar-vertical>
+      </div>
+    </div>
+  </div>
+-->
+
+<!-- <div class="col-lg-6">
+  <div class="card">
+    <div class="card-header no-shadow">
+      <div class="card-header-text w-100">
+        <div class="card-title">
+          Country spending
+        </div>
+        <div class="card-subtitle text-capitalize ff-sans">
+          Last updated: 1 hour ago
+        </div>
+      </div>
+    </div>
+    <div class="card-block">
+      <div class="row text-center">
+        <div class="col-sm-6 col-md-3 text-purple">
+          <h5 class="mb-0">
+            <strong>
+              34.45B
+            </strong>
+          </h5>
+          <small>
+            Health
+          </small>
+        </div>
+        <div class="col-sm-6 col-md-3">
+          <h5 class="mb-0">
+            <strong>
+              21.78B
+            </strong>
+          </h5>
+          <small>
+            Education
+          </small>
+        </div>
+        <div class="col-sm-6 col-md-3 text-indigo">
+          <h5 class="mb-0">
+            <strong>
+              2.89M
+            </strong>
+          </h5>
+          <small>
+            Research
+          </small>
+        </div>
+        <div class="col-sm-6 col-md-3">
+          <h5 class="mb-0">
+            <strong>
+              34.76B
+            </strong>
+          </h5>
+          <small>
+            Food
+          </small>
+        </div>
+      </div>
+    </div>
+     <div class="mb-1">
+      <ngx-charts-gauge (legendlabelclick)="onLegendLabelClick($event)" (select)="select($event)" [angleSpan]="gaugeAngleSpan" [bigSegments]="gaugeLargeSegments" [legend]="showLegend" [margin]="margin ? [marginTop, marginRight, marginBottom, marginLeft] : null" [max]="gaugeMax" [min]="gaugeMin" [results]="single" [scheme]="colorScheme" [showAxis]="gaugeShowAxis" [smallSegments]="gaugeSmallSegments" [startAngle]="gaugeStartAngle" [textValue]="gaugeTextValue" [tooltipDisabled]="tooltipDisabled" [units]="gaugeUnits" class="gauge-container">
+      </ngx-charts-gauge>
+    </div>
+  </div>
+</div>
+</div>
+<div> -->
+  <div class="row">
+    <div class="col-md-4" *ngIf="noticeData.length">
+      <div class="card bg-indigo card-inverse">
+        <div class="card-header no-shadow">
+          Notice Board
+        </div>
+        <div class="list-group" *ngFor="let notice of noticeData;let i=index; ">
+          <div class="list-group-item list-group-item-action flex-column align-items-start no-bg text-white">
+            <p class="mb-1 w-100">
+              {{notice.title}}
+            </p>
+            <div class="d-flex w-100 justify-content-between">
+              <small>
+                {{notice.noticeText.substring(0,100)}}
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer " style="display: block;">
+          <a style="color: white" class="pull-right" [routerLink]="['/school/admin/notice/view']">VIEW MORE</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8" *ngIf="attendanceSummery.length;">
+      <div class="card">
+        <div class="card-header no-shadow" style="font-size: 15px; display: block; padding: 10px 10px;">
+          Attendance Summery
+          <a class="pull-right badge badge-info"
+          [routerLink]="['/school/admin/report/attendance']">DOWNLOAD</a>
+        </div>
+        <div class="card-block" style="padding: 0px 10px;">
+          <div class="no-more-tables">
+            <table class="table table-hover table-bordered " style="font-size: 16px; text-transform: capitalize;">
+              <thead>
+                <tr>
+                  <th>Class</th>
+                  <th>Total</th>
+                  <th>Present</th>
+                  <th>Absent</th>
+                  <th>By</th>
+                  <th>At</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let summery of attendanceSummery;" [ngClass]="{'table-success':!summery.toTake , 'table-danger':summery.toTake}">
+                  <td data-title="Class">
+                    <strong style="text-transform: uppercase;">{{summery.className}}</strong>
+                    <i class="icon-basic-message-txt" style="color: red; margin-left: 10px;" *ngIf="summery.isSms"></i>
+                  </td>
+                  <td data-title="Total" class="numeric">{{summery.totalStudents}}</td>
+                  <td data-title="Present" class="numeric">{{summery.presentStudents}}</td>
+                  <td data-title="Absent" class="numeric">{{summery.absentStudents}}</td>
+                  <td data-title="Taken By">{{summery.takenByName}}</td>
+                  <td data-title="Taken At">{{summery.takenAt | amTimeAgo}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

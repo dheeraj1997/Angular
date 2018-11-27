@@ -1,0 +1,139 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-block">
+        <div class="row">
+          <div class="form-group col-md-4">
+            <label>
+              Session
+              <span style="color: red">*</span>
+            </label>
+            <select
+              class="form-control"
+              [(ngModel)]="selectedSession"
+              (ngModelChange)="onSessionSelect()">
+              <option *ngFor="let ses of sessionData;" value="{{ses._id}}">{{ses.name}}</option>
+            </select>
+            <small class="form-text text-muted">
+              Select session from dropdown.
+            </small>
+          </div>
+          <div class="form-group col-md-4">
+            <label>
+              Class
+              <span style="color: red">*</span>
+            </label>
+            <select
+              class="form-control"
+              [(ngModel)]="selectedClass"
+              (ngModelChange)="onClassSelect()">
+              <option *ngFor="let class of classData;" value="{{class._id}}">{{class.name}}</option>
+            </select>
+            <small class="form-text text-muted">
+              Select Class From Dropdown.
+            </small>
+          </div>
+          <div class="form-group col-md-4">
+            <label>
+              No of Periods
+              <span style="color: red">*</span>
+            </label>
+            <input
+              type="number"
+              class="form-control"
+              [(ngModel)]="totalPeriod"
+              (ngModelChange)="onPeriodSelect()">
+            <small class="form-text text-muted">
+              Enter No. Of Periods
+            </small>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label>
+              Subject
+              <span style="color: red">*</span>
+            </label>
+            <select
+              class="form-control"
+              [(ngModel)]="selectedSubject"
+              (ngModelChange)="onSubjectSelect()">
+              <option [ngValue]="null"></option>
+              <option *ngFor="let subj of subjectData;" value="{{subj._id}}">{{subj.name}}</option>
+            </select>
+            <small class="form-text text-muted">
+              Select Subject From Dropdown.
+            </small>
+          </div>
+          <div class="form-group col-md-6">
+            <label>
+              Teacher
+              <span style="color: red">*</span>
+            </label>
+            <select
+              class="form-control"
+              [(ngModel)]="selectedTeacher"
+              (ngModelChange)="onTeacherSelect()">
+              <option [ngValue]="null"></option>
+              <option *ngFor="let tchr of teacherData;" value="{{tchr._id}}">{{tchr.name}}</option>
+            </select>
+            <small class="form-text text-muted">
+              Select Teacher From Dropdown.
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-block custom-overflow ">
+        <div>
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+            <tr>
+              <th class="text-center">
+                PERIOD
+              </th>
+              <th *ngFor="let day of days;">
+                {{day | uppercase}}
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let peri of timetableData.periods;">
+              <td class="text-center" headers="Period">
+                <div>
+                  <b>{{peri.number}}</b><sup>{{peri.number | numSuf}}</sup>
+                </div>
+
+              </td>
+              <td *ngFor="let day of peri.days;"
+                  (click)="changePeriod(day)"
+                  [headers]="day.day"
+                  style="text-align: center;cursor: pointer;">
+                <i class="fa fa-remove"
+                   *ngIf="!day.selected"
+                   style="color: red; font-size: xx-large;"></i>
+                <div *ngIf="day.subjectId">
+                  <span>{{subjectIdNameMap[day.subjectId]}}</span>
+                </div>
+                <div *ngIf="day.teacherId">
+                  <span class="small">({{teacherIdNameMap[day.teacherId]}})</span>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-block">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          (click)="save()"
+          [disabled]="isDisable===true">Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

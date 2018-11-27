@@ -1,0 +1,260 @@
+<ng-sidebar-container class="app"
+                      [ngClass]="{'mode-boxed': isBoxed, 'sidebar-opened': isOpened, 'theme-light': theme == 'light', 'theme-dark': theme == 'dark', 'mode-push': _mode == 'push', 'mode-dock': _mode == 'dock', 'mode-over': _mode == 'over', 'mode-slide': _mode == 'slide', 'no-footer': options?.removeFooter, 'map-header': options?.mapHeader}">
+
+  <ng-sidebar
+    [(opened)]="isOpened"
+    [(mode)]="_mode"
+    [position]="'left'"
+    [dockedSize]="'80px'"
+    [autoCollapseWidth]="'991'"
+    [closeOnClickOutside]="isOver()"
+    [showBackdrop]="isOver()"
+    [sidebarClass]="'sidebar-panel'" #sidebar>
+    <nav class="navbar custom-navbar main-brand">
+      <a class="navbar-brand mr-auto" [routerLink]="[menuData+'/dashboard']">
+        <img src="assets/images/logo.png" class="navbar-brand-logo" alt="">
+      </a>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a href="javascript:;" class="nav-link" (click)="toogleSidebar()">
+            <i class="hamburger-icon v2" *ngIf="_mode === 'over' && !isOver()">
+              <span></span>
+            </i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- main navigation -->
+    <nav class="menu">
+      <ul class="navigation" appAccordion>
+        <li class="navigation-item" appAccordionLink *ngFor="let menuitem of menuItems;"
+            group="{{menuitem.state}}">
+          <a class="navigation-link" appAccordionToggle [routerLink]="[menuitem.state]"
+             *ngIf="menuitem.type === 'link'">
+            <i class="icon-{{ menuitem.icon }}"></i>
+            <span>{{ menuitem.name }}</span>
+            <span class="mr-auto"></span>
+            <span class="badge badge-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+          </a>
+          <a class="navigation-link" appAccordionToggle href="{{menuitem.state}}"
+             *ngIf="menuitem.type === 'extLink'">
+            <i class="icon icon-{{ menuitem.icon }}"></i>
+            <span>{{ menuitem.name }}</span>
+            <span class="mr-auto"></span>
+            <span class="badge badge-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+          </a>
+          <a class="navigation-link" appAccordionToggle href="{{menuitem.state}}" target="_blank"
+             *ngIf="menuitem.type === 'extTabLink'">
+            <i class="icon icon-{{ menuitem.icon }}"></i>
+            <span>{{ menuitem.name  }}</span>
+            <span class="mr-auto"></span>
+            <span class="badge badge-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+          </a>
+          <a class="navigation-link" appAccordionToggle href="javascript:;" *ngIf="menuitem.type === 'sub'">
+            <i class="icon icon-{{ menuitem.icon }}"></i>
+            <span>{{ menuitem.name  }}</span>
+            <span class="mr-auto"></span>
+            <span class="badge badge-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+            <i class="menu-caret icon icon-arrows-right"></i>
+          </a>
+          <ul class="navigation-submenu" *ngIf="menuitem.type === 'sub'">
+            <li class="navigation-item" *ngFor="let childitem of menuitem.children">
+              <a class="navigation-link" appAccordionToggle [routerLink]="[childitem.state]"
+                 *ngIf="childitem.type === 'link'">
+                <i class="icon-{{ childitem.icon }}"></i>
+                <span>{{ childitem.name }}</span>
+                <span class="mr-auto"></span>
+                <span class="badge badge-{{ badge.type }}" *ngFor="let badge of childitem.badge">
+                  {{ badge.value }}
+                </span>
+              </a>
+              <a class="navigation-link" href="javascript:;"
+                 *ngIf="childitem.type === 'sub'">
+                <i class="icon-{{ childitem.icon }}"></i>
+                <span>{{ childitem.name  }}</span>
+                <span class="mr-auto"></span>
+                <span class="badge badge-{{ badge.type }}" *ngFor="let badge of childitem.badge">
+                  {{ badge.value }}
+                </span>
+              </a>
+              <div *ngIf="childitem.type === 'sub'" style="margin-left: 20px; margin-top: 2px;">
+            <li class="navigation-item" *ngFor="let child of childitem.children">
+              <a [routerLink]="[child.state ]" class="navigation-link relative">
+                <i class="icon icon-{{ child.icon }}"></i>
+                {{ child.name }}
+              </a>
+            </li>
+            </div>
+            </li>
+            <li class="navigation-item">
+              <hr class="mt-0 mb-0"/>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <!-- /main navigation -->
+  </ng-sidebar>
+
+  <div class="app-inner">
+    <nav class="navbar custom-navbar bg-faded main-header" style="display: inline-block;">
+      <ul class="navbar-nav" style="float: left;">
+        <li class="nav-item">
+          <a href="javascript:;" class="nav-link" (click)="toogleSidebar()">
+            <i class="hamburger-icon v2" *ngIf="_mode !== 'dock'">
+              <span></span>
+            </i>
+          </a>
+        </li>
+      </ul>
+      <span class="navbar-heading hidden-xs-down" style="margin-top: 14px;">{{options?.heading}}</span>
+      <span class="mr-auto"></span>
+      <ul class="navbar-nav" style="float: right;">
+        <li class="nav-item" ngbDropdown>
+          <a href="javascript:;" class="nav-link" ngbDropdownToggle>
+            <!--<i class="icon-user" style="font-size: 20px;"></i>-->
+            <img src="assets/images/profile.jpg" class="navbar-avatar rounded-circle" alt="user" title="user">
+            <b style="margin-left: 9px; text-transform: capitalize;">{{userData.username}}</b>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right">
+            <!-- <a class="dropdown-item" href="javascript:;">
+            <i class="icon icon-basic-settings mr-3"></i>
+            <span>Settings</span>
+            </a> -->
+            <a class="dropdown-item" href="javascript:;" (click)="toProfile()">
+              <!--<i class="fa fa-user-o mr-3"></i>-->
+              <img src="assets/images/profile.jpg" class="navbar-avatar-profile rounded-circle">
+              <span class="user-span">
+                <b>{{userData.username}}</b><br>
+                <small><i>{{userData.userType.category}}</i></small>
+              </span>
+            </a>
+            <div class="dropdown-divider" *ngIf="userArray.length"></div>
+            <a class="dropdown-item" href="javascript:;" (click)="switchUser(i)"
+               *ngFor="let user of userArray; let i = index;" style="color: #9a9a9a;">
+              <!--<i class="fa fa-user-o mr-3"></i>-->
+              <img src="assets/images/profile.jpg" class="navbar-avatar-profile rounded-circle">
+              <span class="user-span">
+                <b>{{user.username}}</b><br>
+                <small><i>{{user.userType.category}}</i></small>
+              </span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="javascript:;" (click)="openLoginBox(login)">
+              <i class="fa fa-plus-circle mr-3" style="font-size: 40px;"></i>
+              <!--<img src="assets/images/profile.jpg" class="navbar-avatar-profile rounded-circle">-->
+              <span class="add-span">
+                <b style="font-size: 15px;">Add New Account</b>
+              </span>
+            </a>
+            <!-- <a class="dropdown-item" href="javascript:;">
+            <i class="icon icon-basic-message-multiple mr-3"></i>
+            <span>Notifications</span>
+            </a> -->
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="javascript:;" (click)="signOut()">
+              <i class="icon icon-arrows-switch-vertical mr-3"></i>
+              <span>Sign Out</span>
+            </a>
+          </div>
+        </li>
+        <!--<li class="nav-item" ngbDropdown>-->
+        <!--<a href="javascript:;" class="nav-link" ngbDropdownToggle>-->
+        <!--<i class="fi flaticon-notification"></i>-->
+        <!--<span class="badge badge-danger">4</span>-->
+        <!--</a>-->
+        <!--<div class="dropdown-menu dropdown-menu-right notifications">-->
+        <!--<div class="notifications-wrapper">-->
+        <!--<a href="javascript:;" class="dropdown-item">-->
+        <!--<span class="badge badge-warning">NEW</span>-->
+        <!--&nbsp;Sean launched a new application-->
+        <!--<span class="time">2 seconds ago</span>-->
+        <!--</a>-->
+        <!--<a href="javascript:;" class="dropdown-item">-->
+        <!--Removed calendar from app list-->
+        <!--<span class="time">4 hours ago</span>-->
+        <!--</a>-->
+        <!--<a href="javascript:;" class="dropdown-item">-->
+        <!--Jack Hunt has joined mailing list-->
+        <!--<span class="time">9 days ago</span>-->
+        <!--</a>-->
+        <!--<a href="javascript:;" class="dropdown-item">-->
+        <!--<span class="text-muted">Conan Johns created a new list</span>-->
+        <!--<span class="time">9 days ago</span>-->
+        <!--</a>-->
+        <!--</div>-->
+        <!--<div class="notification-footer">Notifications</div>-->
+        <!--</div>-->
+        <!--</li>-->
+        <li class="nav-item">
+          <span class="nav-divider"></span>
+        </li>
+        <li class="nav-item">
+          <a href="javascript:;" class="nav-link" appToggleFullscreen>
+            <i class="fi flaticon-fullscreen"></i>
+          </a>
+        </li>
+
+
+        <!--<li class="nav-item">-->
+        <!--<a href="javascript:;" class="nav-link" (click)="openSearch(search)">-->
+        <!--<i class="fi flaticon-search"></i>-->
+        <!--</a>-->
+        <!--</li>-->
+
+      </ul>
+    </nav>
+
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+</ng-sidebar-container>
+
+<ng-template #search let-c="close" let-d="dismiss">
+  <form class="search__form" action="">
+    <input class="search-input" name="search" type="search" placeholder="Search..." autocomplete="off" autocorrect="off"
+           autocapitalize="off" spellcheck="false" autofocus="true"/>
+    <p class="text-muted">
+      <small><strong>Hit enter to search or ESC to close</strong></small>
+    </p>
+  </form>
+  <div class="search-suggestions">
+    <h6 class="text-uppercase"><strong>Suggestions?</strong></h6>
+    <p class="text-primary">#medical #analytics #fitness #transport #ui #dashboard #admin #bootstrap #angular
+      #typescript</p>
+  </div>
+  <button type="button" class="search-close" aria-label="Close search form" (click)="d('Cross click')">
+    <i class="fi flaticon-close"></i>
+  </button>
+</ng-template>
+
+<ng-template #login let-submit="close" let-dismiss="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title text-uppercase">Add New User!</h6>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss('clicking on cross!')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12 form-group">
+        <label>Username</label>
+        <input type="text" class="form-control" [(ngModel)]="userName">
+      </div>
+      <div class="col-md-12 form-group">
+        <label>Password</label>
+        <input type="password" class="form-control" [(ngModel)]="password" (keyup.enter)="submit('yes')">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer" style="display: block;">
+    <button
+      type="button"
+      class="btn btn-outline-success"
+      (click)="submit('yes')">Login!
+    </button>
+    <button type="button" class="btn btn-outline-danger pull-right" (click)="submit('cancel')">Cancel</button>
+  </div>
+</ng-template>

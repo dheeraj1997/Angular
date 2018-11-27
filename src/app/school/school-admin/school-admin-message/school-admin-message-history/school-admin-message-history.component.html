@@ -1,0 +1,175 @@
+<div class="row">
+  <div class="col-md-12">
+    <button class="btn pull-right card pointer"
+            [routerLink]="['/school/admin/message/send']">
+      Send SMS
+    </button>
+  </div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        Messaging Detail
+      </div>
+      <div class="card-block">
+        <div class="no-more-tables">
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+            <tr>
+              <th>
+                Messages Sent
+              </th>
+              <th>
+                Messages Remaining
+              </th>
+              <th>
+                Total Messages
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td data-title="Messages Sent">
+                {{schoolData.smsCount.used}}
+              </td>
+              <td data-title="Messages Remaining">
+                {{schoolData.smsCount.total - schoolData.smsCount.used}}
+              </td>
+              <td data-title="Total Messages">
+                {{schoolData.smsCount.total}}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        Sent Messages
+      </div>
+      <div class="card-block">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label>
+              Select Start Date
+              <span style="color: red">*</span>
+            </label>
+            <div class="input-group">
+              <input
+                class="form-control"
+                placeholder="yyyy-mm-dd"
+                name="messageHistoryStartDate"
+                [(ngModel)]="historyStartDate"
+                (ngModelChange)="getHistoryData();"
+                (click)="messageHistoryStartDate.toggle()"
+                ngbDatepicker #messageHistoryStartDate="ngbDatepicker" required>
+              <button class="input-group-addon" (click)="messageHistoryStartDate.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+            </div>
+            <small class="form-text text-muted">
+              Select Start Date of Message History.
+            </small>
+          </div>
+          <div class="form-group col-md-6">
+            <label>
+              Select End Date
+              <span style="color: red">*</span>
+            </label>
+            <div class="input-group">
+              <input
+                class="form-control"
+                placeholder="yyyy-mm-dd"
+                name="messageHistoryEndDate"
+                [(ngModel)]="historyEndDate"
+                (ngModelChange)="getHistoryData();"
+                (click)="messageHistoryEndDate.toggle()"
+                ngbDatepicker #messageHistoryEndDate="ngbDatepicker" required>
+              <button class="input-group-addon" (click)="messageHistoryEndDate.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+            </div>
+            <small class="form-text text-muted">
+              Select End Date of Message History.
+            </small>
+          </div>
+          <div class="col-md-12" *ngIf="toShowData.length">
+            <div class="no-more-tables">
+              <table class="table table-bordered table-striped mb-0">
+                <thead>
+                <tr>
+                  <th>
+                    #
+                  </th>
+                  <th>
+                    Text
+                  </th>
+                  <th>
+                    Sms Length
+                  </th>
+                  <th>
+                    Total Sent
+                  </th>
+                  <!--<th>-->
+                  <!--Job Id-->
+                  <!--</th>-->
+                  <th>
+                    Phone Number(s)
+                  </th>
+                  <th>
+                    Date
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let sms of toShowData; let i = index;">
+                  <td data-title="#">
+                    {{i+1}}
+                  </td>
+                  <td data-title="Text">
+                    <small>{{sms.text}}</small>
+                  </td>
+                  <td data-title="Sms Length">
+                    {{sms.smsLength}}
+                  </td>
+                  <td data-title="Total Sent">
+                    {{sms.totalSmsSent}}
+                  </td>
+                  <!--<td data-title="Job Id">-->
+                  <!--{{sms.jobId}}-->
+                  <!--</td>-->
+                  <td data-title="Phone Number(s)">
+                    <p>{{sms.sentTo[0]}} <span
+                      *ngIf="sms.sentTo.length>1"
+                      style="color: #506dff; cursor: pointer;"
+                      (click)="showToSentNumbers(sms , noModal)"> and {{sms.sentTo.length-1}} <i>more</i></span>
+                    </p>
+                  </td>
+                  <td data-title="Date">
+                    {{sms.createdAt | amCalendar}}
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #noModal let-submit="close" let-dismiss="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title text-uppercase">Sms Sent to Following Numbers</h6>
+    <button type="button" class="close" aria-label="Close" (click)="submit('cancel')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="text-justify text-capitalize">
+      <span *ngFor="let no of numbersToView;" class="badge badge-default m-1" style="font-size: 16px;">+91-{{no}}</span>
+    </div>
+  </div>
+</ng-template>

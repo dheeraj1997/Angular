@@ -1,0 +1,534 @@
+<div class="row">
+  <div class="col-md-12" style="margin-bottom: 5px;">
+    <div class="card">
+      <div class="card-block">
+        <div class="row" style="width: 100%;">
+          <div class="col-md-3 text-center">
+            <img [src]="settingData.logo" style="height: 120px; width: 120px;">
+          </div>
+          <div class="col-md-3" style="padding-top: 20px;">
+            <h5>Welcome {{userData.username}}</h5>
+            <h6 class="text-capitalize">{{schoolData.name}}</h6>
+            <b style="font-size: small;">{{schoolData.address.completeAddress}}, {{schoolData.address.district}}-{{schoolData.address.pin}}</b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="card card-block card-widget">
+      <div class="widget-icon rounded-circle bg-red text-white icon icon-share-alt">
+      </div>
+      <div class="block ml-3 mr-3">
+        <h5 class="mb-0 fw-400">
+          <a [routerLink]="['/school/accountant/fees/add']">Collect Fees</a>
+        </h5>
+        <small class="text-muted text-uppercase ">
+          <strong></strong>
+        </small>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="card card-block card-widget">
+      <div class="widget-icon rounded-circle bg-blue text-white icon icon-minus">
+      </div>
+      <div class="block ml-3 mr-3">
+        <h5 class="mb-0 fw-400">
+          <a [routerLink]="['/school/accountant/expenses/add']">Expenses</a>
+        </h5>
+        <small class="text-muted text-uppercase ">
+          <strong></strong>
+        </small>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="card card-block card-widget">
+      <div class="widget-icon rounded-circle bg-yellow text-white icon icon-notebook">
+      </div>
+      <div class="block ml-3 mr-3">
+        <h5 class="mb-0 fw-400">
+          <a [routerLink]="['/school/accountant/ledger']">Ledger</a>
+        </h5>
+        <small class="text-muted text-uppercase ">
+          <strong></strong>
+        </small>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="col-sm-6 col-md-3">
+    <div class="card card-block card-widget">
+      <div class="widget-icon rounded-circle bg-green text-white icon icon-share-alt">
+      </div>
+      <div class="block ml-3 mr-3">
+        <h5 class="mb-0 fw-400">
+          <a [routerLink]="['/school/accountant/fees/add']">Collect Fees</a>
+        </h5>
+        <small class="text-muted text-uppercase ">
+          <strong></strong>
+        </small>
+      </div>
+    </div>
+  </div> -->
+</div>
+<div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="card card-block card-widget">
+      <div class="widget-icon rounded-circle bg-blue text-white icon icon-people">
+      </div>
+      <div class="block ml-3 mr-3">
+        <h5 class="mb-0 fw-400">
+          {{studentCount}}
+        </h5>
+        <small class="text-muted text-uppercase ">
+          <strong>Total Students</strong>
+        </small>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="card card-block card-widget">
+      <div class="widget-icon rounded-circle bg-yellow   text-white icon icon-login">
+      </div>
+      <div class="block ml-3 mr-3">
+        <h5 class="mb-0 fw-400">
+          &#8377; {{totalCollectedFees}}
+        </h5>
+        <small class="text-muted text-uppercase ">
+          <strong>Fees Collected</strong>
+        </small>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="card card-block card-widget">
+      <div class="widget-icon rounded-circle bg-red text-white icon icon-minus">
+      </div>
+      <div class="block ml-3 mr-3">
+        <h5 class="mb-0 fw-400">
+         &#8377; {{totalExpense}}
+        </h5>
+        <small class="text-muted text-uppercase ">
+          <strong>Total Expenses</strong>
+        </small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="row">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header no-shadow">
+        <div class="card-header-text w-100">
+          <div class="card-title">
+            Fee's Graph
+          </div>
+          <div class="card-subtitle text-capitalize ff-sans">
+            Date:
+          </div>
+        </div>
+      </div>
+      <div class="card-block">
+        <div class="row text-center">
+          <div class="col-xs-6 col-sm-3 text-success">
+            <h5 class="mb-0">
+              <strong>
+                $34.45
+              </strong>
+            </h5>
+            <small>
+              Fee Collected
+            </small>
+          </div>
+          <div class="col-xs-6 col-sm-3">
+            <h5 class="mb-0">
+              <strong>
+                100000
+              </strong>
+            </h5>
+            <small>
+               Total Collection
+            </small>
+          </div>
+          <div class="col-xs-6 col-sm-3 ">
+            <h5 class="mb-0">
+              <strong>
+                1000
+              </strong>
+            </h5>
+            <small>
+              Total Student's
+            </small>
+          </div>
+          <div class="col-xs-6 col-sm-3 text-danger">
+            <h5 class="mb-0">
+              <strong>
+                56
+              </strong>
+            </h5>
+            <small>
+              Fee Defaulter's
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="mb-1">
+        <ngx-charts-area-chart-stacked (legendlabelclick)="onLegendLabelClick($event)" (select)="select($event)" [curve]="curve" [gradient]="gradient" [legend]="showLegend" [results]="dateData" [roundDomains]="roundDomains" [scheme]="colorScheme" [schemeType]="schemeType" [showGridLines]="showGridLines" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [timeline]="timeline" [tooltipDisabled]="tooltipDisabled" [xAxis]="showXAxis" [xAxisLabel]="xAxisLabel" [yAxis]="showYAxis" [yAxisLabel]="yAxisLabel" class="line-container">
+        </ngx-charts-area-chart-stacked>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header no-shadow">
+        <div class="card-header-text w-100">
+          <div class="card-title">
+            Expense's Graph
+          </div>
+          <div class="card-subtitle text-capitalize ff-sans">
+            Date:
+          </div>
+        </div>
+      </div>
+      <div class="card-block">
+        <div class="row text-center">
+          <div class="col-lg-6 col-md-3 text-purple">
+            <h5 class="mb-0">
+              <strong>
+                $3
+              </strong>
+            </h5>
+            <small>
+              Expenses
+            </small>
+          </div>
+           <div class="col-sm-6 col-md-3">
+            <h5 class="mb-0">
+              <strong>
+                21.78B
+              </strong>
+            </h5>
+            <small>
+              Education
+            </small>
+          </div>
+          <div class="col-lg-6 col-md-3 text-indigo">
+            <h5 class="mb-0">
+              <strong>
+               100000
+              </strong>
+            </h5>
+            <small>
+              Total Expenses
+            </small>
+          </div>
+           <div class="col-sm-6 col-md-3">
+            <h5 class="mb-0">
+              <strong>
+                34.76B
+              </strong>
+            </h5>
+            <small>
+              Food
+            </small>
+          </div>         </div>
+      </div>
+      <div class="mb-1">
+        <ngx-charts-area-chart-stacked (legendlabelclick)="onLegendLabelClick($event)" (select)="select($event)" [curve]="curve" [gradient]="gradient" [legend]="showLegend" [results]="dateData" [roundDomains]="roundDomains" [scheme]="colorScheme" [schemeType]="schemeType" [showGridLines]="showGridLines" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [timeline]="timeline" [tooltipDisabled]="tooltipDisabled" [xAxis]="showXAxis" [xAxisLabel]="xAxisLabel" [yAxis]="showYAxis" [yAxisLabel]="yAxisLabel" class="line-container">
+        </ngx-charts-area-chart-stacked>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- <div class="row">
+  <div class="col-lg-5">
+    <div class="card">
+      <div class="card-header no-shadow">
+        <div class="card-header-text w-100">
+          <div class="card-title">
+            Social Feed
+          </div>
+          <div class="card-subtitle text-capitalize ff-sans">
+            Last updated: 1 hour ago
+          </div>
+        </div>
+      </div>
+      <div class="activity-stream">
+        <div class="card">
+          <div class="card-header">
+            <img class="card-avatar" src="assets/images/face1.jpg"/>
+            <div class="card-header-text">
+              <div class="card-title">
+                Received a call from Joel
+              </div>
+              <div class="card-subtitle">
+                at 3:14PM
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <img class="card-avatar" src="assets/images/face2.jpg"/>
+            <div class="card-header-text">
+              <div class="card-title">
+                Added Ellie to Group
+              </div>
+              <div class="card-subtitle">
+                5 mins ago
+              </div>
+            </div>
+          </div>
+          <div class="card-block">
+            <p class="mb-0">
+              Nullam id dolor id nibh ultricies vehicula ut id elit.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3">
+    <div class="card bg-purple card-inverse">
+      <div class="card-header">
+        Todos
+      </div>
+      <div class="card-block">
+        <ul class="list-unstyled mb-0">
+          <li>
+            <label class="custom-control custom-checkbox mb-2">
+              <input class="custom-control-input" type="checkbox"/>
+              <span class="custom-control-indicator">
+              </span>
+              <span class="custom-control-description">
+                Learn Angular 4
+              </span>
+            </label>
+          </li>
+          <li>
+            <label class="custom-control custom-checkbox mb-2">
+              <input class="custom-control-input" type="checkbox"/>
+              <span class="custom-control-indicator">
+              </span>
+              <span class="custom-control-description">
+                Update Vue.JS
+              </span>
+            </label>
+          </li>
+          <li>
+            <label class="custom-control custom-checkbox">
+              <input class="custom-control-input" type="checkbox">
+              <span class="custom-control-indicator">
+              </span>
+              <span class="custom-control-description">
+                Add ReactJS
+              </span>
+            </label>
+          </li>
+          <li>
+            <label class="custom-control custom-checkbox mb-2">
+              <input class="custom-control-input" type="checkbox"/>
+              <span class="custom-control-indicator">
+              </span>
+              <span class="custom-control-description">
+                Upgrade Ember
+              </span>
+            </label>
+          </li>
+          <li>
+            <label class="custom-control custom-checkbox mb-2">
+              <input class="custom-control-input" type="checkbox"/>
+              <span class="custom-control-indicator">
+              </span>
+              <span class="custom-control-description">
+                Read on Meteor
+              </span>
+            </label>
+          </li>
+          <li>
+            <label class="custom-control custom-checkbox">
+              <input class="custom-control-input" type="checkbox"/>
+              <span class="custom-control-indicator">
+              </span>
+              <span class="custom-control-description">
+                Commit Riot changes
+              </span>
+            </label>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card no-bg">
+      <div class="card-block text-center rounded" style="background-image: url('assets/images/unsplash/2.jpg')">
+        <img alt="" class="avatar-lg rounded-circle d-block mx-auto mb-3" src="assets/images/face4.jpg"/>
+        <button class="btn btn-secondary btn-sm mb-3">
+          Follow
+        </button>
+      </div>
+      <div class="card-block pt-3 pb-3 ml-3 mr-3 bg-indigo text-white rounded" style="margin-top: -15px;">
+        <div class="row text-center">
+          <div class="col">
+            <div class="h6 no-margin">
+              62
+            </div>
+            <div class="small bold text-uppercase">
+              Followers
+            </div>
+          </div>
+          <div class="col">
+            <div class="h6 no-margin">
+              98
+            </div>
+            <div class="small bold text-uppercase">
+              Posts
+            </div>
+          </div>
+          <div class="col">
+            <div class="h6 no-margin">
+              29
+            </div>
+            <div class="small bold text-uppercase">
+              Likes
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="row">
+  <!-- <div class="col-md-12 col-xl-4">
+    <div class="card">
+      <div class="card-header no-shadow">
+        Messages
+      </div>
+      <ul class="list-group border-0">
+        <li class="list-group-item border-top-0 border-left-0 border-right-0">
+          <div class="d-flex justify-content-center">
+            <a class="pull-left avatar-sm" href="javascript:;">
+              <img class="img-fluid rounded-circle" src="assets/images/face1.jpg"/>
+            </a>
+            <div class="pl-3">
+              <a class="d-block" href="javascript:;">
+                Amanda Alvarez
+              </a>
+              <span>
+                Donec ullamcorper nulla non metus auctor fringilla.
+              </span>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item border-top-0 border-left-0 border-right-0">
+          <div class="d-flex justify-content-center">
+            <a class="pull-left avatar-sm" href="javascript:;">
+              <img class="img-fluid rounded-circle" src="assets/images/face2.jpg"/>
+            </a>
+            <div class="pl-3">
+              <a class="d-block" href="javascript:;">
+                Debra Kelly
+              </a>
+              <span>
+                Donec ullamcorper nulla non metus auctor fringilla.
+              </span>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item border-top-0 border-left-0 border-right-0  border-bottom-0">
+          <div class="d-flex justify-content-center">
+            <a class="pull-left avatar-sm" href="javascript:;">
+              <img class="img-fluid rounded-circle" src="assets/images/face3.jpg"/>
+            </a>
+            <div class="pl-3">
+              <a class="d-block" href="javascript:;">
+                Walter Ryan
+              </a>
+              <span>
+                Donec ullamcorper nulla non metus auctor fringilla.
+              </span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div> -->
+  <div class="col-md-6 col-xl-6">
+    <div class="card bg-indigo card-inverse">
+      <div class="card-header no-shadow">
+        Notice Board
+      </div>
+      <div class="list-group" *ngFor="let notice of noticeData ">
+        <div class="list-group-item list-group-item-action flex-column align-items-start no-bg text-white">
+          <p class="mb-1 w-100">
+            {{notice.title}}
+          </p>
+          <div class="d-flex w-100 justify-content-between">
+            <small>
+              {{notice.noticeText.substring(0,100)}}
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer " style="display: block;">
+        <a style="color: white" class="pull-right" [routerLink]="['/school/accountant/notice']">VIEW MORE</a>
+      </div>
+    </div>
+    <!-- <div class="col-md-6 col-xl-4">
+      <div class="card">
+        <div class="card-header no-shadow">
+          News Feed
+        </div>
+        <ul class="list-group border-0">
+          <li class="list-group-item border-left-0 border-right-0">
+            <div class="d-flex justify-content-center">
+              <a class="pull-left avatar-sm" href="javascript:;">
+                <img class="img-fluid" src="assets/images/face4.jpg"/>
+              </a>
+              <div class="pl-3">
+                <span class="d-block">
+                  Donec ullamcorper nulla non metus auctor fringilla.
+                </span>
+                <small class="text-muted">
+                  Yesterday
+                </small>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item border-left-0 border-right-0">
+            <div class="d-flex justify-content-center">
+              <a class="pull-left avatar-sm" href="javascript:;">
+                <img class="img-fluid" src="assets/images/face5.jpg"/>
+              </a>
+              <div class="pl-3">
+                <span class="d-block">
+                  Donec ullamcorper nulla non metus auctor fringilla.
+                </span>
+                <small class="text-muted">
+                  Yesterday
+                </small>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item border-left-0 border-right-0  border-bottom-0">
+            <div class="d-flex justify-content-center">
+              <a class="pull-left avatar-sm" href="javascript:;">
+                <img class="img-fluid" src="assets/images/face1.jpg">
+              </a>
+              <div class="pl-3">
+                <span class="d-block">
+                  Donec ullamcorper nulla non metus auctor fringilla.
+                </span>
+                <small class="text-muted">
+                  Yesterday
+                </small>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div> -->
+  </div>

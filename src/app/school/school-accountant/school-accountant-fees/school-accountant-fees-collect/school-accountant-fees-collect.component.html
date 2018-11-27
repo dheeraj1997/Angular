@@ -1,0 +1,215 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        Student Detail
+      </div>
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-2" style="text-align: center;line-height: 1.7;">
+            <img [src]="studentData.picture" style="height: 180px; max-width: 180px;text-transform: capitalize;">
+          </div>
+          <div class="col-md-10">
+            <div class="row">
+              <div class="col-md-4" style="font-size: 16px; line-height: 2;text-transform: capitalize;">
+                <strong>SR Number:</strong> {{studentData.schoolDetail.srnNo}}<br>
+                <strong>Admission Number:</strong> {{studentData.schoolDetail.admissionNumber}}<br>
+                <strong>Roll Number:</strong> {{studentData.schoolDetail.rollNo}}<br>
+                <strong>Name:</strong> {{studentData.name}}<br>
+                <strong>Class:</strong> {{studentData.className}}
+              </div>
+              <div class="col-md-4" style="font-size: 16px; line-height: 2; text-transform: capitalize;">
+                <strong>Guardian Name:</strong> {{studentData.guardianInfo.name}}<br>
+                <strong>Relation:</strong> {{studentData.guardianInfo.relation}}<br>
+                <strong>Number:</strong> +91-{{studentData.guardianInfo.contactNo}}<br>
+                <strong>Aadhaar:</strong> {{studentData.guardianInfo.aadhaarId}}<br>
+                <strong>Email:</strong> {{studentData.guardianInfo.email}}
+              </div>
+              <div class="col-md-4" style="font-size: 16px; line-height: 2;text-transform: capitalize;">
+                <strong>Mother's Name:</strong> {{studentData.motherName}}<br>
+                <strong>Father's Name:</strong> {{studentData.fatherName}}<br>
+                <strong>Father's Occupation:</strong> {{studentData.fatherOccupation}}<br>
+                <strong>Address:</strong> {{studentData.address.completeAddress}}<br>
+                <strong>Pin Code:</strong> {{studentData.address.pin}}<br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        Fee detail
+      </div>
+      <div class="card-block">
+        <div class="form-group">
+          <label>
+            Select Months
+            <span style="color: red">*</span>
+          </label>
+          <div>
+            <button
+              type="button"
+              class="btn"
+              *ngFor="let month of showMonthData;"
+              [disabled]="month.isDisabled"
+              [ngClass]="{'btn-success':month.selected && !month.isDisabled, 'btn-outline-success':!month.selected && !month.isDisabled, 'btn-danger':month.isDisabled}"
+              (click)="toggleSelectMonth(month)"
+              style="margin-right: 10px; margin-bottom: 10px;">
+              {{month.name | uppercase}}
+            </button>
+          </div>
+        </div>
+        <div *ngFor="let mon of feeCollectMonths;" style="margin-bottom: 20px;">
+          <h6>{{mon|uppercase}}</h6>
+          <div class="no-more-tables" *ngIf="monthFeeDataMap[mon] && monthFeeDataMap[mon].feeData">
+            <table class="table table-bordered table-striped mb-0">
+              <thead>
+              <tr>
+                <th>
+                  Particular
+                </th>
+                <th>
+                  Amount
+                </th>
+                <th>
+                  Fees Type
+                </th>
+                <th>
+                  Due Date
+                </th>
+                <th>
+                  To Collect
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let fee of monthFeeDataMap[mon].feeData;">
+                <td data-title="Particular" *ngIf="!fee.isAlreadyCollected">
+                  {{fee.particular}}
+                </td>
+                <td data-title="Amount" *ngIf="!fee.isAlreadyCollected">
+                  {{fee.amount}}
+                </td>
+                <td data-title="Fees Type" *ngIf="!fee.isAlreadyCollected">
+                  {{fee.type}}
+                </td>
+                <td data-title="Due Date" *ngIf="!fee.isAlreadyCollected">
+                  {{fee.dueDate}}
+                </td>
+                <td data-title="To Collect" *ngIf="!fee.isAlreadyCollected">
+                  <label class="custom-control custom-checkbox">
+                    <input type="checkbox"
+                           [(ngModel)]="fee.toCollect"
+                           (change)="handleCollectChange(fee , mon)"
+                           class="custom-control-input">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">Collect</span>
+                  </label>
+                </td>
+              </tr>
+              </tbody>
+              <tbody>
+              <tr>
+                <td colspan="3">
+                  <strong>Amount:</strong>
+                </td>
+                <td colspan="2" *ngIf="monthFeeDataMap[mon] && monthFeeDataMap[mon]">
+                  <span>&#8377; {{monthFeeDataMap[mon].total}}</span>
+                </td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div style="margin-bottom: 20px;">
+          <h5>Total Fees To Collect</h5>
+          <div class="no-more-tables">
+            <table class="table table-bordered table-striped mb-0">
+              <tr>
+                <td colspan="3">
+                  <strong>Net Amount:</strong>
+                </td>
+                <td colspan="2">
+                  <span>&#8377; {{totalFeeToCollect}}</span>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        mode of payment
+      </div>
+
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-3">
+            <label class="custom-control custom-radio">
+              <input name="payment"
+                     type="radio"
+                     value="cash" [(ngModel)]="paymentOption"
+                     class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Cash</span>
+            </label>
+          </div>
+          <div class="col-md-3">
+            <label class="custom-control custom-radio">
+              <input name="payment"
+                     type="radio"
+                     value="cheque" [(ngModel)]="paymentOption"
+                     class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Cheque</span>
+            </label>
+          </div>
+          <div class="col-md-3">
+            <label class="custom-control custom-radio">
+              <input name="payment"
+                     type="radio"
+                     value="card" [(ngModel)]="paymentOption"
+                     class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Card</span>
+            </label>
+          </div>
+          <div class="col-md-3">
+            <label class="custom-control custom-radio">
+              <input name="payment"
+                     type="radio"
+                     value="bank" [(ngModel)]="paymentOption"
+                     class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Bank</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <span style="color: red"> * </span> &nbsp;&nbsp;
+        Required Fields
+      </div>
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-12">
+            <button type="submit"
+                    (click)="submitFees()"
+                    [disabled]="isDisable===true"
+                    class="btn btn-primary">Submit Fee
+            </button>
+            <button type="submit"
+                    [routerLink]="['/school/accountant/fees/add']"
+                    class="btn btn-danger pull-right">Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

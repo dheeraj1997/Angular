@@ -1,0 +1,83 @@
+<div class="d-flex align-items-stretch min-height-100 h-100">
+  <div class="bg-cover bg-3 hidden-sm-down col-md-6 col-lg-8"></div>
+  <div class="card card-block mb-0 rounded-0 p-5 col-sm-12 col-md-6 col-lg-4">
+    <div class="mb-3">
+      <a class="" routerLink="/">
+        <img src="assets/images/logo.png" class="avatar-lg mb-1" alt="">
+      </a>
+      <p class="ff-headers text-uppercase">Recover your password</p>
+    </div>
+    <div *ngIf="a">
+      <form [formGroup]="form" (ngSubmit)="onSubmitUsername(username.value)">
+        <fieldset class="form-group"
+                  [ngClass]="{'has-danger': form.controls['username'].hasError('required') && form.controls['username'].touched}">
+          <label class="form-control-label">
+            Enter your username
+          </label>
+
+          <input type="text" class="form-control" placeholder="Username" [formControl]="form.controls['username']"
+                 [ngClass]="{'form-control-danger': form.controls['username'].hasError('required') && form.controls['username'].touched}"
+                 #username/>
+          <div class="form-control-feedback"
+               *ngIf="form.controls['username'].hasError('required') && form.controls['username'].touched">
+            Username is required.
+          </div>
+        </fieldset>
+        <button class="btn btn-primary"
+                type="submit" [disabled]="form.controls['username'].hasError('required')">Reset password
+        </button>
+      </form>
+    </div>
+    <div *ngIf="b">
+      <form [formGroup]="form" (ngSubmit)="onSubmitOtp(otp.value)">
+        <fieldset class="form-group"
+                  [ngClass]="{'has-danger': form.controls['otp'].hasError('required') && form.controls['otp'].touched}">
+
+          <label class="form-control-label">
+            Enter your OTP
+          </label>
+          <input type="text" class="form-control" placeholder="OTP" [formControl]="form.controls['otp']"
+                 [ngClass]="{'form-control-danger': form.controls['otp'].hasError('required') && form.controls['otp'].touched}"
+                 #otp/>
+          <div class="form-control-feedback"
+               *ngIf="form.controls['otp'].hasError('required') && form.controls['otp'].touched">
+            OTP is required.
+          </div>
+        </fieldset>
+        <button class="btn btn-primary" type="submit" [disabled]="isDisableO===true">OTP password</button>
+      </form>
+    </div>
+    <div *ngIf="c">
+      <form [formGroup]="form" (ngSubmit)="onSubmitPassword(password.value, confirmPassword.value)">
+        <fieldset class="form-group"
+                  [ngClass]="{'has-danger': form.controls['password'].hasError('required') && form.controls['password'].touched}">
+          <label class="form-control-label">
+            Enter your Password
+          </label>
+          <input type="password" class="form-control" placeholder="*****" [formControl]="form.controls['password']"
+                 [ngClass]="{'form-control-danger': form.controls['password'].hasError('required') && form.controls['password'].touched}"
+                 #password/>
+          <div class="form-control-feedback"
+               *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched">
+          </div>
+        </fieldset>
+
+
+        <fieldset class="form-group"
+                  [ngClass]="{'has-danger': form.controls['confirmPassword'].hasError('required') && form.controls['confirmPassword'].touched}">
+          <label class="form-control-label">
+            Confirm Password
+          </label>
+          <input type="password" class="form-control" placeholder="*****"
+                 [formControl]="form.controls['confirmPassword']"
+                 [ngClass]="{'form-control-danger': form.controls['confirmPassword'].hasError('required') && form.controls['confirmPassword'].touched}"
+                 #confirmPassword/>
+          <div class="form-control-feedback"
+               *ngIf="form.controls['confirmPassword'].hasError('required') && form.controls['confirmPassword'].touched">
+          </div>
+        </fieldset>
+        <button class="btn btn-primary" type="submit" [disabled]="isDisableP===true">Change Password</button>
+      </form>
+    </div>
+  </div>
+</div>

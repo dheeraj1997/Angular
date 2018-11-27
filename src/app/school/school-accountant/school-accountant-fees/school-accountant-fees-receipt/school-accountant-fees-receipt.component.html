@@ -1,0 +1,78 @@
+<div class="card">
+  <div class="card-block">
+    <div class="row">
+      <div class="col-md-6">
+        <img src="assets/images/logo.png" class="avatar-md mb-3" alt="Inforida">
+      </div>
+      <div class="col-md-6">
+        <button class="btn btn-info pull-right" (click)="printReceipt()" [disabled]="disablePrint">Print Receipt
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p>Issued on {{today | amDateFormat:'DD-MMMM-YYYY'}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p class="mb-0"><strong>School Details</strong></p>
+        <p class="mb-0"><strong>Name:</strong> {{schoolData.name}}</p>
+        <p class="mb-0" *ngIf="schoolData.address"><strong>Address:</strong> {{schoolData.address.completeAddress}},
+          {{schoolData.address.state}},
+          {{schoolData.address.country}} - {{schoolData.address.pin}}</p>
+        <p class="mb-0" *ngIf="schoolData.contact && schoolData.contact.phone[0]"><strong>Phone:</strong>
+          {{schoolData.contact.phone[0]}}</p>
+        <p class="mb-0" *ngIf="schoolData.contact && schoolData.contact.email[0]"><strong>Email:</strong>
+          {{schoolData.contact.email[0]}}</p>
+      </div>
+    </div>
+    <div class="row mt-3 mb-1">
+      <div class="col">
+        <p class="mb-0"><strong>Student Details</strong></p>
+        <p class="mb-0"><strong>Name:</strong> {{studentData.name}}</p>
+        <p class="mb-0"><strong>Guardian Name:</strong> {{studentData.guardianInfo.name}}</p>
+        <p class="mb-0"><strong>Class:</strong> {{studentData.className}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="no-more-tables mb-2">
+    <table class="table table-hover table-striped mb-0 align-middle">
+      <thead class="thead-inverse">
+      <tr>
+        <th>Particular</th>
+        <th>Fees Type</th>
+        <th>Amount</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of toSubmitFee;">
+        <td data-title="Particular">
+          <strong>{{item.particular}}</strong><br/>
+          <span class="text-muted">{{item.month | uppercase}}</span>
+        </td>
+        <td data-title="Fees Type">{{item.type | uppercase}}</td>
+        <td data-title="Amount">{{item.amount | currency:'INR':true:'1.2-2'}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="card">
+  <div class="card-block">
+    <div class="row mb-5">
+      <div class="col mt-1 mb-1 text-xs-left text-sm-right">
+        <p class="text-uppercase m-0"><strong>Total</strong></p>
+        <h3 class="m-0 text-success">{{ totalAmount | currency:'INR':true:'1.2-2'}}</h3>
+      </div>
+    </div>
+
+    <small class="p-t-2">
+      <strong>
+        PAYMENT TERMS AND POLICIES
+      </strong>
+    </small>
+  </div>
+</div>

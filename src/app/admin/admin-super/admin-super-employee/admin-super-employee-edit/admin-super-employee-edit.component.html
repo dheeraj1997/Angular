@@ -1,0 +1,245 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        Basic Information
+      </div>
+      <div class="card-block">
+        <div class="form-group">
+          <label>
+            Employee's Name
+            <span style="color: red">*</span>
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="employeeData.name"
+            placeholder="Enter Employee's Name" required>
+          <small class="form-text text-muted">
+            Complete Name of the Employee.
+          </small>
+        </div>
+        <div class="form-group">
+          <label>
+            Gender
+          </label>
+          <select
+            class="form-control"
+            [(ngModel)]="employeeData.gender">
+            <option value="m">M</option>
+            <option value="f">F</option>
+            <option value="o">Other</option>
+          </select>
+          <small class="form-text text-muted">
+            Select gender from dropdown.
+          </small>
+        </div>
+        <div class="form-group">
+          <label>
+            Aadhaar Id
+            <span style="color: green">
+              <small>recommended</small>
+            </span>
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="employeeData.aadhaarId"
+            placeholder="Enter Employee's Aadhaar Id" required>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        Address Information
+      </div>
+      <div class="card-block">
+        <div class="form-group">
+          <label>
+            Pin Code
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter Pin Code"
+            [(ngModel)]="employeeData.address.pin"
+            maxlength="6"
+            (ngModelChange)="getDetailsFromPin($event)"
+            required>
+        </div>
+        <div class="form-group">
+          <label>
+            Village/Locality
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="employeeData.address.village"
+            placeholder="Enter Village/Locality" required>
+        </div>
+        <div class="form-group">
+          <label>
+            Block
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="employeeData.address.block"
+            placeholder="Enter Block">
+        </div>
+        <div class="form-group">
+          <label>
+            District
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="employeeData.address.district"
+            placeholder="Enter District">
+        </div>
+        <div class="form-group">
+          <label>
+            State
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="employeeData.address.state"
+            placeholder="Enter State">
+        </div>
+        <div class="form-group">
+          <label>
+            Complete Address
+          </label>
+          <textarea
+            class="form-control"
+            [(ngModel)]="employeeData.address.completeAddress"
+            rows="3">Complete Address</textarea>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        Contact Info
+      </div>
+      <div class="card-block">
+        <div class="form-group"
+             *ngFor="let phone of employeeData.contact.phone; let i= index; trackBy:customTrackBy;">
+          <label>
+            Phone Number
+            <span style="color: red">*</span>
+            <span *ngIf="i > 0">{{i+1}}</span>
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter Phone Number"
+            [(ngModel)]="employeeData.contact.phone[i]"
+          >
+        </div>
+        <div class="form-group">
+          <button
+            class="btn btn-secondary pointer"
+            (click)="submitEvent('addPhone', 'click' , 'superAdminEditEmployee');addPhone()">
+            Add More Phone(s)
+          </button>
+        </div>
+        <div class="form-group" *ngFor="let email of employeeData.contact.email; let i= index; trackBy:customTrackBy;">
+          <label>
+            Email Address
+            <span *ngIf="i > 0">{{i+1}}</span>
+          </label>
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Enter Email Address"
+            [(ngModel)]="employeeData.contact.email[i]">
+        </div>
+        <div class="form-group">
+          <button
+            class="btn btn-secondary pointer"
+            (click)="submitEvent('addEmail', 'click' , 'superAdminEditEmployee');addEmail()">
+            Add More Email Address(es)
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        HR Information
+      </div>
+      <div class="card-block">
+        <div class="form-group">
+          <label>
+            Designation
+            <span style="color: green">
+              <small>recommended</small>
+            </span>
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="employeeData.hr.designation"
+            placeholder="Enter Employee's Designation">
+          <small>Required for HR Department.</small>
+        </div>
+        <div class="form-group">
+          <label>
+            Salary
+            <span style="color: green">
+              <small>recommended</small>
+            </span>
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="employeeData.hr.salary"
+            placeholder="Enter Employee's Salary">
+          <small>Required for HR Department.</small>
+        </div>
+        <div class="form-group">
+          <label>
+            Experience
+            <span style="color: green">
+              <small>in years</small>
+            </span>
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="employeeData.hr.exp"
+            placeholder="Enter Employee's Experience">
+          <small>Required for HR Department.</small>
+        </div>
+        <div class="form-group">
+          <label>
+            Pan No.
+            <span style="color: green">
+              <small>recommended</small>
+            </span>
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="employeeData.hr.panNo"
+            placeholder="Enter Employee's PAN No.">
+          <small>Required for HR Department.</small>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <span style="color: red"> * </span> &nbsp;&nbsp;
+        Required Fields
+      </div>
+      <div class="card-block">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          (click)="submitEvent('submitEmployee', 'click' , 'superAdminEditEmployee');submitEmployee()">Submit
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

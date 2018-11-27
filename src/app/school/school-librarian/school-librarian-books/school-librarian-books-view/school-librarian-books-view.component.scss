@@ -1,0 +1,45 @@
+ .btn {
+ margin:4px;
+ padding:0.532rem 1.5rem;
+ font-size: 13px;
+ 
+ }
+
+ .book_cover img{
+ height:250px;
+ width:220px;
+ }
+ @media only screen and (max-width: 380px) {
+ .btn {
+ margin:4px;
+ padding:0.532rem 1.4rem;
+ font-size: 13px;
+ }
+ 
+ }
+ @media only screen and (max-width: 370px) {
+ .btn {
+ margin:4px;
+ padding:0.532rem 1.3rem;
+ font-size: 13px;
+ }
+ }
+
+ @media only screen and (max-width: 330px) {
+ .btn {
+ margin:4px;
+ padding:0.532rem 1.1rem;
+ font-size: 13px;
+ text-transform: none;
+
+ }
+ }
+
+ @media only screen and (max-width: 300px) {
+ .btn {
+ margin:4px;
+ padding:0.532rem 1rem;
+ font-size: 12px;
+ text-transform: none;
+ }
+ }

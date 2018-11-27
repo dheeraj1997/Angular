@@ -1,0 +1,181 @@
+<div class="row">
+	<div class=" col-md-12" *ngIf="showAdd">
+		<div class="card">
+			<div class="card-header"  >
+				Add Category
+			</div>
+			<div class="card-block">
+				<div class="form-group">
+					<label>
+						Category name
+						<span style="color: red">
+							<small>*</small>
+						</span>
+					</label>
+					<input
+					type="text"
+					[(ngModel)]="expenseCategoryData.name"
+					class="form-control"
+					placeholder="Enter Category name">
+				</div>
+				<div class="form-group">
+					<label>
+						Comment
+					</label>
+					<input
+					type="text"
+					[(ngModel)]="expenseCategoryData.comment"
+					class="form-control"
+					placeholder="Enter Category comment">
+					<small class="form-text text-muted">
+						<i style="color: green;">required for your knowledge </i>
+						Recommended
+					</small>
+				</div>
+			</div>
+			<div class="card-footer">
+				<button
+				type="submit"
+				class="btn btn-primary"
+				(click)="submitExpenseCategory()">Submit
+			</button>
+		</div>
+	</div>
+</div>
+<div class="col-md-12" *ngIf="toShowData.length">
+	<button class="btn pull-right card pointer"
+	(click)="addNew()">
+		Add New Category's
+	</button>
+
+</div>
+<div class="col-md-12" *ngIf="toShowData.length">
+	<div class="card">
+		<div class="card-header">
+			Expense Category's
+		</div>
+		<div class="card-block">
+			<input
+			type="text"
+			class="form-control mb-3"
+			[(ngModel)]="searchString"
+			placeholder="Type to filter the name column..."
+			(ngModelChange)='search($event)'>
+			<div class="no-more-tables">
+				<table class="table table-bordered table-striped mb-0">
+					<thead>
+						<tr>
+							<th>
+								#
+							</th>
+							<th>
+								Category Name
+							</th>
+							<th>
+								Comment
+							</th>
+							<th>
+								Action
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let expenseCategory of toShowData; let i = index; ">
+							<td>
+								{{i+1}}
+							</td>
+
+							<td data-title="Category Name">
+								{{expenseCategory.name}}
+							</td>
+							<td data-title="Comment">
+								{{expenseCategory.comment}}
+							</td>
+							<td data-title="Action">
+								<button
+								type="button"
+								class="btn btn-success pointer"
+								(click)="editExpenseCategory(expenseCategory , i, editModal)"
+								placement="top"
+								ngbTooltip="Edit Expense">
+								<i class="fa fa-edit"></i>
+							</button>
+							<button
+							type="button"
+							class="btn btn-danger pointer"
+							placement="top"
+							(click)="delete(expenseCategory , i, deleteModal)"
+							ngbTooltip="Delete Expense">
+							<i class="fa fa-remove"></i>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</div>
+</div>
+</div>
+
+<ng-template #editModal let-submit="close" let-dismiss="dismiss">
+	<div class="modal-header">
+		<h6 class="modal-title text-uppercase">Edit {{nameToEdit}}!</h6>
+		<button type="button" class="close" aria-label="Close"(click)="dismiss('clicking on cross!')">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<div class="form-group">
+					<label>
+						Category name
+						<span style="color: red">
+							<small>*</small>
+						</span>
+					</label>
+					<input
+					type="text"
+					[(ngModel)]="expenseCategoryData.name"
+					class="form-control"
+					placeholder="Enter Category name">
+				</div>
+				<div class="form-group">
+					<label>
+						Comment
+					</label>
+					<input
+					type="text"
+					[(ngModel)]="expenseCategoryData.comment"
+					class="form-control"
+					placeholder="Enter Category comment">
+				</div>
+	</div>
+	<div class="modal-footer" style="display: block;">
+		<button
+		type="button"
+		class="btn btn-outline-danger"
+		(click)="submit('yess')">Yes!
+	</button>
+	<button type="button" class="btn btn-outline-success pull-right" (click)="submit('cancels')">Cancel</button>
+</div>
+</ng-template>
+
+<ng-template #deleteModal let-submit="close" let-dismiss="dismiss">
+	<div class="modal-header">
+		<h6 class="modal-title text-uppercase">Delete {{nameToDelete}}!</h6>
+		<button type="button" class="close" aria-label="Close"(click)="dismiss('clicking on cross!')">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<p>Are you sure you want to delete <b>{{nameToDelete}}</b>?</p>
+	</div>
+	<div class="modal-footer" style="display: block;">
+		<button
+		type="button"
+		class="btn btn-outline-danger"
+		(click)="submit('yes')">Yes!
+	</button>
+	<button type="button" class="btn btn-outline-success pull-right" (click)="submit('cancel')">Cancel</button>
+</div>
+</ng-template>

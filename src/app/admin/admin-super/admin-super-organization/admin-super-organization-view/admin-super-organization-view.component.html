@@ -1,0 +1,140 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        All Organizations
+      </div>
+      <div class="card-block">
+        <input
+          type="text"
+          class="form-control mb-3"
+          [(ngModel)]="searchString"
+          placeholder="Type to filter the name column..."
+          (ngModelChange)='search($event)'>
+        <div class="no-more-tables">
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+            <tr>
+              <th>
+                #
+              </th>
+              <th>
+                Name
+              </th>
+              <th>
+                Boards
+              </th>
+              <th class="numeric">
+                Phone
+              </th>
+              <th>
+                Email
+              </th>
+              <th>
+                UserName
+              </th>
+              <th>
+                Action
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let organization of organizationList; let i=index; ">
+              <td>{{i+1}}</td>
+              <td data-title="Name">
+                {{organization.name}}
+              </td>
+              <td data-title="Board">
+              	{{organization.affiliation.board[0]}},{{organization.affiliation.board[1]}},{{organization.affiliation.board[2]}}
+              </td>
+              <td data-title="Phone" class="numeric">
+                {{organization.contact.phone[0]}}
+              </td>
+              <td data-title="email">
+                <small>{{organization.contact.email[0]}}</small>
+              </td>
+              <td data-title="UserName">
+                {{organization.userName}}
+              </td>
+              <td class="numeric" data-title="Action">
+                <button
+                  type="button"
+                  class="btn btn-success pointer"
+                  placement="top"
+                  [routerLink]="['/admin/super/organization/edit', organization._id]"
+                  ngbTooltip="Edit organization">
+                  <i class="fa fa-edit"></i>
+                </button>                
+                <button
+                  type="button"
+                  class="btn btn-danger pointer"
+                  placement="top"
+                  (click)="delete(organization , i, deleteModal)"
+                  ngbTooltip="Delete organization">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #deleteModal let-submit="close" let-dismiss="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title text-uppercase">Delete {{nameToDelete}}!</h6>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss('clicking on cross!')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete <b>{{nameToDelete}}</b> employee?</p>
+  </div>
+  <div class="modal-footer" style="display: block;">
+    <button
+      type="button"
+      class="btn btn-outline-danger"
+      (click)="submit('yes')">Yes!
+    </button>
+    <button type="button" class="btn btn-outline-success pull-right" (click)="submit('cancel')">Cancel</button>
+  </div>
+</ng-template>
+<ng-template #changePasswordModal let-submit="close" let-dismiss="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title text-uppercase">Change Password of {{nameToChange}}!</h6>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss('clicking on cross!')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12 form-group">
+        <label>Password</label>
+        <input
+          type="password"
+          class="form-control"
+          [(ngModel)]="pass"
+          placeholder="Password">
+      </div>
+      <div class="col-md-12 form-group">
+        <label>Confirm Password</label>
+        <input
+          type="password"
+          [(ngModel)]="repass"
+          class="form-control"
+          placeholder="Confirm Password">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer" style="display: block;">
+    <button
+      type="button"
+      class="btn btn-outline-success"
+      (click)="submit('yes')">Yes!
+    </button>
+    <button type="button" class="btn btn-outline-danger pull-right" (click)="submit('cancel')">Cancel</button>
+  </div>
+</ng-template>

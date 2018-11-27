@@ -1,0 +1,23 @@
+<h6 class="text-uppercase">
+  All Attendance to Take
+</h6>
+<div class="row">
+  <div class="col-lg-4" *ngFor="let timeData of timeTableData;">
+    <div class="card" [ngClass]="{'card-success':timeData.toTake, 'card-warning':!timeData.toTake}">
+      <div class="card-header">
+        <div class="col-lg-6">Time</div>
+        <div class="col-lg-6 text-right">
+          <b *ngIf="timeData.startTime">
+            {{timeData.startTime.hour}}: {{timeData.startTime.minute}} -
+            {{timeData.endTime.hour}}: {{timeData.endTime.minute}}
+          </b>
+        </div>
+      </div>
+      <div class="card-block">
+        <h6>Class: {{timeData.class}}</h6>
+        <h6>Subject: {{timeData.subject}}</h6>
+        <h6>Total Student: {{timeData.totalStudent}}</h6>
+      </div>
+    </div>
+  </div>
+</div>

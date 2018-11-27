@@ -1,0 +1,121 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <!--<div class="card-header">-->
+        <!--Basic details-->
+      <!--</div>-->
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>
+                Select Class
+              </label>
+              <select [(ngModel)]="selectedClass" class="form-control"
+                      (ngModelChange)="onClassSelect()">
+                <option *ngFor="let cls of classData;" value="{{cls._id}}">
+                  {{cls.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4" *ngIf="selectedClass">
+            <div class="form-group">
+              <label>
+                Select Exam
+              </label>
+              <select [(ngModel)]="selectedExam"
+                      (ngModelChange)="onExamSelect()"
+                      class="form-control">
+                <option *ngFor="let exam of examinationData;" value="{{exam._id}}">
+                  {{exam.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4" *ngIf="selectedClass && selectedExam">
+            <div class="form-group">
+              <label>
+                Select Subject
+              </label>
+              <select [(ngModel)]="selectedSubject"
+                      (ngModelChange)="onSubjectSelect()"
+                      class="form-control">
+                <option *ngFor="let subject of subjectData;" value="{{subject._id}}">
+                  {{subject.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <!--<div class="col-md-3" *ngIf="selectedClass && selectedExam && selectedSubject">-->
+            <!--<div class="form-group">-->
+              <!--<label> &nbsp;</label>-->
+              <!--&lt;!&ndash;<div class="form-control">&ndash;&gt;-->
+              <!--<button class="btn btn-primary"-->
+                      <!--style="margin-top: 27px;"-->
+                      <!--(click)="getStudents()">-->
+                <!--Add Marks-->
+              <!--</button>-->
+              <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--</div>-->
+          <!--</div>-->
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12" *ngIf="resultData.markList.length">
+        <button [routerLink]="['/school/teacher/result/csv']"
+                class="btn card pull-right">
+          Upload CSV
+        </button>
+      </div>
+    </div>
+    <div class="card" *ngIf="resultData.markList.length">
+      <div class="card-header">
+        Marks out of {{maxMarks}}
+      </div>
+      <div class="card-block">
+        <div class="no-more-tables">
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+            <tr>
+              <th>
+                Roll No.
+              </th>
+              <th>
+                Student's Name
+              </th>
+              <th>
+                Marks
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let student of resultData.markList;">
+              <td data-title="Roll No.">
+                {{student.rollNo}}
+              </td>
+              <td data-title="Student's Name">
+                {{student.name}}
+              </td>
+              <td data-title="marks">
+                <input type="text"
+                       class="form-control"
+                       [(ngModel)]="student.marks">
+              </td>
+
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row" style="margin-top: 20px;">
+          <div class="col-md-12">
+            <button (click)="submitMarks()" class="btn btn-primary" type="submit">
+              Submit Marks
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

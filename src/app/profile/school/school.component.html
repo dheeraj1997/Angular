@@ -1,0 +1,87 @@
+<div class="body">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 p-0">
+        <div class="profile-div">
+          <div class="cover-img" [ngStyle]="{'background-image': 'url(' + schoolData.coverPicture + ')'}">
+            <div class="cover-div">
+            </div>
+            <!--<img class="cover-img" [src]="schoolData.coverPicture"/>-->
+          </div>
+          <img align="left" class="profile-image" [src]="schoolData.profilePicture"/>
+          <div class="profile-text card">
+            <h2>{{schoolData.name}}({{schoolData.establishedYear}})</h2>
+            <h5>@{{userName}}</h5>
+            <h6>{{schoolData.affiliation.board}} {{schoolData.affiliation.code}}</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> <!-- /container fluid-->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="card">
+          <div class="card-header">About</div>
+          <div class="card-block">
+            <h6>{{schoolData.about}}</h6>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <ngb-tabset>
+          <ngb-tab id="contact">
+            <ng-template ngbTabTitle>Contact</ng-template>
+            <ng-template ngbTabContent>
+              <!--<div class="container">-->
+              <!--<div class="row">-->
+              <!--<div class="col-md-12">-->
+              <div class="card tab-div">
+                <div class="card-block">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <span>
+                        <strong>Emergency Number: </strong><span>{{schoolData.contact.phone[0]}}<br/></span>
+                      </span>
+                      <span>
+                        <strong>Phone: </strong><span
+                        *ngFor="let phone of schoolData.contact.phone;let p = index;">{{phone}}<i
+                        *ngIf="p<schoolData.contact.phone.length-1">, </i></span>
+                      </span>
+                    </div>
+                    <span>
+                        <strong>Email Id: </strong><span
+                      *ngFor="let email of schoolData.contact.email;let e = index;">{{email}}<i
+                      *ngIf="e<schoolData.contact.email.length-1">, </i></span>
+                      </span>
+                  </div>
+                </div>
+              </div>
+              <!--</div>-->
+              <!--</div>-->
+              <!--</div>-->
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab id="address">
+            <ng-template ngbTabTitle>Address</ng-template>
+            <ng-template ngbTabContent>
+              <div class="tab-div"></div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab id="picture">
+            <ng-template ngbTabTitle>Gallery</ng-template>
+            <ng-template ngbTabContent>
+              <div class="tab-div"></div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab id="location">
+            <ng-template ngbTabTitle>Location</ng-template>
+            <ng-template ngbTabContent>
+              <div class="tab-div"></div>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+    </div>
+  </div>
+</div>

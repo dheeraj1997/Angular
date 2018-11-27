@@ -1,0 +1,77 @@
+$break-sm: 400px;
+$break-md: 700px;
+$break-lg: 1200px;
+.landing-section {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  background-color: whitesmoke;
+  margin-top: -16px;
+  .header-banner {
+    text-align: center;
+    padding: 30px 10px;
+    background: linear-gradient(50deg, #3d7dca, #7dd8ff, #5691c8, #158cc8, #3d7dca);
+    @media screen and (max-width: $break-sm) {
+      height: 91vh;
+    }
+    @media screen and (max-width: $break-md) {
+      height: 91vh;
+    }
+    .heading {
+      color: #FFFFFF;
+      font-size: 50px;
+      @media screen and (max-width: $break-sm) {
+        font-size: 40px;
+      }
+      @media screen and (max-width: $break-md) {
+        font-size: 40px;
+      }
+    }
+  }
+
+  .header-banner p {
+    font-size: 34px;
+    @media screen and (max-width: $break-sm) {
+      font-size: 28px;
+    }
+    @media screen and (max-width: $break-md) {
+      font-size: 28px;
+    }
+    text-align: center;
+  }
+  .login-bt {
+    color: #3e7dca;
+    background-color: #ffffff;
+    font-size: 20px;
+    margin-top: 25px;
+    padding: 5px 25px !important;
+
+  }
+
+  .login-bt:hover {
+    background-color: #d7d2cc;
+    color: black;
+
+  }
+}
+
+.features {
+  .icon-size {
+    height: 50px;
+  }
+  .icon-style {
+    color: #3d7dca;
+    font-size: 40px;
+  }
+  .card {
+    padding: 10px;
+    margin-bottom: 30px;
+    height: 200px;
+  }
+}
+
+.clients {
+  text-align: center;
+  .card {
+    height: 80px;
+  }
+}

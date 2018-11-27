@@ -1,0 +1,236 @@
+<div class="row">
+  <div class="col-md-12" style="margin-bottom: 5px;">
+    <div class="card">
+      <div class="card-block">
+        <div class="row" style="width: 100%;">
+          <div class="col-md-3 text-center">
+            <img [src]="settingData.logo" style="height: 120px; width: 120px;">
+          </div>
+          <div class="col-md-3" style="padding-top: 20px;">
+            <h5>Welcome {{userData.username}}</h5>
+            <h6 class="text-capitalize">{{schoolData.name}}</h6>
+            <b style="font-size: small;">{{schoolData.address.completeAddress}}, {{schoolData.address.district}}-{{schoolData.address.pin}}</b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="card card-block card-widget">
+      <div class="widget-icon rounded-circle bg-green text-white icon icon-plus">
+      </div>
+      <div class="block ml-3 mr-3">
+        <h5 class="mb-0 fw-400">
+          <a [routerLink]="['/school/teacher/attendance/add']"> Take Attendance</a>
+        </h5>
+        <small class="text-muted text-uppercase ">
+          <strong></strong>
+        </small>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="card card-block card-widget">
+      <div class="widget-icon rounded-circle bg-yellow text-white icon icon-book-open">
+      </div>
+      <div class="block ml-3 mr-3">
+        <h5 class="mb-0 fw-400">
+          <a [routerLink]="['/school/teacher/homework/add']">Give Homework</a>
+        </h5>
+        <small class="text-muted text-uppercase ">
+          <strong></strong>
+        </small>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="card card-block card-widget">
+      <div class="widget-icon rounded-circle bg-red text-white icon icon-doc">
+      </div>
+      <div class="block ml-3 mr-3">
+        <h5 class="mb-0 fw-400">
+          <a [routerLink]="['/school/teacher/time-table']"> Time-Table</a>
+        </h5>
+        <small class="text-muted text-uppercase ">
+          <strong></strong>
+        </small>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="card card-block card-widget">
+      <div class="widget-icon rounded-circle bg-yellow text-white icon icon-people">
+      </div>
+      <div class="block ml-3 mr-3">
+        <h5 class="mb-0 fw-400">
+          {{totalStudent}}
+        </h5>
+        <small class="text-muted text-uppercase ">
+          <strong>Total Students</strong>
+        </small>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="card card-block card-widget">
+      <div class="widget-icon rounded-circle bg-red text-white icon icon-organization">
+      </div>
+      <div class="block ml-3 mr-3">
+        <h5 class="mb-0 fw-400">
+          {{totalClass}}
+        </h5>
+        <small class="text-muted text-uppercase ">
+          <strong>Total Classes</strong>
+        </small>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="card card-block card-widget">
+      <div class="widget-icon rounded-circle bg-green text-white icon icon-note">
+      </div>
+      <div class="block ml-3 mr-3">
+        <h5 class="mb-0 fw-400">
+          {{totalSubject}}
+        </h5>
+        <small class="text-muted text-uppercase ">
+          <strong>Total Subjects</strong>
+        </small>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="card card-block card-widget">
+      <div class="widget-icon rounded-circle bg-red text-white icon icon-people">
+      </div>
+      <div class="block ml-3 mr-3">
+        <h5 class="mb-0 fw-400">
+          {{totalTeacher}}
+        </h5>
+        <small class="text-muted text-uppercase ">
+          <strong>Total Teachers</strong>
+        </small>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="card card-block card-widget">
+      <div class="widget-icon rounded-circle bg-green text-white icon  icon-people">
+      </div>
+      <div class="block ml-3 mr-3">
+        <h5 class="mb-0 fw-400">
+          {{totalStaff}}
+        </h5>
+        <small class="text-muted text-uppercase ">
+          <strong>Total Staff</strong>
+        </small>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="card card-block card-widget">
+      <div class="widget-icon rounded-circle bg-yellow text-white icon  icon-notebook">
+      </div>
+      <div class="block ml-3 mr-3">
+        <h5 class="mb-0 fw-400">
+          {{noOfBooks}}
+        </h5>
+        <small class="text-muted text-uppercase ">
+          <strong>Total Books</strong>
+        </small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <!-- <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header no-shadow">
+        <div class="card-header-text w-100">
+          <div class="card-title">
+            Attendance Ratio
+          </div>
+          <div class="card-subtitle text-capitalize ff-sans">
+            Date:
+          </div>
+        </div>
+      </div>
+      <div class="card-block">
+        <div class="row text-center">
+          <div class="col-xs-6 col-sm-3 text-success">
+            <h5 class="mb-0">
+              <strong>
+                50
+              </strong>
+            </h5>
+            <small>
+              Present
+            </small>
+          </div>
+          <div class="col-xs-6 col-sm-3">
+            <h5 class="mb-0">
+              <strong>
+                8
+              </strong>
+            </h5>
+            <small>
+              Absent
+            </small>
+          </div>
+          <div class="col-xs-6 col-sm-3 text-danger">
+            <h5 class="mb-0">
+              <strong>
+                58
+              </strong>
+            </h5>
+            <small>
+              Total Students
+            </small>
+          </div>
+          <div class="col-xs-6 col-sm-3">
+            <h5 class="mb-0">
+              <strong>
+                93%
+              </strong>
+            </h5>
+            <small>
+              Percentage
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="mb-1">
+        <ngx-charts-area-chart-stacked (legendlabelclick)="onLegendLabelClick($event)" (select)="select($event)" [curve]="curve" [gradient]="gradient" [legend]="showLegend" [results]="dateData" [roundDomains]="roundDomains" [scheme]="colorScheme" [schemeType]="schemeType" [showGridLines]="showGridLines" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [timeline]="timeline" [tooltipDisabled]="tooltipDisabled" [xAxis]="showXAxis" [xAxisLabel]="xAxisLabel" [yAxis]="showYAxis" [yAxisLabel]="yAxisLabel" class="line-container">
+        </ngx-charts-area-chart-stacked>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="col-md-6 col-xl-6">
+    <div class="card bg-indigo card-inverse">
+      <div class="card-header no-shadow">
+        Notice Board
+      </div>
+      <div class="list-group" *ngFor="let notice of noticeData;">
+        <div class="list-group-item list-group-item-action flex-column align-items-start no-bg text-white">
+          <p class="mb-1 w-100">
+            {{notice.title}}
+          </p>
+          <div class="d-flex w-100 justify-content-between">
+            <small>
+              {{notice.noticeText.substring(0,100)}}
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer " style="display: block;">
+        <a style="color: white" class="pull-right" [routerLink]="['/school/teacher/notice']">VIEW MORE</a>
+      </div>
+    </div>
+  </div>
+</div>

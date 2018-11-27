@@ -1,0 +1,159 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        Notice Board
+      </div>
+      <div class="card-block">
+        <div class="form-group">
+          <label>Title
+            <span style="color: red">*</span>
+          </label>
+          <input type="text"
+                 class="form-control"
+                 [(ngModel)]="noticeData.title"
+                 placeholder="Title of Notice ">
+        </div>
+        <div class="row">
+          <div class="form-group col-md-10">
+            <label>
+              Start Date
+              <span style="color: red">*</span>
+            </label>
+            <div class="input-group">
+              <input
+                class="form-control"
+                placeholder="yyyy-mm-dd"
+                name="d1"
+                [(ngModel)]="noticeData.noticeDate"
+                (click)="d1.toggle()"
+                ngbDatepicker #d1="ngbDatepicker" required>
+              <button class="input-group-addon" (click)="d1.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+            </div>
+            <small class="form-text text-muted">
+              Start Date of Notice.
+            </small>
+          </div>
+          <div class="form-group col-md-2">
+            <label>
+              Holiday
+            </label>
+            <div>
+              <label class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox"
+                       [(ngModel)]="noticeData.isHoliday">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>
+              </label>
+            </div>
+            <small class="form-text text-muted">
+              in case of Holiday.
+            </small>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Notice /Event
+                <span style="color: red">*</span>
+              </label>
+              <textarea
+                id="notice"
+                [(ngModel)]="noticeData.noticeText"
+                class="form-control"
+                placeholder="about event and notice in detail"
+                rows="6">
+
+						</textarea>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-check">
+              <label>Select User</label>
+              <div>
+                <label class="custom-control custom-checkbox">
+                  <input class="custom-control-input" type="checkbox"
+                         [(ngModel)]="noticeData.selectAll"
+                         (change)="onTragetChange('all')">
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">Send to all </span>
+                </label>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <label class="custom-control custom-checkbox">
+                    <input class="custom-control-input" type="checkbox"
+                           [(ngModel)]="noticeData.selectParents"
+                           (change)="onTragetChange('parents')">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">Parents</span>
+                  </label>
+                </div>
+                <div class="col-4">
+                  <label class="custom-control custom-checkbox">
+                    <input class="custom-control-input" type="checkbox"
+                           [(ngModel)]="noticeData.selectTeachers"
+                           (change)="onTragetChange('teachers')">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">Teachers</span>
+                  </label>
+                </div>
+                <div class="col-4">
+                  <label class="custom-control custom-checkbox">
+                    <input class="custom-control-input" type="checkbox"
+                           [(ngModel)]="noticeData.selectStudents"
+                           (change)="onTragetChange('students')">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">Students</span>
+                  </label>
+                </div>
+                <div class="col-4">
+                  <label class="custom-control custom-checkbox">
+                    <input class="custom-control-input" type="checkbox"
+                           [(ngModel)]="noticeData.selectLibrarian"
+                           (change)="onTragetChange('librarians')">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">Librarians</span>
+                  </label>
+                </div>
+                <div class="col-4">
+                  <label class="custom-control custom-checkbox">
+                    <input class="custom-control-input" type="checkbox"
+                           [(ngModel)]="noticeData.selectAccountant"
+                           (change)="onTragetChange('accountants')">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">Accountants</span>
+                  </label>
+                </div>
+                <div class="col-4">
+                  <label class="custom-control custom-checkbox">
+                    <input class="custom-control-input" type="checkbox"
+                           [(ngModel)]="noticeData.selectRegistrar"
+                           (change)="onTragetChange('registrar')">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">Registrar</span>
+                  </label>
+                </div>
+              </div>
+              <small class="form-text text-muted">
+                in case of selected users
+              </small>
+
+            </div>
+          </div>
+          <div class="col-md-12">
+            <button class="btn
+					btn-success"
+                    (click)="saveNotice()">
+              Send
+            </button>
+            <button class="btn btn-warning pull-right"
+                    (click)="saveNotice(true)">
+              Save to Draft
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

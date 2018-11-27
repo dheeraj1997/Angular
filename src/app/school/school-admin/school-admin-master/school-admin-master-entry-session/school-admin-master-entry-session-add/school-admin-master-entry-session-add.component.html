@@ -1,0 +1,101 @@
+<div style="background-color: #f5f5f5 ">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          Enter Session Information
+        </div>
+        <div class="card-block">
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label>
+                Session Name
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="sessionData.name"
+                placeholder="Enter Session Name">
+              <small class="form-text text-muted">
+                Start Year of Session.
+              </small>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label>
+                Start Date
+                <span style="color: red">*</span>
+              </label>
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  placeholder="yyyy-mm-dd"
+                  name="sesStartDate"
+                  [(ngModel)]="sessionData.startDate"
+                  (click)="sesStartDate.toggle()"
+                  ngbDatepicker #sesStartDate="ngbDatepicker" required>
+                <button class="input-group-addon" (click)="sesStartDate.toggle()" type="button">
+                  <i class="fa fa-calendar"></i>
+                </button>
+              </div>
+              <small class="form-text text-muted">
+                Start Date of Session.
+              </small>
+            </div>
+            <div class="form-group col-md-6">
+              <label>
+                End Date
+                <span style="color: red">*</span>
+              </label>
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  placeholder="yyyy-mm-dd"
+                  name="sesEndDate"
+                  [(ngModel)]="sessionData.endDate"
+                  (click)="sesEndDate.toggle()"
+                  ngbDatepicker #sesEndDate="ngbDatepicker" required>
+                <button class="input-group-addon" (click)="sesEndDate.toggle()" type="button">
+                  <i class="fa fa-calendar"></i>
+                </button>
+              </div>
+              <small class="form-text text-muted">
+                End Date of Session.
+              </small>
+            </div>
+          </div>
+          <!--<div class="row">-->
+            <!--<div class="form-group col-md-12">-->
+              <!--<label>-->
+                <!--Comment-->
+              <!--</label>-->
+              <!--<input-->
+                <!--type="text"-->
+                <!--class="form-control"-->
+                <!--[(ngModel)]="sessionData.comment"-->
+                <!--placeholder="Enter Comment">-->
+              <!--<small class="form-text text-muted">-->
+                <!--Comment (if any)-->
+              <!--</small>-->
+            <!--</div>-->
+          <!--</div>-->
+          <div class="row">
+            <div class="form-group col-md-12">
+              <span style="color: red">*</span>
+              Required Fields
+            </div>
+            <div class="form-group col-md-12">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                (click)="save()"
+                [disabled]="isDisable===true">Save Session
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

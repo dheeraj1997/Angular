@@ -1,0 +1,110 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        All Schools
+      </div>
+      <div class="card-block" *ngIf="schoolList.length">
+        <input
+          type="text"
+          class="form-control mb-3"
+          [(ngModel)]="searchString"
+          placeholder="Type to filter the name column..."
+          (ngModelChange)='search($event)'>
+        <div class="no-more-tables">
+          <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+              <th>
+                #
+              </th>
+              <th>
+                School
+              </th>
+              <th class="numeric">
+                Phone
+              </th>
+              <th>
+                District
+              </th>
+              <th>
+                Status
+              </th>
+              <th>
+                Created By
+              </th>
+              <th>
+                Created At
+              </th>
+              <th class="numeric">
+                SMS
+              </th>
+              <th>
+                Action
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let school of schoolList; let i=index; ">
+              <td data-title="#">
+                {{i+1}}
+              </td>
+              <td data-title="School">
+                <small>{{school.name}}</small>
+              </td>
+              <td data-title="Phone" class="numeric">
+                {{school.contact.phone[0]}}
+              </td>
+              <td data-title="District">
+                {{school.address.district}}
+              </td>
+              <td data-title="Status" class="numeric">
+                <select *ngIf="school.createdById === userData._id"
+                        class="form-control"
+                        [(ngModel)]="school.status"
+                        (ngModelChange)="changeStatus(school)">
+                  <option value="{{status.value}}" *ngFor="let status of statusOptions;">{{status.name}}</option>
+                </select>
+                <small *ngIf="school.createdById !== userData._id">{{statusMap[school.status]}}</small>
+              </td>
+              <td data-title="Created By">
+                {{school.createdBy}}
+              </td>
+              <td data-title="Created By">
+                {{school.createdAt | amTimeAgo}}
+              </td>
+              <td data-title="SMS Remaining" class="numeric">
+                {{school.smsCount.total - school.smsCount.used}}
+              </td>
+              <td class="numeric" data-title="Action">
+                <button
+                  type="button"
+                  *ngIf="school.createdById === userData._id"
+                  class="btn-success pointer btn-icon"
+                  placement="top"
+                  [routerLink]="['/admin/employee/school/edit', school._id]"
+                  ngbTooltip="Edit School">
+                  <i class="fa fa-edit"></i>
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <ngb-pagination
+          [collectionSize]="total"
+          [(page)]="page"
+          [pageSize]="limit"
+          [maxSize]="3"
+          [rotate]="true"
+          [ellipses]="true"
+          [boundaryLinks]="true"
+          (pageChange)="changePage($event)"
+          style="float: right; margin-top: 10px;"
+        ></ngb-pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
+

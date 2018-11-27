@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-md-4" *ngFor="let note of noticeData;">
+    <div class="card" [ngClass]="{holiday:note.isHoliday}">
+      <div class="card-header">
+        {{note.title}}
+      </div>
+      <div class="card-block">
+        <p><b>DATE: {{note.noticeDate.day}}/{{note.noticeDate.month}}/{{note.noticeDate.year}}</b></p>
+        <p class="card-text text-justify">{{note.noticeText}}</p>
+      </div>
+    </div>
+  </div>
+</div>

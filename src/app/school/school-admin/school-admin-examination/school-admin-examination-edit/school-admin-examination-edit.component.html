@@ -1,0 +1,147 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        Exam Details
+      </div>
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>
+                Select Session
+                <span style="color: red">*</span>
+              </label>
+              <select [(ngModel)]="examinationData.sessionId" class="form-control">
+                <option *ngFor='let sess of sessionData;' value="{{sess._id}}">
+                  {{sess.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>
+                Select Class
+                <span style="color: red">*</span>
+              </label>
+              <select [(ngModel)]="examinationData.classId" class="form-control">
+                <option *ngFor='let cls of classData;' value="{{cls._id}}">
+                  {{cls.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>
+                Examination Name
+              </label>
+              <input
+                type="text"
+                [(ngModel)]="examinationData.name"
+                class="form-control"
+                placeholder="Enter name of the Examination">
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="row" *ngFor="let mark of examinationData.marks; let m = index;">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>
+                    Select Subject
+                    <span style="color: red">*</span>
+                  </label>
+                  <select [(ngModel)]="mark.subjectId" class="form-control">
+                    <option *ngFor="let subject of subjectData;let s=index"
+                            value="{{subject._id}}"
+                            (change)="subjectSelect(s)">
+                      {{subject.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label>
+                    Maximum Marks
+                    <span style="color: red">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="mark.maxMarks"
+                    placeholder="Enter Maximum Marks">
+                </div>
+              </div>
+              <div class="col-md-3 form-group">
+                <!--<ngb-datepicker [(ngModel)]="mark.date"></ngb-datepicker>-->
+                <label>
+                  Select Date
+                  <span style="color: red">*</span>
+                </label>
+                <div class="input-group">
+                  <input
+                    class="form-control"
+                    placeholder="yyyy-mm-dd"
+                    name="attendanceDateStart"
+                    [(ngModel)]="mark.date"
+                    (click)="examDate.toggle()"
+                    ngbDatepicker #examDate="ngbDatepicker" required>
+                  <button class="input-group-addon" (click)="examDate.toggle()" type="button">
+                    <i class="fa fa-calendar"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label>
+                    Start
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="mark.start"
+                    placeholder="HH:MM A(AM/PM)">
+                </div>
+              </div>
+              <div class="col-md-2 form-group">
+                <label>
+                  End
+                </label>
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="mark.end"
+                    placeholder="HH:MM A(AM/PM)">
+                  <i *ngIf="m"
+                     class="fa fa-remove pointer"
+                     (click)="deleteRow(m)"
+                     style="color: red; font-size: 25px; margin-left: 10px; margin-top: 5px;"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <button
+              type="submit"
+              class="btn btn-success pull-left"
+              (click)="addNewRow()">Add New Row
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary pull-right"
+              [disabled]="!this.examinationData.marks.length
+              || !this.examinationData.classId
+              || !this.examinationData.name
+              || !this.examinationData.marks[0]
+              || !this.examinationData.marks[0].subjectId"
+              (click)="submitExamination()">Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+.body {
+  font-family: 'Open Sans', sans-serif;
+  background: whitesmoke;
+  min-height: 100vh;
+  //padding-top: 10px;
+}
+
+.profile-div {
+  height: 500px;
+}
+
+.cover-div {
+  z-index: 0;
+  height: 400px;
+  background: rgba(153, 153, 154, 0.51);
+  width: 100%;
+}
+
+.cover-img {
+  z-index: -1;
+  width: 100%;
+  height: 400px;
+  margin-bottom: 10px;
+}
+
+.profile-image {
+  margin: -120px 10px 20px 80px;
+  z-index: 9;
+  width: 18%;
+  border: solid 3px white;
+  border-radius: 5px;
+}
+
+.profile-text {
+  margin-right: 10px;
+  padding: 10px;
+}
+
+/deep/ .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+  background-color: white;
+  color: #525253;
+  font-weight: bolder;
+  font-size: 17px;
+}
+
+/deep/ .nav-tabs .nav-link {
+  color: black;
+  font-size: 17px;
+  font-weight: bolder;
+}
+
+.tab-div {
+  //background: white;
+  min-height: 500px;
+  //border: 1px solid #ddd;
+  margin-top: -1px;
+  font-size: 17px;
+  line-height: 2.5;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+
+  .profile-text > h1 {
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .profile-image {
+    margin: -45px 10px 0px 25px;
+    z-index: 9;
+    width: 20%;
+  }
+}

@@ -1,0 +1,221 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        All Schools
+      </div>
+      <div class="card-block" *ngIf="schoolList.length">
+        <input
+          type="text"
+          class="form-control mb-3"
+          [(ngModel)]="searchString"
+          placeholder="Type to filter the name column..."
+          (ngModelChange)='search($event)'>
+        <div class="no-more-tables">
+          <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+              <th>
+                #
+              </th>
+              <th>
+                School
+              </th>
+              <th class="numeric">
+                Phone
+              </th>
+              <th>
+                District
+              </th>
+              <th>
+                Status
+              </th>
+              <th>
+                By
+              </th>
+              <th>
+                At
+              </th>
+              <th>
+                User
+              </th>
+              <th class="numeric">
+                SMS
+              </th>
+              <th>
+                Action
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let school of schoolList; let i=index; ">
+              <td data-title="#">
+                {{i+1}}
+              </td>
+              <td data-title="School">
+                <small>{{school.name}}</small>
+              </td>
+              <td data-title="Phone" class="numeric">
+                <small>{{school.contact.phone[0]}}</small>
+              </td>
+              <td data-title="District">
+                <small>{{school.address.district}}</small>
+              </td>
+              <td data-title="Status">
+                <select
+                  class="form-control"
+                  [(ngModel)]="school.status"
+                  (ngModelChange)="changeStatus(school)">
+                  <option value="{{status.value}}" *ngFor="let status of statusOptions;">{{status.name}}</option>
+                </select>
+              </td>
+              <td data-title="Created By">
+                <small>{{school.createdBy}}</small>
+              </td>
+              <td data-title="Created At">
+                <small>{{school.createdAt | amTimeAgo}}</small>
+              </td>
+              <td data-title="UserName">
+                <small>{{school.userName}}</small>
+              </td>
+              <td data-title="SMS Remaining" class="numeric">
+                <small>{{school.smsCount.total - school.smsCount.used}}</small>
+              </td>
+              <td class="numeric" data-title="Action">
+                <button
+                  type="button"
+                  class="btn-success pointer btn-icon pd-right-0"
+                  placement="top"
+                  [routerLink]="['/admin/super/school/edit', school._id]"
+                  ngbTooltip="Edit School">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button
+                  type="button"
+                  (click)="changePassword(school , changePasswordModal)"
+                  class="btn-info pointer btn-icon pd-right-0"
+                  placement="top"
+                  ngbTooltip="Change Password">
+                  <i class="fa fa-eject"></i>
+                </button>
+                <button
+                  type="button"
+                  class="btn-warning pointer btn-icon pd-right-0"
+                  placement="top"
+                  (click)="showSmsModal(school, smsModal)"
+                  ngbTooltip="Edit SMS">
+                  <i class="fa fa-comment"></i>
+                </button>
+                <button
+                  type="button"
+                  class="btn-danger pointer btn-icon pd-right-0"
+                  placement="top"
+                  (click)="delete(school , i, deleteModal)"
+                  ngbTooltip="Delete school">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <ngb-pagination
+          [collectionSize]="total"
+          [(page)]="page"
+          [pageSize]="limit"
+          [maxSize]="3"
+          [rotate]="true"
+          [ellipses]="true"
+          [boundaryLinks]="true"
+          (pageChange)="changePage($event)"
+          style="float: right; margin-top: 10px;"
+        ></ngb-pagination>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #deleteModal let-submit="close" let-dismiss="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title text-uppercase">Delete {{nameToDelete}}!</h6>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss('clicking on cross!')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete <b>{{nameToDelete}}</b> school?</p>
+  </div>
+  <div class="modal-footer" style="display: block;">
+    <button
+      type="button"
+      class="btn btn-outline-danger"
+      (click)="submit('yes')">Yes!
+    </button>
+    <button type="button" class="btn btn-outline-success pull-right" (click)="submit('cancel')">Cancel</button>
+  </div>
+</ng-template>
+<ng-template #smsModal let-submit="close" let-dismiss="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title text-uppercase">Edit Sms For {{nameToSms}}!</h6>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss('clicking on cross!')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12 form-group">
+        <label>Total SMS Allotted</label>
+        <input type="number" class="form-control" [(ngModel)]="smsShowData.count">
+      </div>
+      <div class="col-md-12 form-group">
+        <label>Total SMS Remaining</label>
+        <input type="number" class="form-control" [(ngModel)]="smsShowData.remaining" disabled>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer" style="display: block;">
+    <button
+      type="button"
+      class="btn btn-outline-success"
+      (click)="submit('yes')">Allotte SMS!
+    </button>
+    <button type="button" class="btn btn-outline-danger pull-right" (click)="submit('cancel')">Cancel</button>
+  </div>
+</ng-template>
+<ng-template #changePasswordModal let-submit="close" let-dismiss="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title text-uppercase">Change Password of {{nameToChange}}!</h6>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss('clicking on cross!')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-12 form-group">
+        <label>Password</label>
+        <input
+          type="password"
+          class="form-control"
+          [(ngModel)]="pass"
+          placeholder="Password">
+      </div>
+      <div class="col-md-12 form-group">
+        <label>Confirm Password</label>
+        <input
+          type="password"
+          [(ngModel)]="repass"
+          class="form-control"
+          placeholder="Confirm Password">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer" style="display: block;">
+    <button
+      type="button"
+      class="btn btn-outline-success"
+      (click)="submit('yes')">Yes!
+    </button>
+    <button type="button" class="btn btn-outline-danger pull-right" (click)="submit('cancel')">Cancel</button>
+  </div>
+</ng-template>
+
+

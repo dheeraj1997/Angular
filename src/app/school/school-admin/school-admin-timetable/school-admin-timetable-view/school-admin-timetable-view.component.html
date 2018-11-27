@@ -1,0 +1,102 @@
+<div class="row">
+  <div class="col-md-12">
+    <button class="btn pull-right card "
+            [routerLink]="['/school/admin/timetable/create']">
+      Create Timetable
+    </button>
+  </div>
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-block">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label>
+              Session
+              <span style="color: red">*</span>
+            </label>
+            <select
+              class="form-control"
+              [(ngModel)]="selectedSession"
+              (ngModelChange)="onSessionSelect()">
+              <option *ngFor="let ses of sessionData;" value="{{ses._id}}">{{ses.name}}</option>
+            </select>
+            <small class="form-text text-muted">
+              Select session from dropdown.
+            </small>
+          </div>
+          <div class="form-group col-md-6">
+            <label>
+              Class
+              <span style="color: red">*</span>
+            </label>
+            <select
+              class="form-control"
+              [(ngModel)]="selectedClass"
+              (ngModelChange)="onClassSelect()">
+              <option *ngFor="let class of classData;" value="{{class._id}}">{{class.name}}</option>
+            </select>
+            <small class="form-text text-muted">
+              Select Class From Dropdown.
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="showBelow">
+      <div class="col-md-12">
+        <button class="btn  pull-left pointer"
+                [ngClass]="{'btn-danger':withTeacher , 'btn-success':!withTeacher}"
+                (click)="toggleTeacher()">
+          Show Teacher
+        </button>
+        <button class="btn pull-right card pointer"
+                [disabled]="isDisable"
+                (click)="printPdf()">
+          print
+        </button>
+      </div>
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-block custom-overflow ">
+            <div>
+              <table class="table table-bordered table-striped mb-0">
+                <thead>
+                <tr>
+                  <th class="text-center">
+                    PERIOD
+                  </th>
+                  <th *ngFor="let day of days;">
+                    {{day | uppercase}}
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let peri of timetableData.periods;">
+                  <td class="text-center" headers="Period">
+                    <div>
+                      <b>{{peri.number}}</b><sup>{{peri.number | numSuf}}</sup>
+                    </div>
+                  </td>
+                  <td *ngFor="let day of peri.days;"
+                      [headers]="day.day"
+                      style="text-align: center;cursor: pointer;">
+                    <i class="fa fa-minus"
+                       *ngIf="!day.selected"
+                       style="font-size: large; "></i>
+                    <div>
+                      <span class="text-capitalize">{{subjectIdNameMap[day.subjectId]}}</span>
+                    </div>
+                    <div *ngIf="withTeacher">
+                      <span class="text-capitalize small" *ngIf="teacherIdNameMap[day.teacherId]">({{teacherIdNameMap[day.teacherId]}})</span>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

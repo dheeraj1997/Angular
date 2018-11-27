@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-md-4" style="margin-bottom: 15px;">
+    <!--<button class="btn pull-left card pointer">-->
+      <div class="input-group">
+        <input
+          class="form-control"
+          placeholder="yyyy-mm-dd"
+          name="attendanceDateStart"
+          [(ngModel)]="attendanceDate"
+          (ngModelChange)="getAttendanceList();"
+          (click)="attendanceDateStart.toggle()"
+          ngbDatepicker #attendanceDateStart="ngbDatepicker" required>
+        <button class="input-group-addon" (click)="attendanceDateStart.toggle()" type="button">
+          <i class="fa fa-calendar"></i>
+        </button>
+      </div>
+    <!--</button>-->
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-4" *ngFor="let list of attendanceList; let i = index;">
+    <div class="card" [ngClass]="{'card-success':list.toTake, 'card-warning':!list.toTake}">
+      <div class="card-block">
+        <span *ngIf="list.isSms" class="msg-icon">
+          <i class="icon-basic-message-txt"></i>
+        </span>
+        <h6>Class: {{list.className}}</h6>
+        <h6>Total Student: {{list.totalStudents}}</h6>
+        <button
+          class="btn btn-primary"
+          *ngIf="list.toTake"
+          (click)="takeAttendance(list)">
+          Take Attendance
+        </button>
+
+        <button
+          *ngIf="!list.toTake"
+          class="btn btn-success"
+          (click)="viewAttendance(list)">
+          View({{list.takenByName}})
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

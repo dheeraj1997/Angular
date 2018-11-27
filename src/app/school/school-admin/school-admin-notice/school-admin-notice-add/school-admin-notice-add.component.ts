@@ -1,0 +1,180 @@
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {NgbDatepickerConfig, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {SchoolService} from '../../../../shared/services/school.service';
+import {NoticeService} from '../../../../shared/services/notice.service';
+
+const ls = localStorage;
+const today = new Date();
+
+@Component({
+  selector: 'app-school-admin-notice-add',
+  templateUrl: './school-admin-notice-add.component.html',
+  styleUrls: ['./school-admin-notice-add.component.scss']
+})
+
+
+export class SchoolAdminNoticeAddComponent implements OnInit {
+
+  noticeData = {
+    title: '',
+    schoolId: '',
+    noticeText: '',
+    isHoliday: false,
+    noticeDate: {
+      year: today.getFullYear(),
+      month: today.getMonth() + 1,
+      day: today.getDate()
+    },
+    targetGroup: ['teachers', 'parents', 'librarians', 'accountants', 'students', 'hrs', 'registrars'],
+    selectAll: false,
+    selectTeachers: false,
+    selectStudents: false,
+    selectParents: false,
+    selectLibrarian: false,
+    selectAccountant: false,
+    selectRegistrar: false,
+    isDraft: false
+  };
+  userData = {
+    _id: '',
+  };
+  schoolData = {
+    _id: '',
+  };
+
+  constructor(private school: SchoolService,
+              private notice: NoticeService,
+              private router: Router,
+              private config: NgbDatepickerConfig,
+              private alert: ToastrService) {
+    config.minDate = {year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate()};
+  }
+
+  ngOnInit() {
+    this.userData = JSON.parse(ls.getItem('userData'));
+    this.school.getSchoolByLoginId(this.userData._id.toString())
+      .map(x => x.json())
+      .subscribe(scRes => {
+        console.log('scRes', scRes);
+        if (scRes && scRes.data && scRes.data._id) {
+          this.schoolData = scRes.data;
+          console.log('schoolId', this.schoolData._id);
+
+          this.noticeData.schoolId = this.schoolData._id;
+        } else {
+          this.alert.error(' School data not fetched ', ' Reload !')
+        }
+      });
+  }
+
+  onTragetChange(noticeTarget) {
+    switch (noticeTarget) {
+      case 'librarians':
+        if (this.noticeData.selectLibrarian) {
+          if (this.noticeData.targetGroup.indexOf('librarians') === -1) {
+            this.noticeData.targetGroup.push('librarians');
+          }
+        } else {
+
+          this.noticeData.targetGroup.splice(this.noticeData.targetGroup.indexOf('librarians'), 1)
+
+        }
+        break;
+
+      case 'parents':
+        if (this.noticeData.selectParents) {
+          if (this.noticeData.targetGroup.indexOf('parents') === -1) {
+            this.noticeData.targetGroup.push('parents')
+          }
+        } else {
+          this.noticeData.targetGroup.splice(this.noticeData.targetGroup.indexOf('parents'), 1)
+        }
+        break;
+      case 'students':
+        if (this.noticeData.selectStudents) {
+          if (this.noticeData.targetGroup.indexOf('students') === -1) {
+            this.noticeData.targetGroup.push('students')
+          }
+        } else {
+          this.noticeData.targetGroup.splice(this.noticeData.targetGroup.indexOf('students'), 1)
+        }
+        break;
+      case 'teachers':
+        if (this.noticeData.selectTeachers) {
+          if (this.noticeData.targetGroup.indexOf('teachers') === -1) {
+            this.noticeData.targetGroup.push('teachers')
+          }
+        } else {
+          this.noticeData.targetGroup.splice(this.noticeData.targetGroup.indexOf('teachers'), 1)
+        }
+        break;
+      case 'registrar':
+        if (this.noticeData.selectRegistrar) {
+          if (this.noticeData.targetGroup.indexOf('registrar') === -1) {
+            this.noticeData.targetGroup.push('registrar')
+          }
+        } else {
+          this.noticeData.targetGroup.splice(this.noticeData.targetGroup.indexOf('registrar'), 1)
+        }
+        break;
+      case 'accountants':
+        if (this.noticeData.selectAccountant) {
+          if (this.noticeData.targetGroup.indexOf('accountants') === -1) {
+            this.noticeData.targetGroup.push('accountants')
+          }
+        } else {
+          this.noticeData.targetGroup.splice(this.noticeData.targetGroup.indexOf('accountants'), 1)
+        }
+        break;
+
+      case 'all':
+        if (this.noticeData.selectAll) {
+          this.noticeData.selectTeachers = true;
+          this.noticeData.selectStudents = true;
+          this.noticeData.selectParents = true;
+          this.noticeData.selectLibrarian = true;
+          this.noticeData.selectAccountant = true;
+          this.noticeData.selectRegistrar = true;
+          this.noticeData.targetGroup = ['teachers', 'parents', 'librarians', 'accountants', 'students', 'hr', 'registrar'];
+        } else {
+          this.noticeData.selectTeachers = false;
+          this.noticeData.selectStudents = false;
+          this.noticeData.selectParents = false;
+          this.noticeData.selectLibrarian = false;
+          this.noticeData.selectAccountant = false;
+          this.noticeData.selectRegistrar = false;
+          this.noticeData.targetGroup = [];
+        }
+        break;
+    }
+  }
+
+  saveNotice(isDraft?) {
+    console.log('noticeData', this.noticeData);
+    if (
+      this.noticeData.noticeDate ||
+      this.noticeData.schoolId ||
+      this.noticeData.title ||
+      this.noticeData.noticeText
+    ) {
+      this.noticeData.isDraft = isDraft;
+      console.log('this.noticeData', this.noticeData);
+      this.notice.saveNotice(this.noticeData)
+        .map(x => x.json())
+        .subscribe(res => {
+          this.alert.success(res.message, 'Success');
+          this.router.navigate(['/school/admin/notice/view'])
+        }, err => {
+          err = err.json();
+          console.log('err', err);
+          this.alert.error(err.error, 'Error');
+        })
+
+    } else {
+      this.alert.error('Required fields are empty!', 'Fatal Error!');
+    }
+
+  }
+}

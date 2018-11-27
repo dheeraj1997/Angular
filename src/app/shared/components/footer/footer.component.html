@@ -1,0 +1,178 @@
+<!-- <div class="footer-background">
+  <div class="div-wrapper">
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-2 col-sm-6 col-xs-6 text-center">
+            <ul class="list-group">
+              <li class="list-heading">Inforida</li>
+
+              <li class="foot-item" *ngFor="let item of footerRow1;">
+                <a class="foot-item foot-link"
+                (click)="submitEvent('navigation', 'click' , item.name)"
+                [routerLink]="[item.state]"
+                [routerLinkActive]="['active']">{{item.name}}
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-2 col-sm-6 col-xs-6 text-center">
+          <ul class="list-group">
+            <li class="list-heading">Company</li>
+            <li class="foot-item" *ngFor="let item of footerRow2;">
+              <a class="foot-item foot-link"
+              (click)="submitEvent('navigation', 'click' , item.name)"
+              [routerLink]="[item.state]"
+              [routerLinkActive]="['active']">{{item.name}}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-2 col-xs-6 text-center">
+        <ul class="list-group">
+          <li class="list-heading">Clients</li>
+          <li class="foot-item" *ngFor="let item of footerRow3;">
+            <a class="foot-item foot-link"
+            (click)="submitEvent('navigation', 'click' , item.name)"
+            [routerLink]="[item.state]"
+            [routerLinkActive]="['active']">{{item.name}}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-2 col-xs-6 text-center">
+      <ul class="list-group">
+        <li class="list-heading">Legal</li>
+        <li class="foot-item" *ngFor="let item of footerRow4;">
+          <a class="foot-item foot-link"
+          (click)="submitEvent('navigation', 'click' , item.name)"
+          [routerLink]="[item.state]"
+          [routerLinkActive]="['active']">{{item.name}}
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-2 col-xs-6 text-center">
+    <ul class="list-group">
+      <li class="list-heading">Resources</li>
+      <li><a>Developer API</a></li>
+      <li><a [routerLink]="['/technology']"
+       [routerLinkActive]="['active']">Technologies</a></li>
+     </ul>
+   </div>
+   <div class="col-md-2 col-xs-6 text-center">
+    <section id="lab_social_icon_footer">
+      <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+      <div class="text-center center-block">
+        <a href="https://www.facebook.com/inforida/"><i id="social-fb"
+          class="fa fa-facebook-square fa-3x social"></i></a>
+          <a href="https://www.twitter.com/inforidaindia/"><i id="social-tw"
+            class="fa fa-twitter-square fa-3x social"></i></a>
+            
+            <a href="https://www.linkedin.com/company/inforida/"><i id="social-ln"
+              class="fa fa-linkedin-square fa-3x social"></i></a>
+
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="copy-wrapper">
+                <div>
+                  <img src="../assets/images/logo.png" alt="Inforida" class="logo">
+                </div>
+                <div class="copy-content">
+                  <p><span> &#169;</span> 2017 Inforida. All rights reserved</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+-->
+<div class="footer-background">
+  <div class="div-wrapper">
+    <div class="container">
+      <div class="row" >
+        <div class="col-md-4 bb" >
+          <div style="color: whitesmoke; font-weight: 500; font-size: medium;">DOWNLOAD THE APP
+          </div>
+          <div>
+            <a href="https://play.google.com/store/apps/details?id=inforida.in.inforidaapp" target="_blank"><img class="download-app" src="../assets/images/google-play.png" ></a>
+          </div>
+        </div>
+        <div class="col-md-4 bb" >
+          <div class="row">
+            <div class="col-xs-6 bl" >
+              <ul class="list-group">
+                <li class="foot-item" *ngFor="let item of footerRowNew;">
+                  <a class="foot-item foot-link"
+                  (click)="submitEvent('navigation', 'click' , item.name)"
+                  [routerLink]="[item.state]"
+                  [routerLinkActive]="['active']">{{item.name}}
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-xs-6 br">
+            <ul class="list-group">
+              <li class="foot-item" *ngFor="let item of footerRowNew2;">
+                <a class="foot-item foot-link"
+                (click)="submitEvent('navigation', 'click' , item.name)"
+                [routerLink]="[item.state]"
+                [routerLinkActive]="['active']">{{item.name}}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 bb " >
+      <ul class="list-group">
+        <li class="foot-item" *ngFor="let item of footerRowNew1;">
+          <a class="foot-item foot-link"
+          (click)="submitEvent('navigation', 'click' , item.name)"
+          [routerLink]="[item.state]"
+          [routerLinkActive]="['active']">{{item.name}}
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-6" style="border-right: solid whitesmoke 1px; color: whitesmoke;    ">
+    Found security issues, that you’d like us to know? <a href="mailto:info@inforida.com?bcc=nishant85888@gmail.com&subject=Issues&body=Type%20your%20email%20here" style="color: whitesmoke;font-weight: bolder;">Submit an issue</a>
+  </div>
+  <div class="col-xs-6" style="color:whitesmoke;margin-bottom: 10px ; ">
+    Have Queries ? Call for any assistance on <span style="color: whitesmoke;font-weight: bolder;"> +91 96168 17660</span> 
+  </div>
+</div>
+
+<div class="row" style="border-top: solid whitesmoke 1px;">
+  <div class="col-md-4 col-sm-12 col-xs-12 text-pt">
+    <div class="icon-img-align">
+      <a class="pt" href="https://www.facebook.com/inforida/" target="_blank" > <img src="../assets/images/facebook.png" class="icon-img" ></a>
+      <a class="pt" href="https://www.linkedin.com/company/inforida/" target="_blank"><img src="../assets/images/linkdin.png" class="icon-img"></a>
+      <a class="pt" href="https://www.twitter.com/inforidaindia/" target="_blank"><img src="../assets/images/twitter.png" class="icon-img"></a> 
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-12 col-xs-12">
+    <div class="copy-wrapper">
+      <div>
+        <img src="../assets/images/logo.png" alt="Inforida" class="logo">
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-12 col-xs-12">
+    <h5 class="text-pt"><span> &#169;</span> 2017 Inforida- All rights reserved</h5>
+  </div>
+</div>
+</div>
+</div>
+</div>

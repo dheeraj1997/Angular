@@ -1,0 +1,23 @@
+.user-span {
+  margin-bottom: 10px;
+  margin-right: 5px;
+  padding: 10px;
+}
+
+.icon-stu-absent {
+  color: red;
+  cursor: pointer;
+}
+
+.icon-stu-present {
+  color: green;
+  cursor: pointer;
+}
+
+.absent {
+  background: rgba(255, 0, 15, 0.86);
+}
+
+.present {
+  background: rgba(0, 128, 0, 0.77);
+}

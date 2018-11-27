@@ -1,0 +1,108 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        View Homework
+      </div>
+      <div class="card-block">
+        <input
+        type="text"
+        class="form-control mb-3"
+        [(ngModel)]="searchString"
+        placeholder="Type to filter the subject name column..."
+        (ngModelChange)='search($event)'>
+        <div class="no-more-tables">
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+              <tr>
+                <th>
+                  Date
+                </th>
+                <th>
+                  Class
+                </th>
+                <th>
+                  Subject
+                </th>
+                <th>
+                 Action
+               </th>
+             </tr>
+           </thead>
+           <tbody>
+            <tr *ngFor ="let homework of toShowData">
+              <td data-title="Date">
+                {{homework.createdAt | amDateFormat:'LL'}}
+              </td>
+              <td data-title="Class">
+                {{homework.className}}
+              </td>
+              <td data-title="Subject">
+                {{homework.subjectName}}
+              </td>
+              <td data-title="Action">
+                <button
+                type="button"
+                class="btn btn-info pointer"
+                placement="top"
+                (click)="view(homework , i, viewModal)"
+                ngbTooltip="View Homework">
+                <i class="icon-eye"></i>
+              </button>
+              <button
+              type="button"
+              class="btn btn-danger pointer"
+              placement="top"
+              (click)="delete(homework , i, deleteModal)"
+              ngbTooltip="Delete Homework">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</div>
+</div>
+</div>
+
+<ng-template #viewModal let-submit="close" let-dismiss="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title text-uppercase">Homework on {{modelDate | amDateFormat:'LL' }} of {{modelSubject}}</h6>
+    <button type="button" class="close" aria-label="Close" (click)="submit('cancel')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>{{modelHomework.substring(0,400)}}</p>
+  </div>
+  <div class="modal-footer" style="display: block;">
+    <button
+    type="button"
+    class="btn btn-outline-success pull-right" 
+    (click)="submit('edit')">Edit
+  </button>
+</div>
+</ng-template>
+
+<ng-template #deleteModal let-submit="close" let-dismiss="dismiss">
+  <div class="modal-header">
+    <h6 class="modal-title text-uppercase">Delete homework of {{modelSubject}}!</h6>
+    <button type="button" class="close" aria-label="Close"(click)="dismiss('clicking on cross!')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete homework of <b>{{modelSubject}}</b>?</p>
+  </div>
+  <div class="modal-footer" style="display: block;">
+    <button
+    type="button"
+    class="btn btn-outline-danger"
+    (click)="submit('yes')">Yes!
+  </button>
+  <button type="button" class="btn btn-outline-success pull-right" (click)="submit('cancel')">Cancel</button>
+</div>
+</ng-template>

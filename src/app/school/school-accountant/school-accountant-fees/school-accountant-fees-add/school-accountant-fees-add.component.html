@@ -1,0 +1,101 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-block">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label>
+              <b>Select Session</b>
+            </label>
+            <select class="form-control"
+                    [(ngModel)]="selectedSession"
+                    (change)="onSessionChange()">
+              <option value="{{sess._id}}" *ngFor="let sess of sessionData;">
+                {{sess.name}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label>
+              <b>Select Class</b>
+            </label>
+            <select class="form-control"
+                    [(ngModel)]="selectedClass"
+                    (change)="onClassChange()">
+              <option value="{{cls._id}}" *ngFor="let cls of classData;">
+                {{cls.name}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" *ngIf="toShowData.length">
+      <div class="card-block">
+        <input
+          type="text"
+          [(ngModel)]="searchString"
+          class="form-control mb-3"
+          placeholder="Type to filter the name column..."
+          (ngModelChange)='search($event)'>
+        <div class="no-more-tables">
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+            <tr>
+              <th>
+                #
+              </th>
+              <th>
+                Roll No
+              </th>
+              <th>
+                Student Name
+              </th>
+              <th>
+                Class
+              </th>
+              <th>
+                Guardian Name
+              </th>
+              <th>
+                Relation
+              </th>
+              <th>
+                Action
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let student of toShowData;let i = index; ">
+              <td data-title="#">{{i+1}}</td>
+              <td data-title="Roll No">
+                {{student.schoolDetail.rollNo}}
+              </td>
+              <td data-title="Student Name">
+                {{student.name}}
+              </td>
+              <td data-title="Class">
+                {{student.className}}
+              </td>
+              <td data-title="Guardian Name">
+                {{student.guardianInfo.name}}
+              </td>
+              <td data-title="Relation">
+                {{student.guardianInfo.relation}}
+              </td>
+              <td data-title="Action">
+                <button
+                  type="button"
+                  class="btn btn-success pointer"
+                  [routerLink]="['/school/accountant/fees/collect' , student._id , selectedSession]">
+                  Collect
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

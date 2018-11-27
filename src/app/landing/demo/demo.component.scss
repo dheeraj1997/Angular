@@ -1,0 +1,98 @@
+@import "../../../assets/styles/scss/components/landing";
+
+.requestheading{
+color:#3e7dca;
+}
+ .bg-img
+
+{
+  background: linear-gradient(to right, #ff6a00, #ee0979);
+}
+
+.navbar-brand img{
+  height:50px;
+  float:left;
+  margin:10px;
+}
+
+.bg-fimg
+{
+background-color:#000508;
+}
+.card-block{
+    font-size:17px;
+}
+
+.landing-header {
+    padding-top: 0rem;
+     padding-bottom: 0rem;
+
+}
+.nav-link {
+    color: white !important ;
+  }
+
+.nav-link:hover{
+  font-size:16px !important;
+  transition: all ease 0.1s;
+}
+.navbar ul{
+    float:right;
+ }
+
+.navbar-brand {
+    font-weight: bold;
+    color: white;
+     padding-top: 0rem;
+     padding-bottom: 0rem;
+}
+
+.footer-pads
+{
+      padding-bottom: 2rem;
+      }
+
+.footer-widget{
+  text-align:center;
+}
+.footer-widget a {
+    color: rgb(0, 145, 234);
+}
+.footer-widget a:visited
+{
+color: rgb(0, 145, 234) ;
+}
+
+.footer-title {
+    font-family: "Montserrat", Helvetica, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.02rem;
+    font-size: 13px;
+    background: transparent;
+    color: #fff;
+}
+
+.footer-widget a:hover
+ {
+    color: #f2f2f2;
+    }
+
+ 
+.sty{
+  background-color: white;
+}
+ .footer-logo{
+ text-align:center;
+ }
+.avatar-s
+{
+  width: 5.125rem;
+
+}
+.loginbt{
+  background-color:  #3e7dca;
+}
+
+.form-group{
+  margin-bottom:0px;
+}

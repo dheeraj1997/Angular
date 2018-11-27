@@ -1,0 +1,72 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        Select Class
+      </div>
+      <div class="card-block">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <select class="form-control" [(ngModel)]="selectedSession">
+              <option value="{{sess._id}}"
+                      *ngFor="let sess of sessionData;">
+                {{sess.name}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <select
+              class="form-control"
+              [(ngModel)]="selectedClass">
+              <option
+                value="{{cls._id}}"
+                *ngFor="let cls of classData;">
+                {{cls.name}}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" *ngIf="selectedClass">
+      <div class="card-header">
+        Upload Student Data Here(CSV).
+      </div>
+      <div class="card-block">
+        <div class="row">
+          <div class="col-md-6">
+            <label class="custom-file">
+              <input
+                type="file"
+                id="file"
+                accept=".csv"
+                (change)="uploadCsv($event)"
+                class="custom-file-input">
+              <span class="custom-file-control"></span>
+            </label>
+          </div>
+          <div class="col-md-6">
+
+            <button
+              style="margin: 5px 5px 0px 0px;"
+              (click)="getCsv('blank')"
+              class="btn btn-success">
+              <i class="fa fa-download"></i>
+              Blank Template
+            </button>
+            <button
+              style="margin: 5px 5px 0px 0px;"
+              (click)="getCsv('sample')"
+              class="btn btn-info">
+              <i class="fa fa-question-circle"></i>
+              Sample Template
+            </button>
+
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

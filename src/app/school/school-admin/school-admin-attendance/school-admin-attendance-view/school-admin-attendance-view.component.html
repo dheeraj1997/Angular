@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row" style="width: 100%;">
+          <div class="col-lg-2">
+            <b>Date:</b> {{listData.date}}
+          </div>
+          <div class="col-lg-2">
+            <b>Class: </b> {{listData.className}}
+          </div>
+          <div class="col-lg-2">
+            <b>Total Students: </b> {{listData.totalStudents}}
+          </div>
+          <div class="col-lg-3">
+            <b>Taken By: </b> {{listData.takenByName}}
+          </div>
+        </div>
+      </div>
+      <div class="card-block">
+        <input
+          type="text"
+          class="form-control mb-3"
+          [(ngModel)]="searchString"
+          placeholder="Type to filter the name column..."
+          required
+          (ngModelChange)='searchStudent($event)'>
+        <div class="no-more-tables">
+          <table class="table table-bordered table-striped mb-0">
+            <thead>
+            <tr>
+              <th>
+                Roll No
+              </th>
+              <th>
+                Name
+              </th>
+              <th>
+                Status
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let att of attendanceData;">
+              <td data-title="Roll No">
+                {{att.rollNo}}
+              </td>
+              <td data-title="Name">
+                {{att.name}}
+              </td>
+              <td data-title="Status"
+                  class="table-success"
+                  [ngClass]="{'table-danger':att.status === 'absent'}">
+                {{att.status | uppercase}}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
